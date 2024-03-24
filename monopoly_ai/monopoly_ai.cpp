@@ -3,6 +3,7 @@
 
 #include "monopoly_ai.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #define SFML_STATIC
 
 using namespace std;
