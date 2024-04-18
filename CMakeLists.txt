@@ -25,3 +25,4 @@ include_directories(${CMAKE_SOURCE_DIR}/SFML/include)
 add_subdirectory("monopoly_ai")
 add_subdirectory(tests)
 
+target_compile_definitions(monopoly_ai PRIVATE "BASE_PATH=\"${PROJECT_SOURCE_DIR}/\"")
