@@ -11,8 +11,8 @@ public:
 
     Board(float width, float height, std::shared_ptr<sf::RenderWindow> win);
 
-    virtual void draw(float posX, float posY) override;
+    virtual void draw() override;
 
     void initializeSquares(float posX, float posY);
-
+    void setPosition(float x, float y);
 };

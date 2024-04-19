@@ -11,7 +11,7 @@ int main()
 {
     auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "Board Example");
     Board board(400, 400, window);
-
+    board.setPosition(200.0f, 100.0f);
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {
@@ -20,7 +20,7 @@ int main()
         }
 
         window->clear();
-        board.draw(200.0f, 100.0f);
+        board.draw();
         window->display();
     }
     return 0;

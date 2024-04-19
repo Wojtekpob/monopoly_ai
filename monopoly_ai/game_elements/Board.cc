@@ -7,12 +7,11 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     initializeSquares(200.0f, 100.0f);
 }
 
-void Board::draw(float posX, float posY) {
-    shape_.setPosition(posX, posY);
+void Board::draw() {
     if (window_) {
         window_->draw(shape_);
         for (auto& square : squares_) {
-            square.draw(posX, posY);
+            square.draw();
         }
     }
 }
@@ -38,8 +37,13 @@ void Board::initializeSquares(float posX, float posY){
                 
             }
 
-            boardSquare.shape.setPosition(x, y);
+            boardSquare.setPosition(x, y);
             squares_.push_back(boardSquare);
         }
     }
+}
+
+
+void Board::setPosition(float x, float y) {
+    shape_.setPosition(sf::Vector2f(x, y));
 }

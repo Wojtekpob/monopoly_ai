@@ -10,5 +10,5 @@ public:
     Drawable(std::shared_ptr<sf::RenderWindow> win) : window_(win) {}
     virtual ~Drawable() {}
 
-    virtual void draw(float posX, float posY) = 0;
+    virtual void draw() = 0;
 };
