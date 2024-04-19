@@ -7,7 +7,7 @@ protected:
 
 public:
 
-    Drawable(std::shared_ptr<sf::RenderWindow> win) : window_(win) {}
+    Drawable( std::shared_ptr<sf::RenderWindow> win ) : window_(win) {}
     virtual ~Drawable() {}
 
     virtual void draw() = 0;

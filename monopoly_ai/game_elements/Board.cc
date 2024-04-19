@@ -16,10 +16,11 @@ void Board::draw() {
     }
 }
 
-void Board::initializeSquares(float posX, float posY){
+void Board::initializeSquares(float pos_x, float pos_y){
     float x, y;
-    float squareWidth = 400 / 11;
-    float squareHeight = 400 / 11;
+    int number_of_squares = 11;
+    float squareWidth = shape_.getSize().x / number_of_squares; 
+    float squareHeight = shape_.getSize().y / number_of_squares;
     std::string textContent = "Sample Text";
     for (int side = 0; side < 4; ++side) {
         for (int i = 0; i < 9; ++i) {
@@ -28,12 +29,12 @@ void Board::initializeSquares(float posX, float posY){
 
 
             if (side % 2 == 0) { 
-                x = posX + squareWidth + i * squareWidth;
-                y = side == 0 ? posY : posY + 400 - squareHeight;
+                x = pos_x + squareWidth + i * squareWidth;
+                y = side == 0 ? pos_y : pos_y + shape_.getSize().y - squareHeight;
             }
             else {  
-                x = side == 1 ? posX + 400 - squareHeight : posX;
-                y = posY + squareWidth + i * squareWidth;
+                x = side == 1 ? pos_x + shape_.getSize().x - squareHeight : pos_x;
+                y = pos_y + squareWidth + i * squareWidth;
                 
             }
 

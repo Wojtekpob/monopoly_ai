@@ -1,7 +1,7 @@
-#include "Drawable.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <string>
+#include "Drawable.h"
 
 class BoardSquare : public Drawable {
 private:
@@ -10,9 +10,9 @@ private:
 
 public:
     sf::RectangleShape shape_;
-    BoardSquare(float width, float height, std::shared_ptr<sf::RenderWindow> win,
-        float orientation, const std::string& textContent);
+    BoardSquare( float width, float height, std::shared_ptr<sf::RenderWindow> win,
+        float orientation, const std::string& text_content );
 
     virtual void draw() override;
-    void setPosition(float x, float y);
+    void setPosition( float x, float y );
 };

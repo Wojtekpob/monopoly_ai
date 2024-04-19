@@ -1,8 +1,9 @@
-﻿#include "monopoly_ai.h"
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 #include <iostream>
-#include "game_elements/Board.h"
 #include <memory>
+#include "game_elements/Board.h"
+#include "monopoly_ai.h"
+
 #define SFML_STATIC
 
 using namespace std;

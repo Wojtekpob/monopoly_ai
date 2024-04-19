@@ -1,7 +1,7 @@
-#include "Drawable.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "BoardSquare.h"
+#include "Drawable.h"
 
 class Board : public Drawable {
 private:
@@ -9,10 +9,10 @@ private:
     std::vector<BoardSquare> squares_;
 public:
 
-    Board(float width, float height, std::shared_ptr<sf::RenderWindow> win);
+    Board( float width, float height, std::shared_ptr<sf::RenderWindow> win );
 
     virtual void draw() override;
 
-    void initializeSquares(float posX, float posY);
-    void setPosition(float x, float y);
+    void initializeSquares( float pos_x, float pos_y );
+    void setPosition( float x, float y );
 };
