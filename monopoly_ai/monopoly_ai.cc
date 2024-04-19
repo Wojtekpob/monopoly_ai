@@ -1,7 +1,7 @@
 ﻿#include "monopoly_ai.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "interface_components/Board.h"
+#include "game_elements/Board.h"
 #include <memory>
 #define SFML_STATIC
 
@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "Board Example");
-    Board board(400, 400, window);  // Pass the shared window pointer to the Board
+    Board board(400, 400, window);
 
     while (window->isOpen()) {
         sf::Event event;

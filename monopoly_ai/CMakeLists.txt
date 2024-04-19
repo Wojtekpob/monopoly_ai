@@ -8,7 +8,7 @@
 
 
 # Dodaj źródło do pliku wykonywalnego tego projektu.
-add_executable (monopoly_ai "monopoly_ai.cc" "monopoly_ai.h" "interface_components/Board.cc" "interface_components/Board.h" "interface_components/Drawable.h" "interface_components/BoardSquare.h")
+add_executable (monopoly_ai "monopoly_ai.cc" "monopoly_ai.h" "game_elements/Board.cc" "game_elements/Board.h" "game_elements/Drawable.h" "game_elements/BoardSquare.h" "game_elements/BoardSquare.cc")
 
 target_link_libraries(monopoly_ai sfml-graphics sfml-window sfml-system)
 
