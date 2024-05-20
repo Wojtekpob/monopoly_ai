@@ -2,7 +2,6 @@
 #include <iostream>
 #include <memory>
 #include "game_elements/Board.h"
-#include "monopoly_ai.h"
 
 #define SFML_STATIC
 

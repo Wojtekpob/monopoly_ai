@@ -1,14 +1,16 @@
-#include <memory>
+#ifndef DRAWABLE_H
+#define DRAWABLE_H
+
 #include <SFML/Graphics.hpp>
-#pragma once
+#include <memory>
+
 class Drawable {
-protected:
-    std::shared_ptr<sf::RenderWindow> window_; 
-
 public:
-
-    Drawable( std::shared_ptr<sf::RenderWindow> win ) : window_(win) {}
-    virtual ~Drawable() {}
-
+    Drawable(std::shared_ptr<sf::RenderWindow> win) : window_(win) {}
     virtual void draw() = 0;
+
+protected:
+    std::shared_ptr<sf::RenderWindow> window_;
 };
+
+#endif // DRAWABLE_H

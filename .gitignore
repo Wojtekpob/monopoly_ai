@@ -13,3 +13,4 @@ _deps
 CMakePresets.json
 out/
 build/
+CMakeSettings.json
