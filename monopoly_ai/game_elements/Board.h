@@ -17,7 +17,8 @@ private:
     void initializeSquares(float pos_x, float pos_y);
 
     sf::RectangleShape shape_;
-    std::vector<BoardSquare> squares_;
+    std::vector<std::shared_ptr<BoardSquare>> squares_;
+    sf::Texture texture_;
 };
 
 #endif // BOARD_H
