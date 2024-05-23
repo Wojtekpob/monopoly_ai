@@ -13,6 +13,7 @@ public:
     void draw() override;
     void setPosition(float x, float y);
     sf::Vector2f getPosition() const;
+    void setColor(sf::Color&);
 
 private:
     sf::RectangleShape shape_;

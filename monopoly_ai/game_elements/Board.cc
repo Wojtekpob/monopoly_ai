@@ -58,42 +58,69 @@ void Board::initializeSquares(float pos_x, float pos_y) {
     };
 
     std::vector<sf::Color> propertyColors = {
-        //sf::Color::White,
-        //sf::Color::Yellow,
-        //sf::Color::Magenta,
-        //sf::Color::Yellow,
-        //sf::Color::Magenta,
-        //sf::Color::Magenta,
-        //sf::Color::Red,
-        //sf::Color::Magenta,
-        //sf::Color::Red,
-        //sf::Color::Red,
-        //sf::Color::White,
-        //sf::Color::Blue,
+        sf::Color::White,
+        sf::Color::Yellow,
+        sf::Color::Magenta,
+        sf::Color::Yellow,
+        sf::Color::Magenta,
+        sf::Color::Magenta,
+        sf::Color::Red,
+        sf::Color::Magenta,
+        sf::Color::Red,
+        sf::Color::Red,
+        sf::Color::White,
+        sf::Color::Blue,
+        sf::Color::Magenta,
+        sf::Color::Blue,
+        sf::Color::Blue,
+        sf::Color::Magenta,
+        sf::Color(255, 165, 0),
+        sf::Color::Magenta,
+        sf::Color(255, 165, 0),
+        sf::Color(255, 165, 0),
+        sf::Color::White,
+        sf::Color::Green,
+        sf::Color::Magenta,
+        sf::Color::Green,
+        sf::Color::Green,
+        sf::Color::Magenta,
+        sf::Color(128, 0, 128),
+        sf::Color(128, 0, 128),
+        sf::Color::Magenta,
+        sf::Color(128, 0, 128),
+        sf::Color::White,
+        sf::Color(165, 42, 42),
+        sf::Color(165, 42, 42),
+        sf::Color::Magenta,
+        sf::Color(165, 42, 42),
+        sf::Color::Magenta,
+        sf::Color::Magenta,
+        sf::Color::Black,
+        sf::Color::Magenta,
+        sf::Color::Black
 
-
-        sf::Color(165, 42, 42),    // Brown
-        sf::Color(165, 42, 42),    // Brown
-        sf::Color(75, 155, 195),   // Light Blue
-        sf::Color(75, 155, 195),   // Light Blue
-        sf::Color(75, 155, 195),   // Light Blue
-        sf::Color(199, 0, 144),    // Pink
-        sf::Color(199, 0, 144),    // Pink
-        sf::Color(199, 0, 144),    // Pink
-        sf::Color(255, 165, 0),    // Orange
-        sf::Color(255, 165, 0),    // Orange
-        sf::Color(255, 165, 0),    // Orange
-        sf::Color(255, 0, 0),      // Red
-        sf::Color(255, 0, 0),      // Red
-        sf::Color(255, 0, 0),      // Red
-        sf::Color(255, 255, 0),    // Yellow
-        sf::Color(255, 255, 0),    // Yellow
-        sf::Color(255, 255, 0),    // Yellow
-        sf::Color(0, 128, 0),      // Green
-        sf::Color(0, 128, 0),      // Green
-        sf::Color(0, 128, 0),      // Green
-        sf::Color(0, 0, 255),      // Dark Blue
-        sf::Color(0, 0, 255)       // Dark Blue
+        //sf::Color(165, 42, 42),    // Brown
+        //sf::Color(165, 42, 42),    // Brown
+        //sf::Color(75, 155, 195),   // Light Blue
+        //sf::Color(75, 155, 195),   // Light Blue
+        //sf::Color(75, 155, 195),   // Light Blue
+        //sf::Color(199, 0, 144),    // Pink
+        //sf::Color(199, 0, 144),    // Pink
+        //sf::Color(199, 0, 144),    // Pink
+        //sf::Color(255, 165, 0),    // Orange
+        //sf::Color(255, 165, 0),    // Orange
+        //sf::Color(255, 165, 0),    // Orange
+        //sf::Color(255, 0, 0),      // Red
+        //sf::Color(255, 0, 0),      // Red
+        //sf::Color(255, 0, 0),      // Red
+        //sf::Color(255, 255, 0),    // Yellow
+        //sf::Color(255, 255, 0),    // Yellow
+        //sf::Color(255, 255, 0),    // Yellow
+        //sf::Color(0, 128, 0),      // Green
+        //sf::Color(0, 128, 0),      // Green
+        //sf::Color(0, 128, 0),      // Green
+        //sf::Color(0, 0, 255),      // Dark Blue
+        //sf::Color(0, 0, 255)       // Dark Blue
     };
 
     int specialTileIndex = 0;
@@ -107,7 +134,7 @@ void Board::initializeSquares(float pos_x, float pos_y) {
             }
 
             std::string textContent = "Property";
-            sf::Color fillColor = propertyColors[propertyColorIndex];
+            //sf::Color fillColor = propertyColors[propertyColorIndex];
             std::string textureFile = "";
 
 
@@ -115,14 +142,14 @@ void Board::initializeSquares(float pos_x, float pos_y) {
                 (i == number_of_squares - 1 && j == 0) || (i == number_of_squares - 1 && j == number_of_squares - 1)) {
                 textContent = specialTiles[specialTileIndex].first;
                 textureFile = specialTiles[specialTileIndex].second;
-                fillColor = sf::Color::White;
+                //fillColor = sf::Color::White;
                 specialTileIndex++;
             }
             else {
                 propertyColorIndex++;
             }
 
-            auto boardSquare = std::make_shared<BoardSquare>(squareWidth, squareHeight, window_, 0.0f, textContent, fillColor, textureFile);
+            auto boardSquare = std::make_shared<BoardSquare>(squareWidth, squareHeight, window_, 0.0f, textContent, sf::Color::White, textureFile);
 
             x = pos_x + j * squareWidth;
             y = pos_y + i * squareHeight;
@@ -130,19 +157,22 @@ void Board::initializeSquares(float pos_x, float pos_y) {
             if (counter <= 10) {
                 squares_[counter] = boardSquare;
             }
-            else if (counter <= 30) {
+            else if (counter < 30) {
                 if (counter % 2 == 1) {
                     squares_[- 0.5 * counter + 44.5] = boardSquare;
                 }
                 else squares_[0.5 * counter + 5] = boardSquare;
             }
-            else squares_[60 - counter] = boardSquare;
+            else squares_[59 - counter] = boardSquare;
             ++counter;
             if (!((i == 0 && j == 0) || (i == 0 && j == number_of_squares - 1) ||
                 (i == number_of_squares - 1 && j == 0) || (i == number_of_squares - 1 && j == number_of_squares - 1))) {
                 propertyColorIndex = (propertyColorIndex + 1) % propertyColors.size();
             }
         }
+    }
+    for (int i = 0; i < squares_.size(); i++) {
+        squares_[i]->setColor(propertyColors[i]);
     }
 }
 

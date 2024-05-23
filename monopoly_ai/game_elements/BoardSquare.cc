@@ -31,6 +31,10 @@ BoardSquare::BoardSquare(float width, float height, std::shared_ptr<sf::RenderWi
     //text_.setRotation(orientation);
 }
 
+void BoardSquare::setColor(sf::Color& color) {
+    shape_.setFillColor(color);
+}
+
 void BoardSquare::draw() {
     if (window_) {
         window_->draw(shape_);
