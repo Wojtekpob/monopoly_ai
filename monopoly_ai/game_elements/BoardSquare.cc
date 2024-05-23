@@ -41,3 +41,7 @@ void BoardSquare::setPosition(float x, float y) {
     shape_.setPosition(sf::Vector2f(x, y));
     text_.setPosition(x + 10, y + 10);
 }
+
+sf::Vector2f BoardSquare::getPosition() const {
+    return shape_.getPosition();
+}

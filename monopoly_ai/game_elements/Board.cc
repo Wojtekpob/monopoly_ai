@@ -3,14 +3,19 @@
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     : Drawable(win) {
+    current_player_ = 0;
+    dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
     initializeSquares(200.0f, 100.0f);
+    initializePlayers(4);
+}
 
-    if (!texture_.loadFromFile(std::string(BASE_PATH) + "assets/textures/parking.png")) {
-        throw std::runtime_error("s");
-    }
-    shape_.setTexture(&texture_);
+void Board::runRound() {
+    dice_->throwDice();
+    players_[current_player_]->move(dice_->getValue(), squares_);
+
+    current_player_ = ++current_player_ % 4;
 }
 
 void Board::draw() {
@@ -19,6 +24,22 @@ void Board::draw() {
         for (auto& square : squares_) {
             square->draw();
         }
+        for (auto& player : players_) {
+            player->draw();
+        }
+        dice_->draw();
+    }
+}
+
+void Board::initializePlayers(int players=1) {
+    std::vector<sf::Vector2f> position_biases = {
+        sf::Vector2f(7.0f, 7.0f),
+        sf::Vector2f(27.0f, 7.0f),
+        sf::Vector2f(7.0f, 27.0f),
+        sf::Vector2f(27.0f, 27.0f)
+    };
+    for (int i = 0; i < players; i++) {
+        players_.push_back(std::make_unique<Player>(window_, squares_[0], position_biases[i]));
     }
 }
 
@@ -37,6 +58,20 @@ void Board::initializeSquares(float pos_x, float pos_y) {
     };
 
     std::vector<sf::Color> propertyColors = {
+        //sf::Color::White,
+        //sf::Color::Yellow,
+        //sf::Color::Magenta,
+        //sf::Color::Yellow,
+        //sf::Color::Magenta,
+        //sf::Color::Magenta,
+        //sf::Color::Red,
+        //sf::Color::Magenta,
+        //sf::Color::Red,
+        //sf::Color::Red,
+        //sf::Color::White,
+        //sf::Color::Blue,
+
+
         sf::Color(165, 42, 42),    // Brown
         sf::Color(165, 42, 42),    // Brown
         sf::Color(75, 155, 195),   // Light Blue

@@ -12,6 +12,7 @@ public:
         const sf::Color& fillColor, const std::string& textureFile);
     void draw() override;
     void setPosition(float x, float y);
+    sf::Vector2f getPosition() const;
 
 private:
     sf::RectangleShape shape_;
