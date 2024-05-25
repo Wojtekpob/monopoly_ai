@@ -16,10 +16,13 @@ public:
     void draw() override;
     void setPosition(float x, float y); // Deklaracja funkcji
     void runRound();
+    void performCurrentAction();
 
 private:
     void initializeSquares(float pos_x, float pos_y);
     void initializePlayers(int players);
+    bool isActionAvailable(Action& action);
+
 
     int current_player_;
     sf::RectangleShape shape_;

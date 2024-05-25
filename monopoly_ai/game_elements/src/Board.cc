@@ -15,7 +15,92 @@ void Board::runRound() {
     dice_->throwDice();
     players_[current_player_]->move(dice_->getValue(), squares_);
 
+
     current_player_ = ++current_player_ % 4;
+}
+
+void Board::performCurrentAction() {
+    auto player = players_[current_player_];
+    switch (current_action_) {
+    case Action::BUY_PROPERTY:
+        // Implement logic to buy property
+        std::cout << "Player buys property" << std::endl;
+        // Placeholder logic: adjust player's money and mark property as owned// Example cost
+        // Assume current square is a property square
+        player->decreaseMoney(100);
+        break;
+    case Action::PAY_RENT:
+        // Implement logic to pay rent
+        std::cout << "Player pays rent" << std::endl;
+        // Placeholder logic: adjust player's money
+        player->decreaseMoney(50); // Example rent
+        break;
+    case Action::BUY_HOUSE:
+        // Implement logic to buy house
+        std::cout << "Player buys house" << std::endl;
+        // Placeholder logic: adjust player's money and add house to property
+        player->decreaseMoney(200); // Example house cost
+        break;
+    case Action::BUY_HOTEL:
+        // Implement logic to buy hotel
+        std::cout << "Player buys hotel" << std::endl;
+        // Placeholder logic: adjust player's money and add hotel to property
+        player->decreaseMoney(400); // Example hotel cost
+        break;
+    case Action::PLEDGE_PROPERTY:
+        // Implement logic to pledge property
+        std::cout << "Player pledges property" << std::endl;
+        // Placeholder logic: mark property as pledged and adjust player's money
+        player->increaseMoney(150); // Example pledge value
+        break;
+    case Action::PAY_TAX:
+        // Implement logic to pay tax
+        std::cout << "Player pays tax" << std::endl;
+        // Placeholder logic: adjust player's money
+        player->decreaseMoney(75); // Example tax
+        break;
+    case Action::REDEEM_PLEDGE:
+        // Implement logic to redeem pledged property
+        std::cout << "Player redeems pledged property" << std::endl;
+        // Placeholder logic: mark property as unpledged and adjust player's money
+        player->decreaseMoney(150); // Example redeem cost
+        break;
+    default:
+        std::cout << "Invalid action" << std::endl;
+        break;
+    }
+}
+
+bool Board::isActionAvailable(Action& action) {
+    auto player = players_[current_player_];
+    auto currentSquare = player->getCurrentSquare();
+
+    switch (action) { // @TODO to implement
+    case Action::BUY_PROPERTY:
+        // Check if the current square is a property and it can be bought
+        // Placeholder check; replace with actual game logic
+        return true; // Example: always return true for simplicity
+    case Action::PAY_RENT:
+        // Check if the player is on a property owned by another player
+        return false; // Placeholder
+    case Action::BUY_HOUSE:
+        // Check if the player owns all properties of a color set and has enough money
+        return false; // Placeholder
+    case Action::BUY_HOTEL:
+        // Check if the player has enough houses to buy a hotel
+        return false; // Placeholder
+    case Action::PLEDGE_PROPERTY:
+        // Check if the player owns the property and it is not already pledged
+        return false; // Placeholder
+    case Action::PAY_TAX:
+        // Check if the current square is a tax square
+        return false; // Placeholder
+    case Action::REDEEM_PLEDGE:
+        // Check if the player has pledged properties that can be redeemed
+        return false; // Placeholder
+    default:
+        return false;
+    }
 }
 
 void Board::draw() {
