@@ -8,6 +8,7 @@
 #include "Drawable.h"
 #include "Player.h"
 #include "Dice.h"
+#include "Action.h"
 
 class Board : public Drawable {
 public:
@@ -26,7 +27,7 @@ private:
     sf::Texture texture_;
     std::vector<std::shared_ptr<Player>> players_;
     std::unique_ptr<Dice> dice_;
-   
+    Action current_action_;
 };
 
 #endif // BOARD_H

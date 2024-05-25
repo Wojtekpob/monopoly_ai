@@ -21,6 +21,7 @@ private:
     int position_;
     sf::Vector2f position_bias_;
     int id_;
+    std::vector<std::shared_ptr<BoardSquare>> properties_;
 };
 
 #endif // PLAYER_H

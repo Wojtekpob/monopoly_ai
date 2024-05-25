@@ -1,19 +1,14 @@
 ﻿# Set the executable name
 add_executable(monopoly_ai
     monopoly_ai.cc
-    game_elements/Board.cc
-    game_elements/Board.h
-    game_elements/BoardSquare.cc
-    game_elements/BoardSquare.h
-    game_elements/Drawable.h
-    game_elements/Dice.h
-    game_elements/Dice.cc
-    game_elements/Player.h
-    game_elements/Player.cc
-)
+    game_elements/src/Board.cc
+    game_elements/src/BoardSquare.cc
+    game_elements/src/Dice.cc
+    game_elements/src/Player.cc
+    game_elements/src/Action.cc)
 
 # Include directories for header files
-target_include_directories(monopoly_ai PRIVATE ${CMAKE_SOURCE_DIR}/monopoly_ai/game_elements)
+target_include_directories(monopoly_ai PRIVATE ${CMAKE_SOURCE_DIR}/monopoly_ai/game_elements/include)
 
 # Link SFML libraries
 target_link_libraries(monopoly_ai sfml-graphics sfml-window sfml-system)

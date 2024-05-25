@@ -2,7 +2,7 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win) {
+    : Drawable(win), current_action_(Action::BUY_PROPERTY) {
     current_player_ = 0;
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
