@@ -31,6 +31,8 @@ private:
     std::vector<std::shared_ptr<Player>> players_;
     std::unique_ptr<Dice> dice_;
     Action current_action_;
+    sf::Font font_;
+    sf::Text actionText_;
 };
 
 #endif // BOARD_H

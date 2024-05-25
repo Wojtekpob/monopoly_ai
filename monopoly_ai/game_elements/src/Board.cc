@@ -9,6 +9,17 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     shape_.setFillColor(sf::Color::White);
     initializeSquares(200.0f, 100.0f);
     initializePlayers(4);
+
+    if (!font_.loadFromFile(std::string(BASE_PATH) + "assets/fonts/font.ttf")) {
+        throw std::runtime_error("Failed to load font");
+    }
+
+    // Initialize the text object
+    actionText_.setFont(font_);
+    actionText_.setCharacterSize(24); // example size
+    actionText_.setFillColor(sf::Color::Yellow); // example color
+    actionText_.setPosition(10, 10); // example position
+    actionText_.setString("TEST TEST");
 }
 
 void Board::runRound() {
@@ -20,6 +31,8 @@ void Board::runRound() {
 }
 
 void Board::performCurrentAction() {
+    if (!isActionAvailable(current_action_)) return;
+
     auto player = players_[current_player_];
     switch (current_action_) {
     case Action::BUY_PROPERTY:
@@ -113,6 +126,7 @@ void Board::draw() {
             player->draw();
         }
         dice_->draw();
+        window_->draw(actionText_);
     }
 }
 
