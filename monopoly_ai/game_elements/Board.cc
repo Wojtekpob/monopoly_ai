@@ -39,7 +39,7 @@ void Board::initializePlayers(int players=1) {
         sf::Vector2f(27.0f, 27.0f)
     };
     for (int i = 0; i < players; i++) {
-        players_.push_back(std::make_unique<Player>(window_, squares_[0], position_biases[i]));
+        players_.push_back(std::make_shared<Player>(window_, squares_[0], position_biases[i], i));
     }
 }
 

@@ -24,7 +24,7 @@ private:
     sf::RectangleShape shape_;
     std::vector<std::shared_ptr<BoardSquare>> squares_;
     sf::Texture texture_;
-    std::vector<std::unique_ptr<Player>> players_;
+    std::vector<std::shared_ptr<Player>> players_;
     std::unique_ptr<Dice> dice_;
    
 };

@@ -8,17 +8,19 @@
 
 class Player : public Drawable {
 public:
-    Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias);
+    Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id);
     void draw() override;
     void move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares);
     std::shared_ptr<BoardSquare> getCurrentSquare() const;
     void setPosition(sf::Vector2f &pos);
+    bool operator==(const Player& other) const;
 
 private:
     sf::CircleShape circle_;
     std::shared_ptr<BoardSquare> currentSquare_;
     int position_;
     sf::Vector2f position_bias_;
+    int id_;
 };
 
 #endif // PLAYER_H

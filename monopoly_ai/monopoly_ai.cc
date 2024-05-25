@@ -1,8 +1,8 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
-#include "game_elements/Board.h"
-#include "game_elements/Dice.h"
+#include "Board.h"
+#include "Dice.h"
 
 #define SFML_STATIC
 
