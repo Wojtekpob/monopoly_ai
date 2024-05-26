@@ -6,8 +6,13 @@ add_executable(monopoly_ai
     game_elements/src/Dice.cc
     game_elements/src/Player.cc
     game_elements/src/Action.cc
-    game_elements/src/Property.cc
-)
+    game_elements/src/fields/Property.cc
+    game_elements/src/fields/Estate.cc
+    game_elements/src/fields/UtilityField.cc 
+    game_elements/src/fields/RailRoad.cc
+    game_elements/src/fields/BlankField.cc 
+    game_elements/src/fields/TaxField.cc 
+    game_elements/src/fields/GoToJailField.cc)
 
 # Include directories for header files
 target_include_directories(monopoly_ai PRIVATE ${CMAKE_SOURCE_DIR}/monopoly_ai/game_elements/include)

@@ -7,6 +7,7 @@
 
 class ActionField {
 public:
+    ActionField(const std::string& name) : name_(name) {}
     virtual ~ActionField() = default;
     virtual void invokeAction(std::shared_ptr<Player> player) = 0;
 
