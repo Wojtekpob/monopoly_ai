@@ -17,11 +17,17 @@ public:
     void setPosition(float x, float y); // Deklaracja funkcji
     void runRound();
     void performCurrentAction();
+    void nextPlayer();
+    void drawAction();
+    void incrementAction();
+    void decrementAction();
+    void setActionAvailability();
 
 private:
     void initializeSquares(float pos_x, float pos_y);
     void initializePlayers(int players);
     bool isActionAvailable(Action& action);
+    void updatePlayerText();
 
 
     int current_player_;
@@ -33,6 +39,8 @@ private:
     Action current_action_;
     sf::Font font_;
     sf::Text actionText_;
+    sf::Text playerText_;
+    bool action_available_;
 };
 
 #endif // BOARD_H

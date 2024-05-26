@@ -7,6 +7,7 @@ Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquar
     circle_.setFillColor(sf::Color::White); 
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
     setPosition(currentSquare_->getPosition());
+
 }
 
 void Player::setPosition(sf::Vector2f &pos) {
@@ -42,4 +43,8 @@ void Player::decreaseMoney(int amount) {
 
 void Player::increaseMoney(int amount) {
     money_ += amount;
+}
+
+int Player::getMoney() const {
+    return money_;
 }

@@ -2,13 +2,13 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY) {
-    current_player_ = 0;
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0) {
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
     initializeSquares(200.0f, 100.0f);
     initializePlayers(4);
+    setActionAvailability();
 
     if (!font_.loadFromFile(std::string(BASE_PATH) + "assets/fonts/font.ttf")) {
         throw std::runtime_error("Failed to load font");
@@ -17,9 +17,14 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     // Initialize the text object
     actionText_.setFont(font_);
     actionText_.setCharacterSize(24); // example size
-    actionText_.setFillColor(sf::Color::Yellow); // example color
-    actionText_.setPosition(10, 10); // example position
-    actionText_.setString("TEST TEST");
+    actionText_.setPosition(610.0f, 40.0f); // example position
+
+    playerText_.setFont(font_);
+    playerText_.setCharacterSize(24);
+    playerText_.setFillColor(sf::Color::White);
+    playerText_.setPosition(610.0f, 10.0f); // Position it in the right corner
+
+    updatePlayerText();
 }
 
 void Board::runRound() {
@@ -27,11 +32,11 @@ void Board::runRound() {
     players_[current_player_]->move(dice_->getValue(), squares_);
 
 
-    current_player_ = ++current_player_ % 4;
+    nextPlayer();
 }
 
 void Board::performCurrentAction() {
-    if (!isActionAvailable(current_action_)) return;
+    if (action_available_) return;
 
     auto player = players_[current_player_];
     switch (current_action_) {
@@ -84,6 +89,10 @@ void Board::performCurrentAction() {
     }
 }
 
+void Board::setActionAvailability() {
+    action_available_ = isActionAvailable(current_action_);
+}
+
 bool Board::isActionAvailable(Action& action) {
     auto player = players_[current_player_];
     auto currentSquare = player->getCurrentSquare();
@@ -101,7 +110,7 @@ bool Board::isActionAvailable(Action& action) {
         return false; // Placeholder
     case Action::BUY_HOTEL:
         // Check if the player has enough houses to buy a hotel
-        return false; // Placeholder
+        return true; // Placeholder
     case Action::PLEDGE_PROPERTY:
         // Check if the player owns the property and it is not already pledged
         return false; // Placeholder
@@ -126,7 +135,8 @@ void Board::draw() {
             player->draw();
         }
         dice_->draw();
-        window_->draw(actionText_);
+        drawAction();
+        window_->draw(playerText_);
     }
 }
 
@@ -197,29 +207,6 @@ void Board::initializeSquares(float pos_x, float pos_y) {
         sf::Color::Black,
         sf::Color::Magenta,
         sf::Color::Black
-
-        //sf::Color(165, 42, 42),    // Brown
-        //sf::Color(165, 42, 42),    // Brown
-        //sf::Color(75, 155, 195),   // Light Blue
-        //sf::Color(75, 155, 195),   // Light Blue
-        //sf::Color(75, 155, 195),   // Light Blue
-        //sf::Color(199, 0, 144),    // Pink
-        //sf::Color(199, 0, 144),    // Pink
-        //sf::Color(199, 0, 144),    // Pink
-        //sf::Color(255, 165, 0),    // Orange
-        //sf::Color(255, 165, 0),    // Orange
-        //sf::Color(255, 165, 0),    // Orange
-        //sf::Color(255, 0, 0),      // Red
-        //sf::Color(255, 0, 0),      // Red
-        //sf::Color(255, 0, 0),      // Red
-        //sf::Color(255, 255, 0),    // Yellow
-        //sf::Color(255, 255, 0),    // Yellow
-        //sf::Color(255, 255, 0),    // Yellow
-        //sf::Color(0, 128, 0),      // Green
-        //sf::Color(0, 128, 0),      // Green
-        //sf::Color(0, 128, 0),      // Green
-        //sf::Color(0, 0, 255),      // Dark Blue
-        //sf::Color(0, 0, 255)       // Dark Blue
     };
 
     int specialTileIndex = 0;
@@ -277,4 +264,64 @@ void Board::initializeSquares(float pos_x, float pos_y) {
 
 void Board::setPosition(float x, float y) {
     shape_.setPosition(sf::Vector2f(x, y));
+}
+
+void Board::nextPlayer() {
+    current_player_ = (current_player_ + 1) % players_.size();
+    current_action_ = Action::BUY_PROPERTY;
+    setActionAvailability();
+    updatePlayerText();
+}
+
+void Board::drawAction() {
+    if (action_available_) {
+        actionText_.setFillColor(sf::Color::Green);
+    }
+    else {
+        actionText_.setFillColor(sf::Color(105, 105, 105));
+    }
+    
+    switch (current_action_) {
+    case Action::BUY_PROPERTY:
+        actionText_.setString("ACTION: BUY_PROPERTY \n keepo");
+        break;
+    case Action::PAY_RENT:
+        actionText_.setString("ACTION: PAY_RENT");
+        break;
+    case Action::BUY_HOUSE:
+        actionText_.setString("ACTION: BUY_HOUSE");
+        break;
+    case Action::BUY_HOTEL:
+        actionText_.setString("ACTION: BUY_HOTEL");
+        break;
+    case Action::PLEDGE_PROPERTY:
+        actionText_.setString("ACTION: PLEDGE_PROPERTY");
+        break;
+    case Action::PAY_TAX:
+        actionText_.setString("ACTION: PAY_TAX");
+        break;
+    case Action::REDEEM_PLEDGE:
+        actionText_.setString("ACTION: REDEEM_PLEDGE");
+        break;
+    default:
+        actionText_.setString("Unknown Action");
+        break;
+    }
+    
+    window_->draw(actionText_);
+}
+
+void Board::incrementAction() {
+    ++current_action_;
+    setActionAvailability();
+}
+
+void Board::decrementAction() {
+    --current_action_;
+    setActionAvailability();
+}
+
+void Board::updatePlayerText() {
+    std::string money = std::to_string(players_[current_player_]->getMoney());
+    playerText_.setString("Player " + std::to_string(current_player_) + "\t\t\t" + money + " $");
 }
