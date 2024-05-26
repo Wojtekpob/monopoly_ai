@@ -5,7 +5,7 @@
 
 class GoToJailField : public ActionField {
 public:
-    GoToJailField(const std::string& name);
+    GoToJailField(int id, const std::string& name);
 
     void invokeAction(std::shared_ptr<Player> player) override;
 };

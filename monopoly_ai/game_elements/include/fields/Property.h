@@ -5,9 +5,11 @@
 
 class Property : public ActionField {
 public:
-    Property(const std::string& name, int cost);
+    Property(int id, const std::string& name, int cost);
 
-    void invokeAction(std::shared_ptr<Player> player) override;
+    void buy(std::shared_ptr<Player> player);
+    void pledge(std::shared_ptr<Player> player);
+    void redeemPledge(std::shared_ptr<Player> player);
 
 private:
     bool pledged_;

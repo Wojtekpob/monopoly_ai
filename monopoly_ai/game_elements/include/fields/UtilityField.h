@@ -5,7 +5,7 @@
 
 class UtilityField : public Property {
 public:
-    UtilityField(const std::string& name, int cost);
+    UtilityField(int id, const std::string& name, int cost);
 
     void invokeAction(std::shared_ptr<Player> player) override;
 };

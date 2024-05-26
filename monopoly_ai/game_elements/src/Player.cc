@@ -48,3 +48,7 @@ void Player::increaseMoney(int amount) {
 int Player::getMoney() const {
     return money_;
 }
+
+void Player::addProperty(int property) {
+    properties_.push_back(property);
+}

@@ -1,8 +1,8 @@
 #include "fields/UtilityField.h"
 #include <iostream>
 
-UtilityField::UtilityField(const std::string& name, int cost)
-    : Property(name, cost) {}
+UtilityField::UtilityField(int id, const std::string& name, int cost)
+    : Property(id, name, cost) {}
 
 void UtilityField::invokeAction(std::shared_ptr<Player> player) {
     std::cout << "Utility field: " << name_ << " - Action taken." << std::endl;

@@ -5,7 +5,7 @@
 
 class BlankField : public ActionField {
 public:
-    BlankField(const std::string& name);
+    BlankField(int id, const std::string& name);
 
     void invokeAction(std::shared_ptr<Player> player) override;
 };

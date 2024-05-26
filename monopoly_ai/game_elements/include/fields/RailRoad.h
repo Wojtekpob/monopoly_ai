@@ -5,7 +5,7 @@
 
 class RailRoad : public Property {
 public:
-    RailRoad(const std::string& name, int cost);
+    RailRoad(int id, const std::string& name, int cost);
 
     void invokeAction(std::shared_ptr<Player> player) override;
 };

@@ -1,8 +1,8 @@
 #include "fields/Estate.h"
 #include <iostream>
 
-Estate::Estate(const std::string& name, int cost, int houseCost, int hotelCost)
-    : Property(name, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost) {}
+Estate::Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost)
+    : Property(id, name, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost) {}
 
 void Estate::invokeAction(std::shared_ptr<Player> player) {
     // Example action: print estate details

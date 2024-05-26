@@ -17,6 +17,7 @@ public:
     int getMoney() const;
     void decreaseMoney(int amount);
     void increaseMoney(int amount);
+    void addProperty(int property_id);
 
 private:
     sf::CircleShape circle_;
@@ -25,7 +26,7 @@ private:
     sf::Vector2f position_bias_;
     int id_;
     int money_;
-    std::vector<std::shared_ptr<BoardSquare>> properties_;
+    std::vector<int> properties_;
 };
 
 #endif // PLAYER_H

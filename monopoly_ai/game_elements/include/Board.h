@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Dice.h"
 #include "Action.h"
+#include "fields/Property.h"
 
 class Board : public Drawable {
 public:
