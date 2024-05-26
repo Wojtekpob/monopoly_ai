@@ -12,7 +12,7 @@ public:
     void draw() override;
     void move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares);
     std::shared_ptr<BoardSquare> getCurrentSquare() const;
-    void setPosition(sf::Vector2f &pos);
+    void setPosition(sf::Vector2f pos);
     bool operator==(const Player& other) const;
     int getMoney() const;
     void decreaseMoney(int amount);

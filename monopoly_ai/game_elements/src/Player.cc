@@ -10,7 +10,7 @@ Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquar
 
 }
 
-void Player::setPosition(sf::Vector2f &pos) {
+void Player::setPosition(sf::Vector2f pos) {
     circle_.setPosition(pos + position_bias_);
 }
 
