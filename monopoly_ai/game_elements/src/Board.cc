@@ -2,7 +2,7 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0) {
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_() {
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -153,7 +153,7 @@ void Board::initializePlayers(int players=1) {
 }
 
 void Board::initializeSquares(float pos_x, float pos_y) {
-   
+    std::vector<std::shared_ptr<ActionField>> fields = fieldLoader_.loadFields(std::string(BASE_PATH) + "assets/fields/fields.json");
     float x, y;
     int number_of_squares = 11;
     float squareWidth = shape_.getSize().x / number_of_squares;
@@ -259,7 +259,10 @@ void Board::initializeSquares(float pos_x, float pos_y) {
     }
     for (int i = 0; i < squares_.size(); i++) {
         squares_[i]->setColor(propertyColors[i]);
+        squares_[i]->setActionField(fields[i]);
+        std::cout << fields[i]->name_ << std::endl;
     }
+   
 }
 
 void Board::setPosition(float x, float y) {

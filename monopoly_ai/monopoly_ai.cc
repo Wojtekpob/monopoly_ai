@@ -15,9 +15,6 @@ int main()
     Board board(400, 400, window);
     board.setPosition(200.0f, 100.0f);
     sf::Color backgroundColor = sf::Color::Black;
-    FieldLoader fieldLoader;
-    std::vector<std::shared_ptr<ActionField>> fields = fieldLoader.loadFields(std::string(BASE_PATH) + "assets/fields/fields.json");
-    std::cout << fields.size() << endl;
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {

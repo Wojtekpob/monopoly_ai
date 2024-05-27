@@ -10,6 +10,7 @@
 #include "Dice.h"
 #include "Action.h"
 #include "fields/Property.h"
+#include "fields/FieldLoader.h"
 
 class Board : public Drawable {
 public:
@@ -42,6 +43,7 @@ private:
     sf::Text actionText_;
     sf::Text playerText_;
     bool action_available_;
+    FieldLoader fieldLoader_;
 };
 
 #endif // BOARD_H

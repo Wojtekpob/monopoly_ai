@@ -4,6 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Drawable.h"
+//#include "fields/ActionField.h"
+
+
+class ActionField;
 
 class BoardSquare : public Drawable {
 public:
@@ -14,6 +18,7 @@ public:
     void setPosition(float x, float y);
     sf::Vector2f getPosition() const;
     void setColor(sf::Color&);
+    void setActionField(std::shared_ptr<ActionField> actionField);
 
 private:
     sf::RectangleShape shape_;
@@ -21,7 +26,7 @@ private:
     sf::Texture texture_;
     float orientation_;
     std::shared_ptr<sf::RenderWindow> window_;
-
+    std::shared_ptr<ActionField> actionField_;
 };
 
 #endif // BOARDSQUARE_H

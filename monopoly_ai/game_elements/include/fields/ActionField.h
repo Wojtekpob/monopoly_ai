@@ -13,9 +13,11 @@ public:
     bool operator==(const ActionField& other) const {
         return id_ == other.id_ && name_ == other.name_;
     }
+    std::string name_;
+
 
 protected:
-    std::string name_;
+
     int id_;
 };
 

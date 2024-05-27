@@ -1,5 +1,6 @@
 #include "BoardSquare.h"
 #include <iostream>
+#include "fields/ActionField.h"
 
 BoardSquare::BoardSquare(float width, float height, std::shared_ptr<sf::RenderWindow> win,
     float orientation, const std::string& textContent,
@@ -48,4 +49,8 @@ void BoardSquare::setPosition(float x, float y) {
 
 sf::Vector2f BoardSquare::getPosition() const {
     return shape_.getPosition();
+}
+
+void BoardSquare::setActionField(std::shared_ptr<ActionField> actionField) {
+    actionField_ = actionField;
 }
