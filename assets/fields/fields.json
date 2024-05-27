@@ -1,20 +1,288 @@
 {
   "fields": [
     {
-      "type": "Estate",
-      "province": "downtown",
-      "cost": 200,
-      "house_cost": 50,
-      "hotel_cost": 100,
-      "houses_rent": [ 0, 0, 0, 0, 0, 0 ]
+      "type": "BlankField",
+      "name": "Start"
     },
     {
       "type": "Estate",
-      "province": "suburb",
+      "name": "Świnoujście",
+      "province": "brown",
+      "cost": 60,
+      "house_cost": 50,
+      "hotel_cost": 50,
+      "houses_rent": [ 2, 10, 30, 90, 160, 250 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Kasa Społeczna"
+    },
+    {
+      "type": "Estate",
+      "name": "Kołobrzeg",
+      "province": "brown",
+      "cost": 60,
+      "house_cost": 50,
+      "hotel_cost": 50,
+      "houses_rent": [ 4, 20, 60, 180, 320, 450 ]
+    },
+    {
+      "type": "TaxField",
+      "name": "Podatek Dochodowy",
+      "tax_amount": 200
+    },
+    {
+      "type": "RailRoad",
+      "name": "Dworzec Główny",
+      "cost": 200,
+      "rent": 25
+    },
+    {
+      "type": "Estate",
+      "name": "Olsztyn",
+      "province": "light blue",
+      "cost": 100,
+      "house_cost": 50,
+      "hotel_cost": 50,
+      "houses_rent": [ 6, 30, 90, 270, 400, 550 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Szansa"
+    },
+    {
+      "type": "Estate",
+      "name": "Suwałki",
+      "province": "light blue",
+      "cost": 100,
+      "house_cost": 50,
+      "hotel_cost": 50,
+      "houses_rent": [ 6, 30, 90, 270, 400, 550 ]
+    },
+    {
+      "type": "Estate",
+      "name": "Białystok",
+      "province": "light blue",
+      "cost": 120,
+      "house_cost": 50,
+      "hotel_cost": 50,
+      "houses_rent": [ 8, 40, 100, 300, 450, 600 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Więzienie"
+    },
+    {
+      "type": "Estate",
+      "name": "Gdynia",
+      "province": "pink",
+      "cost": 140,
+      "house_cost": 100,
+      "hotel_cost": 100,
+      "houses_rent": [ 10, 50, 150, 450, 625, 750 ]
+    },
+    {
+      "type": "UtilityField",
+      "name": "Elektrownia",
       "cost": 150,
-      "house_cost": 40,
-      "hotel_cost": 80,
-      "houses_rent": [ 10, 20, 30, 40, 50, 60 ]
+      "rent": 4 
+    },
+    {
+      "type": "Estate",
+      "name": "Gdańsk",
+      "province": "pink",
+      "cost": 140,
+      "house_cost": 100,
+      "hotel_cost": 100,
+      "houses_rent": [ 10, 50, 150, 450, 625, 750 ]
+    },
+    {
+      "type": "Estate",
+      "name": "Sopot",
+      "province": "pink",
+      "cost": 160,
+      "house_cost": 100,
+      "hotel_cost": 100,
+      "houses_rent": [ 12, 60, 180, 500, 700, 900 ]
+    },
+    {
+      "type": "RailRoad",
+      "name": "Dworzec Zachodni",
+      "cost": 200,
+      "rent": 25
+    },
+    {
+      "type": "Estate",
+      "name": "Toruń",
+      "province": "orange",
+      "cost": 180,
+      "house_cost": 100,
+      "hotel_cost": 100,
+      "houses_rent": [ 14, 70, 200, 550, 750, 950 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Kasa Społeczna"
+    },
+    {
+      "type": "Estate",
+      "name": "Bydgoszcz",
+      "province": "orange",
+      "cost": 180,
+      "house_cost": 100,
+      "hotel_cost": 100,
+      "houses_rent": [ 14, 70, 200, 550, 750, 950 ]
+    },
+    {
+      "type": "Estate",
+      "name": "Poznań",
+      "province": "orange",
+      "cost": 200,
+      "house_cost": 100,
+      "hotel_cost": 100,
+      "houses_rent": [ 16, 80, 220, 600, 800, 1000 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Parking"
+    },
+    {
+      "type": "Estate",
+      "name": "Wrocław",
+      "province": "red",
+      "cost": 220,
+      "house_cost": 150,
+      "hotel_cost": 150,
+      "houses_rent": [ 18, 90, 250, 700, 875, 1050 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Szansa"
+    },
+    {
+      "type": "Estate",
+      "name": "Opole",
+      "province": "red",
+      "cost": 220,
+      "house_cost": 150,
+      "hotel_cost": 150,
+      "houses_rent": [ 18, 90, 250, 700, 875, 1050 ]
+    },
+    {
+      "type": "Estate",
+      "name": "Katowice",
+      "province": "red",
+      "cost": 240,
+      "house_cost": 150,
+      "hotel_cost": 150,
+      "houses_rent": [ 20, 100, 300, 750, 925, 1100 ]
+    },
+    {
+      "type": "RailRoad",
+      "name": "Dworzec Południowy",
+      "cost": 200,
+      "rent": 25
+    },
+    {
+      "type": "Estate",
+      "name": "Rzeszów",
+      "province": "yellow",
+      "cost": 260,
+      "house_cost": 150,
+      "hotel_cost": 150,
+      "houses_rent": [ 22, 110, 330, 800, 975, 1150 ]
+    },
+    {
+      "type": "Estate",
+      "name": "Lublin",
+      "province": "yellow",
+      "cost": 260,
+      "house_cost": 150,
+      "hotel_cost": 150,
+      "houses_rent": [ 22, 110, 330, 800, 975, 1150 ]
+    },
+    {
+      "type": "UtilityField",
+      "name": "Wodociągi",
+      "cost": 150,
+      "rent": 4 
+    },
+    {
+      "type": "Estate",
+      "name": "Łódź",
+      "province": "yellow",
+      "cost": 280,
+      "house_cost": 150,
+      "hotel_cost": 150,
+      "houses_rent": [ 24, 120, 360, 850, 1025, 1200 ]
+    },
+    {
+      "type": "GoToJailField",
+      "name": "Idź do więzienia"
+    },
+    {
+      "type": "Estate",
+      "name": "Kraków",
+      "province": "green",
+      "cost": 300,
+      "house_cost": 200,
+      "hotel_cost": 200,
+      "houses_rent": [ 26, 130, 390, 900, 1100, 1275 ]
+    },
+    {
+      "type": "Estate",
+      "name": "Częstochowa",
+      "province": "green",
+      "cost": 300,
+      "house_cost": 200,
+      "hotel_cost": 200,
+      "houses_rent": [ 26, 130, 390, 900, 1100, 1275 ]
+    },
+    {
+      "type": "BlankField",
+      "name": "Kasa Społeczna"
+    },
+    {
+      "type": "Estate",
+      "name": "Warszawa",
+      "province": "green",
+      "cost": 320,
+      "house_cost": 200,
+      "hotel_cost": 200,
+      "houses_rent": [ 28, 150, 450, 1000, 1200, 1400 ]
+    },
+    {
+      "type": "RailRoad",
+      "name": "Dworzec Wschodni",
+      "cost": 200,
+      "rent": 25
+    },
+    {
+      "type": "BlankField",
+      "name": "Szansa"
+    },
+    {
+      "type": "Estate",
+      "name": "Szczecin",
+      "province": "dark blue",
+      "cost": 350,
+      "house_cost": 200,
+      "hotel_cost": 200,
+      "houses_rent": [ 35, 175, 500, 1100, 1300, 1500 ]
+    },
+    {
+      "type": "TaxField",
+      "name": "Podatek Luksusowy",
+      "tax_amount": 100
+    },
+    {
+      "type": "Estate",
+      "name": "Zakopane",
+      "province": "dark blue",
+      "cost": 400,
+      "house_cost": 200,
+      "hotel_cost": 200,
+      "houses_rent": [ 50, 200, 600, 1400, 1700, 2000 ]
     }
   ]
 }

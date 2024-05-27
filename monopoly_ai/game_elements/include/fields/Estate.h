@@ -5,7 +5,7 @@
 
 class Estate : public Property {
 public:
-    Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent_);
+    Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province);
 
     void invokeAction(std::shared_ptr<Player> player) override;
 
@@ -15,6 +15,7 @@ private:
     int houseCost_;
     int hotelCost_;
     std::vector<int> houses_rent_;
+    std::string province_;
 };
 
 #endif // ESTATE_H
