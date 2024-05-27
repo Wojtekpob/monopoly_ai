@@ -8,7 +8,7 @@ void BlankField::invokeAction(std::shared_ptr<Player> player) {
 }
 
 
-bool BlankField::isActionAvailable(std::shared_ptr<Player> player, Action& action) {
+bool BlankField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     // Logic for BlankField, typically always available
     return true;
 }

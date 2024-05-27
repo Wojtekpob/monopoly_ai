@@ -8,13 +8,13 @@ public:
     Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province);
 
     void invokeAction(std::shared_ptr<Player> player) override;
-    bool isActionAvailable(std::shared_ptr<Player> player, Action& action) override;
+    bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     
 
 private:
-    //void buyProperty(std::shared_ptr<Player> player);
-    //void buyHouse(std::shared_ptr<Player> player);
-    //void buyHouse(std::shared_ptr<Player> player);
+    void buyHouse(std::shared_ptr<Player> player);
+    void buyHotel(std::shared_ptr<Player> player);
+    void payRent(std::shared_ptr<Player> player);
 
     int hotels_;
     int houses_;

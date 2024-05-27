@@ -7,7 +7,7 @@ class BlankField : public ActionField {
 public:
     BlankField(int id, const std::string& name);
 
-    bool isActionAvailable(std::shared_ptr<Player> player, Action& action) override;
+    bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
 
 
     void invokeAction(std::shared_ptr<Player> player) override;

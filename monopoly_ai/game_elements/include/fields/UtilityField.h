@@ -8,7 +8,7 @@ public:
     UtilityField(int id, const std::string& name, int cost, int rent);
 
     void invokeAction(std::shared_ptr<Player> player) override;
-    bool isActionAvailable(std::shared_ptr<Player> player, Action& action) override;
+    bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
 private:
     int rent_;
 };

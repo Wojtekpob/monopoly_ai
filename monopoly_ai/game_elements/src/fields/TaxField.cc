@@ -10,7 +10,7 @@ void TaxField::invokeAction(std::shared_ptr<Player> player) {
 }
 
 
-bool TaxField::isActionAvailable(std::shared_ptr<Player> player, Action& action) {
+bool TaxField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     // Logic for TaxField, typically always available
     return true;
 }

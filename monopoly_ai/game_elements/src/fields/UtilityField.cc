@@ -10,7 +10,7 @@ void UtilityField::invokeAction(std::shared_ptr<Player> player) {
 }
 
 
-bool UtilityField::isActionAvailable(std::shared_ptr<Player> player, Action& action) {
+bool UtilityField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     // Implement the logic to check if the action is available for the player
     // Example: Check if the player can pay the rent
     return true; // Placeholder logic

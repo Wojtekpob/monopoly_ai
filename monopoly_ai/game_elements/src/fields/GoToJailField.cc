@@ -8,7 +8,7 @@ void GoToJailField::invokeAction(std::shared_ptr<Player> player) {
     // Add logic to move player to the jail position
 }
 
-bool GoToJailField::isActionAvailable(std::shared_ptr<Player> player, Action& action) {
+bool GoToJailField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     // Logic for GoToJailField, typically always available
     return true;
 }
