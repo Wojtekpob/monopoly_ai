@@ -8,7 +8,7 @@ public:
     TaxField(int id, const std::string& name, int taxAmount);
 
     void invokeAction(std::shared_ptr<Player> player) override;
-
+    bool isActionAvailable(std::shared_ptr<Player> player, Action& action) override;
 private:
     int taxAmount_;
 };

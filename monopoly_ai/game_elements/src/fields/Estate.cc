@@ -8,3 +8,8 @@ void Estate::invokeAction(std::shared_ptr<Player> player) {
     std::cout << "Estate: " << name_ << " - Houses: " << houses_ << ", Hotels: " << hotels_ << std::endl;
     // Add more logic based on the game rules
 }
+bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action& action) {
+    // Implement the logic to check if the action is available for the player
+    // Example: Check if the player has enough money
+    return true; // Placeholder logic
+}

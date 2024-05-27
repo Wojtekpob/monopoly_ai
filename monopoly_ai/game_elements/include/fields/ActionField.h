@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "Player.h"
+#include "Action.h"
 
 class ActionField {
 public:
@@ -13,6 +14,7 @@ public:
     bool operator==(const ActionField& other) const {
         return id_ == other.id_ && name_ == other.name_;
     }
+    virtual bool isActionAvailable(std::shared_ptr<Player> player, Action& action) = 0;
     std::string name_;
 
 
