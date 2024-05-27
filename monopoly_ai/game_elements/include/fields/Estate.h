@@ -9,7 +9,13 @@ public:
 
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action& action) override;
+    
+
 private:
+    //void buyProperty(std::shared_ptr<Player> player);
+    //void buyHouse(std::shared_ptr<Player> player);
+    //void buyHouse(std::shared_ptr<Player> player);
+
     int hotels_;
     int houses_;
     int houseCost_;

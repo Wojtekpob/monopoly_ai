@@ -10,8 +10,10 @@ public:
     void buy(std::shared_ptr<Player> player);
     void pledge(std::shared_ptr<Player> player);
     void redeemPledge(std::shared_ptr<Player> player);
+    int getRedeemPledgePrice();
+    int getPledgePrice();
 
-private:
+protected:
     bool pledged_;
     std::shared_ptr<Player> owner_;
     int cost_;

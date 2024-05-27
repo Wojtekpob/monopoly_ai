@@ -96,7 +96,7 @@ void Board::setActionAvailability() {
 bool Board::isActionAvailable(Action& action) {
     auto player = players_[current_player_];
     auto currentSquare = player->getCurrentSquare();
-
+   
     switch (action) { // @TODO to implement
     case Action::BUY_PROPERTY:
         // Check if the current square is a property and it can be bought

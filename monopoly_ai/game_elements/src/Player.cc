@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <stdexcept>
 
+
 Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id)
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500) {
     circle_.setRadius(5.0f); 
