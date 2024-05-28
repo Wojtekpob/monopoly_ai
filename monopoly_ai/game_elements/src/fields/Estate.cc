@@ -17,12 +17,13 @@ void Estate::invokeAction(std::shared_ptr<Player> player) {
         buy(player);
     }
 }
+
 bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     switch (action) { 
     case Action::BUY_PROPERTY:
         return owner_ == nullptr && player->getMoney() >= houses_rent_.front();
     case Action::PAY_RENT:
-        return owner_ != nullptr && player != owner_;
+        return owner_ != nullptr && player != owner_ && player->getMoney() >= houses_rent_[houses_ + hotels_];
     case Action::BUY_HOUSE:
         return owner_ != nullptr && player == owner_ && houses_ < 4 && player->getMoney() >= houseCost_;
     case Action::BUY_HOTEL:
@@ -32,7 +33,7 @@ bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     case Action::REDEEM_PLEDGE:
         return owner_ != nullptr && player == owner_ && !pledged_ && player->getMoney() > getRedeemPledgePrice();
     default:
-        return false;
+        return Property::isActionAvailable(player, action);
     }
 }
 

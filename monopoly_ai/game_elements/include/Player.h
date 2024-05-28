@@ -18,6 +18,11 @@ public:
     void decreaseMoney(int amount);
     void increaseMoney(int amount);
     void addProperty(int property_id);
+    int getRailRoads();
+    void incrementRailRoads();
+    int getUtilities();
+    void incrementUtilities();
+    
 
 private:
     sf::CircleShape circle_;
@@ -27,6 +32,8 @@ private:
     int id_;
     int money_;
     std::vector<int> properties_;
+    int railroads_;
+    int utilities_;
 };
 
 #endif // PLAYER_H

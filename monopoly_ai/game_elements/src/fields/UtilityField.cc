@@ -5,13 +5,29 @@ UtilityField::UtilityField(int id, const std::string& name, int cost, int rent)
     : Property(id, name, cost), rent_(rent) {}
 
 void UtilityField::invokeAction(std::shared_ptr<Player> player) {
-    std::cout << "Utility field: " << name_ << " - Action taken." << std::endl;
-    // Add more logic based on the game rules
+    if (owner_) {
+        if (player != owner_) {
+            player->decreaseMoney(getRent());
+            owner_->increaseMoney(getRent());
+        }
+    }
+    else {
+        buy(player);
+        player->incrementUtilities();
+    }
 }
 
-
 bool UtilityField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
-    // Implement the logic to check if the action is available for the player
-    // Example: Check if the player can pay the rent
-    return true; // Placeholder logic
+    switch (action) {
+    case Action::BUY_PROPERTY:
+        return owner_ == nullptr && player->getMoney() >= cost_;
+    case Action::PAY_RENT:
+        return owner_ != nullptr && player != owner_ && player->getMoney() >= getRent();
+    default:
+        return Property::isActionAvailable(player, action);
+    }
+}
+
+int UtilityField::getRent() {
+    return owner_->getUtilities() * 40;
 }

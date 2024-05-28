@@ -1,16 +1,34 @@
 #include "fields/RailRoad.h"
 #include <iostream>
+#include <cmath>
 
 RailRoad::RailRoad(int id, const std::string& name, int cost, int rent)
     : Property(id, name, cost), rent_(rent) {}
 
 void RailRoad::invokeAction(std::shared_ptr<Player> player) {
-    std::cout << "Railroad: " << name_ << " - Action taken." << std::endl;
-    // Add more logic based on the game rules
+    if (owner_) {
+        if (player != owner_) {
+            player->decreaseMoney(getRent());
+            owner_->increaseMoney(getRent());
+        }
+    }
+    else {
+        buy(player);
+        player->incrementRailRoads();
+    }
 }
 
 bool RailRoad::isActionAvailable(std::shared_ptr<Player> player, Action action) {
-    // Implement the logic to check if the action is available for the player
-    // Example: Check if the player can afford the rent
-    return true; // Placeholder logic
+    switch (action) {
+    case Action::BUY_PROPERTY:
+        return owner_ == nullptr && player->getMoney() >= cost_;
+    case Action::PAY_RENT:
+        return owner_ != nullptr && player != owner_ && player->getMoney() >= getRent();
+    default:
+        return Property::isActionAvailable(player, action);
+    }
+}
+
+int RailRoad::getRent() {
+    return std::pow(2, owner_->getUtilities() - 1) * 25;
 }

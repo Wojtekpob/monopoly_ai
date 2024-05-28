@@ -5,12 +5,15 @@ TaxField::TaxField(int id, const std::string& name, int taxAmount)
     : ActionField(id, name), taxAmount_(taxAmount) {}
 
 void TaxField::invokeAction(std::shared_ptr<Player> player) {
-    std::cout << "Tax field: " << name_ << " - Pay tax: " << taxAmount_ << std::endl;
-    player->decreaseMoney(taxAmount_);
+    if (isActionAvailable(player, Action::PAY_TAX))
+        player->decreaseMoney(taxAmount_);
 }
 
-
 bool TaxField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
-    // Logic for TaxField, typically always available
-    return true;
+    switch (action) {
+    case Action::PAY_TAX:
+        return player->getMoney() >= taxAmount_;
+    default:
+        return false;
+    }
 }

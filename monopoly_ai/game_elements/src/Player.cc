@@ -3,7 +3,8 @@
 
 
 Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id)
-    : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500) {
+    : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
+    railroads_(0), utilities_(0) {
     circle_.setRadius(5.0f); 
     circle_.setFillColor(sf::Color::White); 
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
@@ -52,4 +53,22 @@ int Player::getMoney() const {
 
 void Player::addProperty(int property) {
     properties_.push_back(property);
+}
+
+int Player::getRailRoads() {
+    return railroads_;
+}
+
+void Player::incrementRailRoads() {
+    if (railroads_ < 4) ++railroads_;
+    else throw std::runtime_error("Can't have more than 4 railroads");
+}
+
+int Player::getUtilities() {
+    return utilities_;
+}
+
+void Player::incrementUtilities() {
+    if (utilities_ < 4) ++utilities_;
+    else throw std::runtime_error("Can't have more than 4 utilities");
 }

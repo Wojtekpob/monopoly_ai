@@ -9,6 +9,7 @@ public:
 
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
+    int getRent();
 private:
     int rent_;
 };
