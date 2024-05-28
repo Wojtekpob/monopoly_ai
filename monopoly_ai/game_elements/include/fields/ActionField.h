@@ -15,6 +15,10 @@ public:
         return id_ == other.id_ && name_ == other.name_;
     }
     virtual bool isActionAvailable(std::shared_ptr<Player> player, Action action) = 0;
+
+    virtual std::string getStr(Action action) {
+        return name_;
+    }
     std::string name_;
 
 

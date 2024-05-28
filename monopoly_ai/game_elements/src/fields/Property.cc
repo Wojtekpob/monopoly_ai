@@ -4,6 +4,14 @@
 Property::Property(int id, const std::string& name, int cost)
     : ActionField(id, name), pledged_(false), owner_(nullptr), cost_(cost) {}
 
+std::string Property::getStr(Action action) {
+    std::string str;
+    str += ActionField::getStr(action) + "\n";
+    if (owner_) str += "Wlasciciel: " + owner_->to_string() + "\n";
+    else str += "Cena: " + std::to_string(cost_) + "$";
+    return str;
+}
+
 void Property::buy(std::shared_ptr<Player> player) {
     if (player->getMoney() > cost_) {
         player->decreaseMoney(cost_);

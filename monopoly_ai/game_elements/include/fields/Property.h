@@ -13,6 +13,7 @@ public:
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     int getRedeemPledgePrice();
     int getPledgePrice();
+    std::string getStr(Action action) override;
 
 protected:
     bool pledged_;

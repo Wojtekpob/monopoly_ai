@@ -289,33 +289,36 @@ void Board::drawAction() {
     else {
         actionText_.setFillColor(sf::Color(105, 105, 105));
     }
+    std::string str;
     
     switch (current_action_) {
     case Action::BUY_PROPERTY:
-        actionText_.setString("ACTION: BUY_PROPERTY \n keepo");
+        str = "ACTION: BUY_PROPERTY \n keepo";
+        //actionText_.setString("ACTION: BUY_PROPERTY \n keepo");
         break;
     case Action::PAY_RENT:
-        actionText_.setString("ACTION: PAY_RENT");
+        str = "ACTION: PAY_RENT";
         break;
     case Action::BUY_HOUSE:
-        actionText_.setString("ACTION: BUY_HOUSE");
+        str = "ACTION: BUY_HOUSE";
         break;
     case Action::BUY_HOTEL:
-        actionText_.setString("ACTION: BUY_HOTEL");
+        str = "ACTION: BUY_HOTEL";
         break;
     case Action::PLEDGE_PROPERTY:
-        actionText_.setString("ACTION: PLEDGE_PROPERTY");
+        str = "ACTION: PLEDGE_PROPERTY";
         break;
     case Action::PAY_TAX:
-        actionText_.setString("ACTION: PAY_TAX");
+        str = "ACTION: PAY_TAX";
         break;
     case Action::REDEEM_PLEDGE:
-        actionText_.setString("ACTION: REDEEM_PLEDGE");
+        str = "ACTION: REDEEM_PLEDGE";
         break;
     default:
-        actionText_.setString("Unknown Action");
+        str = "Unknown Action";
         break;
     }
+    actionText_.setString(str + "\n" + players_[current_player_]->getCurrentSquare()->actionField_->getStr(Action::REDEEM_PLEDGE));
     
     window_->draw(actionText_);
 }

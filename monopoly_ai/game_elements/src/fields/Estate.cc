@@ -59,3 +59,7 @@ void Estate::payRent(std::shared_ptr<Player> player) {
         player->decreaseMoney(houses_rent_[houses_ + hotels_]);
     }
 }
+
+std::string Estate::getStr(Action action) {
+    return Property::getStr(action);
+}

@@ -72,3 +72,7 @@ void Player::incrementUtilities() {
     if (utilities_ < 4) ++utilities_;
     else throw std::runtime_error("Can't have more than 4 utilities");
 }
+
+std::string Player::to_string() const {
+    return "Player " + std::to_string(id_);
+}

@@ -22,6 +22,7 @@ public:
     void incrementRailRoads();
     int getUtilities();
     void incrementUtilities();
+    std::string Player::to_string() const;
     
 
 private:
@@ -34,6 +35,7 @@ private:
     std::vector<int> properties_;
     int railroads_;
     int utilities_;
+
 };
 
 #endif // PLAYER_H
