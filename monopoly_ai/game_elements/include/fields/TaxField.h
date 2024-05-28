@@ -9,6 +9,7 @@ public:
 
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
+    std::string getStr(Action action) override;
 private:
     int taxAmount_;
 };

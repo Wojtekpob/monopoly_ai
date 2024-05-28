@@ -32,3 +32,12 @@ bool RailRoad::isActionAvailable(std::shared_ptr<Player> player, Action action) 
 int RailRoad::getRent() {
     return std::pow(2, owner_->getUtilities() - 1) * 25;
 }
+
+std::string RailRoad::getStr(Action action) {
+    std::string str;
+    str = Property::getStr(action);
+    if (owner_) {
+        str = str + "\n" + "Czynsz: " + std::to_string(getRent());
+    }
+    return str;
+}

@@ -7,7 +7,7 @@ Property::Property(int id, const std::string& name, int cost)
 std::string Property::getStr(Action action) {
     std::string str;
     str += ActionField::getStr(action) + "\n";
-    if (owner_) str += "Wlasciciel: " + owner_->to_string() + "\n";
+    if (owner_) str += "Wlasciciel: " + owner_->to_string();
     else str += "Cena: " + std::to_string(cost_) + "$";
     return str;
 }

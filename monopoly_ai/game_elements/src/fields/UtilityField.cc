@@ -31,3 +31,12 @@ bool UtilityField::isActionAvailable(std::shared_ptr<Player> player, Action acti
 int UtilityField::getRent() {
     return owner_->getUtilities() * 40;
 }
+
+std::string UtilityField::getStr(Action action) {
+    std::string str;
+    str = Property::getStr(action);
+    if (owner_) {
+        str = str + "\n" + "Czynsz: " + std::to_string(getRent());
+    }
+    return str;
+}

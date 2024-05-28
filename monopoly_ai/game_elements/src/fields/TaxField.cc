@@ -17,3 +17,9 @@ bool TaxField::isActionAvailable(std::shared_ptr<Player> player, Action action) 
         return false;
     }
 }
+
+std::string TaxField::getStr(Action action) {
+    std::string str;
+    str += ActionField::getStr(action) + "\n";
+    return str + "Podatek: " + std::to_string(taxAmount_);
+}

@@ -61,5 +61,12 @@ void Estate::payRent(std::shared_ptr<Player> player) {
 }
 
 std::string Estate::getStr(Action action) {
-    return Property::getStr(action);
+    std::string str;
+    str = Property::getStr(action);
+    if (owner_) {
+        str = str + "\n" + "Cena domu: " + std::to_string(houseCost_) + "\n" + "Cena hotelu: " + std::to_string(hotelCost_);
+        str = str + "\n" + "Ilosc domow: " + std::to_string(houses_) + "\nIlosc hoteli: " + std::to_string(hotels_);
+        str = str + "\n" + "Czynsz: " + std::to_string(houses_rent_[houses_ + hotels_]);
+    }
+   return str;
 }
