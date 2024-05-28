@@ -20,14 +20,20 @@ int main()
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window->close();
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+            else if (!board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
                 board.runRound();
             }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) {
+            else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) {
                 board.incrementAction();
             }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) {
+            else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) {
                 board.decrementAction();
+            }
+            else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                board.nextPlayer();
+            }
+            else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I) {
+                board.performCurrentAction();
             }
         }
         

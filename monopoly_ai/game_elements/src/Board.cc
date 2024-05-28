@@ -2,7 +2,7 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_() {
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_(), dice_tossed_(false) {
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -30,63 +30,66 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
 void Board::runRound() {
     dice_->throwDice();
     players_[current_player_]->move(dice_->getValue(), squares_);
-
-
-    nextPlayer();
+    dice_tossed_ = true;
+    setActionAvailability();
+    //nextPlayer();
 }
 
 void Board::performCurrentAction() {
-    if (action_available_) return;
+    if (!action_available_) return;
 
     auto player = players_[current_player_];
-    switch (current_action_) {
-    case Action::BUY_PROPERTY:
-        // Implement logic to buy property
-        std::cout << "Player buys property" << std::endl;
-        // Placeholder logic: adjust player's money and mark property as owned// Example cost
-        // Assume current square is a property square
-        player->decreaseMoney(100);
-        break;
-    case Action::PAY_RENT:
-        // Implement logic to pay rent
-        std::cout << "Player pays rent" << std::endl;
-        // Placeholder logic: adjust player's money
-        player->decreaseMoney(50); // Example rent
-        break;
-    case Action::BUY_HOUSE:
-        // Implement logic to buy house
-        std::cout << "Player buys house" << std::endl;
-        // Placeholder logic: adjust player's money and add house to property
-        player->decreaseMoney(200); // Example house cost
-        break;
-    case Action::BUY_HOTEL:
-        // Implement logic to buy hotel
-        std::cout << "Player buys hotel" << std::endl;
-        // Placeholder logic: adjust player's money and add hotel to property
-        player->decreaseMoney(400); // Example hotel cost
-        break;
-    case Action::PLEDGE_PROPERTY:
-        // Implement logic to pledge property
-        std::cout << "Player pledges property" << std::endl;
-        // Placeholder logic: mark property as pledged and adjust player's money
-        player->increaseMoney(150); // Example pledge value
-        break;
-    case Action::PAY_TAX:
-        // Implement logic to pay tax
-        std::cout << "Player pays tax" << std::endl;
-        // Placeholder logic: adjust player's money
-        player->decreaseMoney(75); // Example tax
-        break;
-    case Action::REDEEM_PLEDGE:
-        // Implement logic to redeem pledged property
-        std::cout << "Player redeems pledged property" << std::endl;
-        // Placeholder logic: mark property as unpledged and adjust player's money
-        player->decreaseMoney(150); // Example redeem cost
-        break;
-    default:
-        std::cout << "Invalid action" << std::endl;
-        break;
-    }
+    auto currentSquare = player->getCurrentSquare();
+    currentSquare->actionField_->invokeAction(player);
+    setActionAvailability();
+    //switch (current_action_) {
+    //case Action::BUY_PROPERTY:
+    //    // Implement logic to buy property
+    //    std::cout << "Player buys property" << std::endl;
+    //    // Placeholder logic: adjust player's money and mark property as owned// Example cost
+    //    // Assume current square is a property square
+    //    player->decreaseMoney(100);
+    //    break;
+    //case Action::PAY_RENT:
+    //    // Implement logic to pay rent
+    //    std::cout << "Player pays rent" << std::endl;
+    //    // Placeholder logic: adjust player's money
+    //    player->decreaseMoney(50); // Example rent
+    //    break;
+    //case Action::BUY_HOUSE:
+    //    // Implement logic to buy house
+    //    std::cout << "Player buys house" << std::endl;
+    //    // Placeholder logic: adjust player's money and add house to property
+    //    player->decreaseMoney(200); // Example house cost
+    //    break;
+    //case Action::BUY_HOTEL:
+    //    // Implement logic to buy hotel
+    //    std::cout << "Player buys hotel" << std::endl;
+    //    // Placeholder logic: adjust player's money and add hotel to property
+    //    player->decreaseMoney(400); // Example hotel cost
+    //    break;
+    //case Action::PLEDGE_PROPERTY:
+    //    // Implement logic to pledge property
+    //    std::cout << "Player pledges property" << std::endl;
+    //    // Placeholder logic: mark property as pledged and adjust player's money
+    //    player->increaseMoney(150); // Example pledge value
+    //    break;
+    //case Action::PAY_TAX:
+    //    // Implement logic to pay tax
+    //    std::cout << "Player pays tax" << std::endl;
+    //    // Placeholder logic: adjust player's money
+    //    player->decreaseMoney(75); // Example tax
+    //    break;
+    //case Action::REDEEM_PLEDGE:
+    //    // Implement logic to redeem pledged property
+    //    std::cout << "Player redeems pledged property" << std::endl;
+    //    // Placeholder logic: mark property as unpledged and adjust player's money
+    //    player->decreaseMoney(150); // Example redeem cost
+    //    break;
+    //default:
+    //    std::cout << "Invalid action" << std::endl;
+    //    break;
+    //}
 }
 
 void Board::setActionAvailability() {
@@ -96,33 +99,34 @@ void Board::setActionAvailability() {
 bool Board::isActionAvailable(Action& action) {
     auto player = players_[current_player_];
     auto currentSquare = player->getCurrentSquare();
-   
-    switch (action) { // @TODO to implement
-    case Action::BUY_PROPERTY:
-        // Check if the current square is a property and it can be bought
-        // Placeholder check; replace with actual game logic
-        return true; // Example: always return true for simplicity
-    case Action::PAY_RENT:
-        // Check if the player is on a property owned by another player
-        return false; // Placeholder
-    case Action::BUY_HOUSE:
-        // Check if the player owns all properties of a color set and has enough money
-        return false; // Placeholder
-    case Action::BUY_HOTEL:
-        // Check if the player has enough houses to buy a hotel
-        return true; // Placeholder
-    case Action::PLEDGE_PROPERTY:
-        // Check if the player owns the property and it is not already pledged
-        return false; // Placeholder
-    case Action::PAY_TAX:
-        // Check if the current square is a tax square
-        return false; // Placeholder
-    case Action::REDEEM_PLEDGE:
-        // Check if the player has pledged properties that can be redeemed
-        return false; // Placeholder
-    default:
-        return false;
-    }
+    auto a = currentSquare->actionField_->isActionAvailable(player, action);
+    return a;
+    //switch (action) { // @TODO to implement
+    //case Action::BUY_PROPERTY:
+    //    // Check if the current square is a property and it can be bought
+    //    // Placeholder check; replace with actual game logic
+    //    return true; // Example: always return true for simplicity
+    //case Action::PAY_RENT:
+    //    // Check if the player is on a property owned by another player
+    //    return false; // Placeholder
+    //case Action::BUY_HOUSE:
+    //    // Check if the player owns all properties of a color set and has enough money
+    //    return false; // Placeholder
+    //case Action::BUY_HOTEL:
+    //    // Check if the player has enough houses to buy a hotel
+    //    return true; // Placeholder
+    //case Action::PLEDGE_PROPERTY:
+    //    // Check if the player owns the property and it is not already pledged
+    //    return false; // Placeholder
+    //case Action::PAY_TAX:
+    //    // Check if the current square is a tax square
+    //    return false; // Placeholder
+    //case Action::REDEEM_PLEDGE:
+    //    // Check if the player has pledged properties that can be redeemed
+    //    return false; // Placeholder
+    //default:
+    //    return false;
+    //}
 }
 
 void Board::draw() {
@@ -136,6 +140,7 @@ void Board::draw() {
         }
         dice_->draw();
         drawAction();
+        drawLeaderBoard();
         window_->draw(playerText_);
     }
 }
@@ -274,6 +279,7 @@ void Board::nextPlayer() {
     current_action_ = Action::BUY_PROPERTY;
     setActionAvailability();
     updatePlayerText();
+    dice_tossed_ = false;
 }
 
 void Board::drawAction() {
@@ -327,4 +333,16 @@ void Board::decrementAction() {
 void Board::updatePlayerText() {
     std::string money = std::to_string(players_[current_player_]->getMoney());
     playerText_.setString("Player " + std::to_string(current_player_) + "\t\t\t" + money + " $");
+}
+
+void Board::drawLeaderBoard() {
+    for (int i = 0; i < players_.size(); ++i) {
+        
+        std::string money = std::to_string(players_[i]->getMoney());
+        playerText_.setString("Player " + std::to_string(i) + "\t\t\t" + money + " $");
+        if (i == current_player_) playerText_.setFillColor(sf::Color::Green);
+        else playerText_.setFillColor(sf::Color::White);
+        playerText_.setPosition(10.0f, (i) * 20.0f);
+        window_->draw(playerText_);
+    }
 }

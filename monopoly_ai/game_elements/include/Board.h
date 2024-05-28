@@ -24,6 +24,10 @@ public:
     void incrementAction();
     void decrementAction();
     void setActionAvailability();
+    void drawLeaderBoard();
+
+
+    bool dice_tossed_;
 
 private:
     void initializeSquares(float pos_x, float pos_y);
@@ -44,6 +48,7 @@ private:
     sf::Text playerText_;
     bool action_available_;
     FieldLoader fieldLoader_;
+
 };
 
 #endif // BOARD_H

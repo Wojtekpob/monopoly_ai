@@ -9,8 +9,9 @@ void Property::buy(std::shared_ptr<Player> player) {
         player->decreaseMoney(cost_);
         owner_ = player;
         player->addProperty(id_);
+        std::cout << "Kupiono " << name_ << std::endl;
     }
-    else std::cout << "no money" << std::endl;
+    else std::cout << "Brak pieniêdzy" << std::endl;
 }
 
 bool Property::isActionAvailable(std::shared_ptr<Player> player, Action action) {
@@ -18,7 +19,7 @@ bool Property::isActionAvailable(std::shared_ptr<Player> player, Action action) 
     case Action::PLEDGE_PROPERTY:
         return owner_ != nullptr && player == owner_ && !pledged_;
     case Action::REDEEM_PLEDGE:
-        return owner_ != nullptr && player == owner_ && !pledged_ && player->getMoney() > getRedeemPledgePrice();
+        return owner_ != nullptr && player == owner_ && pledged_ && player->getMoney() > getRedeemPledgePrice();
     default:
         return false;
     }

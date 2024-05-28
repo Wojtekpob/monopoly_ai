@@ -8,7 +8,7 @@ Dice::Dice(std::shared_ptr<sf::RenderWindow> window)
     : window_(window), value_(1) {
     loadTextures();
     sprite_.setTexture(textures_[0]); // Initial texture for value 1
-    sprite_.setPosition(50.0f, 50.0f); // Set position on screen
+    sprite_.setPosition(50.0f, 350.0f); // Set position on screen
     std::srand(static_cast<unsigned int>(std::time(nullptr))); // Initialize random generator
 }
 

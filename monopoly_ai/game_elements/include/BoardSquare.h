@@ -20,13 +20,14 @@ public:
     void setColor(sf::Color&);
     void setActionField(std::shared_ptr<ActionField> actionField);
 
+    std::shared_ptr<ActionField> actionField_;
 private:
     sf::RectangleShape shape_;
     sf::Text text_;
     sf::Texture texture_;
     float orientation_;
     std::shared_ptr<sf::RenderWindow> window_;
-    std::shared_ptr<ActionField> actionField_;
+
 };
 
 #endif // BOARDSQUARE_H

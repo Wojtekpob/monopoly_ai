@@ -6,11 +6,18 @@ Estate::Estate(int id, const std::string& name, int cost, int houseCost, int hot
 void Estate::invokeAction(std::shared_ptr<Player> player) {
     if (owner_) {
         if (player == owner_) {
-            if (houses_ < 4) buyHouse(player);
-            else buyHotel(player);
-        }
+            if (houses_ < 4) {
+                buyHouse(player);
+                std::cout << "Kupiono Dom" << std::endl;
+            }
+            else {
+                buyHotel(player);
+                std::cout << "Kupiono Hotel" << std::endl;
+            }
+            }
         else {
             payRent(player);
+            std::cout << "Zap³acono czynsz" << std::endl;
         }
     }
     else {
@@ -27,11 +34,7 @@ bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     case Action::BUY_HOUSE:
         return owner_ != nullptr && player == owner_ && houses_ < 4 && player->getMoney() >= houseCost_;
     case Action::BUY_HOTEL:
-        return owner_ != nullptr && player == owner_ && houses_ == 4 && player->getMoney() >= houses_rent_.back(); 
-    case Action::PLEDGE_PROPERTY:
-        return owner_ != nullptr && player == owner_ && !pledged_;
-    case Action::REDEEM_PLEDGE:
-        return owner_ != nullptr && player == owner_ && !pledged_ && player->getMoney() > getRedeemPledgePrice();
+        return owner_ != nullptr && player == owner_ && houses_ == 4 && hotels_ == 0 && player->getMoney() >= houses_rent_.back(); 
     default:
         return Property::isActionAvailable(player, action);
     }

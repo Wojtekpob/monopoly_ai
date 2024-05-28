@@ -9,5 +9,6 @@ void BlankField::invokeAction(std::shared_ptr<Player> player) {
 
 
 bool BlankField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
+
     return false;
 }

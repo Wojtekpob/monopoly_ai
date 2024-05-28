@@ -6,7 +6,7 @@ Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquar
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
     railroads_(0), utilities_(0) {
     circle_.setRadius(5.0f); 
-    circle_.setFillColor(sf::Color::White); 
+    circle_.setFillColor(sf::Color(255/4 * id, 255 / 4 * id, 255 / 4 * id));
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
     setPosition(currentSquare_->getPosition());
 
