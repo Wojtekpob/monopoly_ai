@@ -9,6 +9,7 @@ void UtilityField::invokeAction(std::shared_ptr<Player> player) {
         if (player != owner_) {
             player->decreaseMoney(getRent());
             owner_->increaseMoney(getRent());
+            rent_paid_ = true;
         }
     }
     else {
@@ -22,7 +23,7 @@ bool UtilityField::isActionAvailable(std::shared_ptr<Player> player, Action acti
     case Action::BUY_PROPERTY:
         return owner_ == nullptr && player->getMoney() >= cost_;
     case Action::PAY_RENT:
-        return owner_ != nullptr && player != owner_ && player->getMoney() >= getRent();
+        return owner_ != nullptr && player != owner_ && !rent_paid_ && player->getMoney() >= getRent();
     default:
         return Property::isActionAvailable(player, action);
     }

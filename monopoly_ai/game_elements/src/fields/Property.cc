@@ -2,7 +2,7 @@
 #include <iostream>
 
 Property::Property(int id, const std::string& name, int cost)
-    : ActionField(id, name), pledged_(false), owner_(nullptr), cost_(cost) {}
+    : ActionField(id, name), pledged_(false), owner_(nullptr), cost_(cost), rent_paid_(false) {}
 
 std::string Property::getStr(Action action) {
     std::string str;
@@ -55,4 +55,8 @@ int Property::getRedeemPledgePrice() {
 
 int Property::getPledgePrice() {
     return cost_ / 2;
+}
+
+void Property::nextRound() {
+    rent_paid_ = false;
 }

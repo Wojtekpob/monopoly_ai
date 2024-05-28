@@ -10,9 +10,10 @@ public:
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     std::string getStr(Action action) override;
-    void nextRound() override {};
+    void nextRound() override;
 private:
     int taxAmount_;
+    bool paid_;
 };
 
 #endif // TAXFIELD_H

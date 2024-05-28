@@ -34,7 +34,7 @@ bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     case Action::BUY_PROPERTY:
         return owner_ == nullptr && player->getMoney() >= houses_rent_.front();
     case Action::PAY_RENT:
-        return owner_ != nullptr && player != owner_ && player->getMoney() >= houses_rent_[houses_ + hotels_];
+        return owner_ != nullptr && player != owner_ && !rent_paid_ && player->getMoney() >= houses_rent_[houses_ + hotels_];
     case Action::BUY_HOUSE:
         return owner_ != nullptr && player == owner_ && !bought_ && houses_ < 4 && player->getMoney() >= houseCost_;
     case Action::BUY_HOTEL:
@@ -61,6 +61,7 @@ void Estate::buyHotel(std::shared_ptr<Player> player) {
 void Estate::payRent(std::shared_ptr<Player> player) {
     if (isActionAvailable(player, Action::PAY_RENT)) {
         player->decreaseMoney(houses_rent_[houses_ + hotels_]);
+        rent_paid_ = true;
     }
 }
 
@@ -77,5 +78,6 @@ std::string Estate::getStr(Action action) {
 
 
 void Estate::nextRound() {
+    Property::nextRound();
     bought_ = false;
 }

@@ -14,11 +14,13 @@ public:
     int getRedeemPledgePrice();
     int getPledgePrice();
     std::string getStr(Action action) override;
+    void nextRound() override;
 
 protected:
     bool pledged_;
     std::shared_ptr<Player> owner_;
     int cost_;
+    bool rent_paid_;
 };
 
 #endif // PROPERTY_H
