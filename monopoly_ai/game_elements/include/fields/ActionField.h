@@ -11,6 +11,7 @@ public:
     ActionField(int id, const std::string& name) : id_(id), name_(name) {}
     virtual ~ActionField() = default;
     virtual void invokeAction(std::shared_ptr<Player> player) = 0;
+    virtual void nextRound() = 0;
     bool operator==(const ActionField& other) const {
         return id_ == other.id_ && name_ == other.name_;
     }

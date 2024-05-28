@@ -8,6 +8,7 @@ public:
     BlankField(int id, const std::string& name);
 
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
+    void nextRound() override {};
 
 
     void invokeAction(std::shared_ptr<Player> player) override;

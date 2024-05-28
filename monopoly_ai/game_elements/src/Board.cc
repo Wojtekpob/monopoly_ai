@@ -275,6 +275,7 @@ void Board::setPosition(float x, float y) {
 }
 
 void Board::nextPlayer() {
+    players_[current_player_]->getCurrentSquare()->actionField_->nextRound();
     current_player_ = (current_player_ + 1) % players_.size();
     current_action_ = Action::BUY_PROPERTY;
     setActionAvailability();

@@ -1,7 +1,8 @@
 #include "fields/Estate.h"
 #include <iostream>
 Estate::Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province) 
-    : Property(id, name, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent), province_(province) {}
+    : Property(id, name, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent),
+    province_(province), bought_(false) {}
 
 void Estate::invokeAction(std::shared_ptr<Player> player) {
     if (owner_) {
@@ -9,10 +10,12 @@ void Estate::invokeAction(std::shared_ptr<Player> player) {
             if (houses_ < 4) {
                 buyHouse(player);
                 std::cout << "Kupiono Dom" << std::endl;
+                bought_ = true;
             }
             else {
                 buyHotel(player);
                 std::cout << "Kupiono Hotel" << std::endl;
+                bought_ = true;
             }
             }
         else {
@@ -22,6 +25,7 @@ void Estate::invokeAction(std::shared_ptr<Player> player) {
     }
     else {
         buy(player);
+        bought_ = true;
     }
 }
 
@@ -32,9 +36,9 @@ bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     case Action::PAY_RENT:
         return owner_ != nullptr && player != owner_ && player->getMoney() >= houses_rent_[houses_ + hotels_];
     case Action::BUY_HOUSE:
-        return owner_ != nullptr && player == owner_ && houses_ < 4 && player->getMoney() >= houseCost_;
+        return owner_ != nullptr && player == owner_ && !bought_ && houses_ < 4 && player->getMoney() >= houseCost_;
     case Action::BUY_HOTEL:
-        return owner_ != nullptr && player == owner_ && houses_ == 4 && hotels_ == 0 && player->getMoney() >= houses_rent_.back(); 
+        return owner_ != nullptr && player == owner_ && !bought_ && houses_ == 4 && hotels_ == 0 && player->getMoney() >= houses_rent_.back();
     default:
         return Property::isActionAvailable(player, action);
     }
@@ -69,4 +73,9 @@ std::string Estate::getStr(Action action) {
         str = str + "\n" + "Czynsz: " + std::to_string(houses_rent_[houses_ + hotels_]);
     }
    return str;
+}
+
+
+void Estate::nextRound() {
+    bought_ = false;
 }

@@ -11,6 +11,7 @@ public:
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     int getRent();
     std::string getStr(Action action) override;
+    void nextRound() override {};
 private:
     int rent_;
 };

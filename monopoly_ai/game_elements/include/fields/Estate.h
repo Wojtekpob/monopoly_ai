@@ -10,6 +10,7 @@ public:
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     std::string getStr(Action action) override;
+    void nextRound() override;
 
 private:
     void buyHouse(std::shared_ptr<Player> player);
@@ -22,6 +23,7 @@ private:
     int hotelCost_;
     std::vector<int> houses_rent_;
     std::string province_;
+    bool bought_;
 };
 
 #endif // ESTATE_H
