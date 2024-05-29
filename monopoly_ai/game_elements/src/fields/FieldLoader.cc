@@ -15,16 +15,16 @@ std::vector<std::shared_ptr<ActionField>> FieldLoader::loadFields(const std::str
     }
     json j;
     file >> j;
-
+    int id = 0;
     std::vector<std::shared_ptr<ActionField>> fields;
     for (const auto& fieldJson : j["fields"]) {
-        fields.push_back(loadField(fieldJson));
+        fields.push_back(loadField(fieldJson, id));
+        ++id;
     }
 
     return fields;
 }
-std::shared_ptr<ActionField> FieldLoader::loadField(const json& j) {
-    int id = id_count_;
+std::shared_ptr<ActionField> FieldLoader::loadField(const json& j, int id) {
     std::string type = j.value("type", "");
 
     if (type == "Estate") {
@@ -48,7 +48,6 @@ std::shared_ptr<ActionField> FieldLoader::loadField(const json& j) {
     else {
         throw std::runtime_error("Unknown field type: " + type);
     }
-    ++id_count_;
 }
 
 

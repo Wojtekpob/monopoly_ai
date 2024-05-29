@@ -18,7 +18,7 @@ using json = nlohmann::json;
 class FieldLoader {
 public:
     std::vector<std::shared_ptr<ActionField>> loadFields(const std::string& jsonString);
-    std::shared_ptr<ActionField> loadField(const json& j);
+    std::shared_ptr<ActionField> loadField(const json& j, int id);
 
 private:
     std::shared_ptr<Estate> createEstate(const json& j, int id);
