@@ -27,7 +27,6 @@ private:
     sf::Texture texture_;
     float orientation_;
     std::shared_ptr<sf::RenderWindow> window_;
-
 };
 
 #endif // BOARDSQUARE_H

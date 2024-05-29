@@ -29,9 +29,11 @@ public:
     std::vector<std::shared_ptr<Property>> getPlayersProperties();
     void drawProperties();
     std::shared_ptr<Player> getCurrentPlayer();
+    void drawSquaresDescription();
 
 
     bool dice_tossed_;
+    int selected_property_;
 
 private:
     void initializeSquares(float pos_x, float pos_y);
@@ -50,6 +52,7 @@ private:
     sf::Font font_;
     sf::Text actionText_;
     sf::Text playerText_;
+    sf::Text fieldsText_;
     bool action_available_;
     FieldLoader fieldLoader_;
 

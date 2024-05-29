@@ -14,7 +14,7 @@ int main()
     auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1400, 900), "Board Example");
     Board board(400, 400, window);
     board.setPosition(200.0f, 100.0f);
-    sf::Color backgroundColor = sf::Color::Black;
+    sf::Color backgroundColor = sf::Color(9, 111, 9);
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {

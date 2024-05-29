@@ -20,8 +20,12 @@ public:
     virtual std::string getStr(Action action) {
         return name_;
     }
+    int getId() {
+        return id_;
+    };
     std::string name_;
     sf::Color color_;
+
 
 protected:
 

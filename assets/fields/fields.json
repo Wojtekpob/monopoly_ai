@@ -7,7 +7,7 @@
     },
     {
       "type": "Estate",
-      "name": "Świnoujście",
+      "name": "Swinoujscie",
       "province": "Zachodniopomorskie",
       "color": "Brown",
       "cost": 60,
@@ -17,12 +17,12 @@
     },
     {
       "type": "BlankField",
-      "name": "Kasa Społeczna",
+      "name": "Kasa Spoleczna",
       "color": "LightGray"
     },
     {
       "type": "Estate",
-      "name": "Kołobrzeg",
+      "name": "Kolobrzeg",
       "province": "Zachodniopomorskie",
       "color": "Brown",
       "cost": 60,
@@ -38,7 +38,7 @@
     },
     {
       "type": "RailRoad",
-      "name": "Dworzec Główny",
+      "name": "Dworzec Glowny",
       "color": "Black",
       "cost": 200,
       "rent": 25
@@ -46,7 +46,7 @@
     {
       "type": "Estate",
       "name": "Olsztyn",
-      "province": "Warmińsko-Mazurskie",
+      "province": "Warminsko-Mazurskie",
       "color": "LightBlue",
       "cost": 100,
       "house_cost": 50,
@@ -60,7 +60,7 @@
     },
     {
       "type": "Estate",
-      "name": "Suwałki",
+      "name": "Suwalki",
       "province": "Podlaskie",
       "color": "LightBlue",
       "cost": 100,
@@ -70,7 +70,7 @@
     },
     {
       "type": "Estate",
-      "name": "Białystok",
+      "name": "Bialystok",
       "province": "Podlaskie",
       "color": "LightBlue",
       "cost": 120,
@@ -80,7 +80,7 @@
     },
     {
       "type": "BlankField",
-      "name": "Więzienie",
+      "name": "Wiezienie",
       "color": "LightGray"
     },
     {
@@ -102,7 +102,7 @@
     },
     {
       "type": "Estate",
-      "name": "Gdańsk",
+      "name": "Gdansk",
       "province": "Pomorskie",
       "color": "Pink",
       "cost": 140,
@@ -129,7 +129,7 @@
     },
     {
       "type": "Estate",
-      "name": "Toruń",
+      "name": "Torun",
       "province": "Kujawsko-Pomorskie",
       "color": "Orange",
       "cost": 180,
@@ -139,7 +139,7 @@
     },
     {
       "type": "BlankField",
-      "name": "Kasa Społeczna",
+      "name": "Kasa Spoleczna",
       "color": "LightGray"
     },
     {
@@ -154,7 +154,7 @@
     },
     {
       "type": "Estate",
-      "name": "Poznań",
+      "name": "Poznan",
       "province": "Wielkopolskie",
       "color": "Orange",
       "cost": 200,
@@ -169,8 +169,8 @@
     },
     {
       "type": "Estate",
-      "name": "Wrocław",
-      "province": "Dolnośląskie",
+      "name": "Wroclaw",
+      "province": "DolnoSlaskie",
       "color": "Red",
       "cost": 220,
       "house_cost": 150,
@@ -195,7 +195,7 @@
     {
       "type": "Estate",
       "name": "Katowice",
-      "province": "Śląskie",
+      "province": "Slaskie",
       "color": "Red",
       "cost": 240,
       "house_cost": 150,
@@ -204,14 +204,14 @@
     },
     {
       "type": "RailRoad",
-      "name": "Dworzec Południowy",
+      "name": "Dworzec Poludniowy",
       "color": "Black",
       "cost": 200,
       "rent": 25
     },
     {
       "type": "Estate",
-      "name": "Rzeszów",
+      "name": "Rzeszow",
       "province": "Podkarpackie",
       "color": "DarkRed",
       "cost": 260,
@@ -231,15 +231,15 @@
     },
     {
       "type": "UtilityField",
-      "name": "Wodociągi",
+      "name": "Wodociagi",
       "color": "Yellow",
       "cost": 150,
       "rent": 4
     },
     {
       "type": "Estate",
-      "name": "Łódź",
-      "province": "Łódzkie",
+      "name": "Lodz",
+      "province": "Lodzkie",
       "color": "DarkRed",
       "cost": 280,
       "house_cost": 150,
@@ -248,13 +248,13 @@
     },
     {
       "type": "GoToJailField",
-      "name": "Idź do więzienia",
+      "name": "Idz do wiezienia",
       "color": "White"
     },
     {
       "type": "Estate",
-      "name": "Kraków",
-      "province": "Małopolskie",
+      "name": "Krakow",
+      "province": "Malopolskie",
       "color": "Green",
       "cost": 300,
       "house_cost": 200,
@@ -263,13 +263,13 @@
     },
     {
       "type": "BlankField",
-      "name": "Kasa Społeczna",
+      "name": "Kasa Spoleczna",
       "color": "LightGray"
     },
     {
       "type": "Estate",
-      "name": "Częstochowa",
-      "province": "Śląskie",
+      "name": "Czestochowa",
+      "province": "Slaskie",
       "color": "Green",
       "cost": 300,
       "house_cost": 200,
@@ -317,7 +317,7 @@
     {
       "type": "Estate",
       "name": "Zakopane",
-      "province": "Małopolskie",
+      "province": "Malopolskie",
       "color": "DarkBlue",
       "cost": 400,
       "house_cost": 200,

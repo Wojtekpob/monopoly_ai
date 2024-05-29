@@ -2,7 +2,7 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_(), dice_tossed_(false) {
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_(), dice_tossed_(false), selected_property_(5) {
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -20,6 +20,10 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
 
     playerText_.setFont(font_);
     playerText_.setCharacterSize(24);
+
+    fieldsText_.setFont(font_);
+    fieldsText_.setCharacterSize(18);
+    fieldsText_.setPosition(800.0f, 5.0f);
 
     updatePlayerText();
 }
@@ -144,6 +148,7 @@ void Board::draw() {
         drawAction();
         drawLeaderBoard();
         window_->draw(playerText_);
+        drawSquaresDescription();
     }
 }
 
@@ -172,50 +177,6 @@ void Board::initializeSquares(float pos_x, float pos_y) {
         {"Free Parking", "assets/textures/parking.png"},
         {"Go To Jail", "assets/textures/go_to_jail.png"}
     };
-
-    std::vector<sf::Color> propertyColors = {
-        sf::Color::White,
-        sf::Color::Yellow,
-        sf::Color::Magenta,
-        sf::Color::Yellow,
-        sf::Color::Magenta,
-        sf::Color::Magenta,
-        sf::Color::Red,
-        sf::Color::Magenta,
-        sf::Color::Red,
-        sf::Color::Red,
-        sf::Color::White,
-        sf::Color::Blue,
-        sf::Color::Magenta,
-        sf::Color::Blue,
-        sf::Color::Blue,
-        sf::Color::Magenta,
-        sf::Color(255, 165, 0),
-        sf::Color::Magenta,
-        sf::Color(255, 165, 0),
-        sf::Color(255, 165, 0),
-        sf::Color::White,
-        sf::Color::Green,
-        sf::Color::Magenta,
-        sf::Color::Green,
-        sf::Color::Green,
-        sf::Color::Magenta,
-        sf::Color(128, 0, 128),
-        sf::Color(128, 0, 128),
-        sf::Color::Magenta,
-        sf::Color(128, 0, 128),
-        sf::Color::White,
-        sf::Color(165, 42, 42),
-        sf::Color(165, 42, 42),
-        sf::Color::Magenta,
-        sf::Color(165, 42, 42),
-        sf::Color::Magenta,
-        sf::Color::Magenta,
-        sf::Color::Black,
-        sf::Color::Magenta,
-        sf::Color::Black
-    };
-
     int specialTileIndex = 0;
     int propertyColorIndex = 0;
     int counter = 0;
@@ -235,7 +196,6 @@ void Board::initializeSquares(float pos_x, float pos_y) {
                 (i == number_of_squares - 1 && j == 0) || (i == number_of_squares - 1 && j == number_of_squares - 1)) {
                 textContent = specialTiles[specialTileIndex].first;
                 textureFile = specialTiles[specialTileIndex].second;
-                //fillColor = sf::Color::White;
                 specialTileIndex++;
             }
             else {
@@ -258,10 +218,6 @@ void Board::initializeSquares(float pos_x, float pos_y) {
             }
             else squares_[59 - counter] = boardSquare;
             ++counter;
-            if (!((i == 0 && j == 0) || (i == 0 && j == number_of_squares - 1) ||
-                (i == number_of_squares - 1 && j == 0) || (i == number_of_squares - 1 && j == number_of_squares - 1))) {
-                propertyColorIndex = (propertyColorIndex + 1) % propertyColors.size();
-            }
         }
     }
     for (int i = 0; i < squares_.size(); i++) {
@@ -283,6 +239,25 @@ void Board::nextPlayer() {
     setActionAvailability();
     updatePlayerText();
     dice_tossed_ = false;
+}
+
+void Board::drawSquaresDescription() {
+    std::string str;
+    for (auto square : squares_) {
+
+        fieldsText_.setPosition(fieldsText_.getPosition() + sf::Vector2f(0.0, 20.0));
+        fieldsText_.setString(square->actionField_->name_);
+        fieldsText_.setColor(square->actionField_->color_);
+        if (selected_property_ == square->actionField_->getId()) {
+            sf::RectangleShape highlightRect;
+            highlightRect.setSize(sf::Vector2f(fieldsText_.getLocalBounds().width, fieldsText_.getLocalBounds().height));
+            highlightRect.setFillColor(sf::Color::Yellow);
+            highlightRect.setPosition(fieldsText_.getPosition());
+            window_->draw(highlightRect);
+        }
+        window_->draw(fieldsText_);
+    }
+    fieldsText_.setPosition(950.0f, 5.0f);
 }
 
 void Board::drawAction() {
@@ -373,5 +348,4 @@ std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
 
 void Board::drawProperties() {
     std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();
-
 }
