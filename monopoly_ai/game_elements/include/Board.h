@@ -30,6 +30,8 @@ public:
     void drawProperties();
     std::shared_ptr<Player> getCurrentPlayer();
     void drawSquaresDescription();
+    void nextProperty();
+    void previousProperty();
 
 
     bool dice_tossed_;

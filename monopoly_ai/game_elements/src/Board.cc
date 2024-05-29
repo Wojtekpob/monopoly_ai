@@ -239,6 +239,10 @@ void Board::nextPlayer() {
     setActionAvailability();
     updatePlayerText();
     dice_tossed_ = false;
+    if (getCurrentPlayer()->getProperties().size() == 0) {
+        selected_property_ = -1;
+    }
+    else selected_property_ = getCurrentPlayer()->getProperties().front();
 }
 
 void Board::drawSquaresDescription() {
@@ -250,7 +254,7 @@ void Board::drawSquaresDescription() {
         fieldsText_.setColor(square->actionField_->color_);
         if (selected_property_ == square->actionField_->getId()) {
             sf::RectangleShape highlightRect;
-            highlightRect.setSize(sf::Vector2f(fieldsText_.getLocalBounds().width, fieldsText_.getLocalBounds().height));
+            highlightRect.setSize(sf::Vector2f(fieldsText_.getLocalBounds().width, fieldsText_.getLocalBounds().height + 5.0));
             highlightRect.setFillColor(sf::Color::Yellow);
             highlightRect.setPosition(fieldsText_.getPosition());
             window_->draw(highlightRect);
@@ -348,4 +352,62 @@ std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
 
 void Board::drawProperties() {
     std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();
+}
+
+void Board::nextProperty() {
+    auto player = getCurrentPlayer();
+    const std::vector<int>& properties = player->getProperties();
+
+    if (properties.empty()) {
+        selected_property_ = -1;
+        return;
+    }
+
+    if (selected_property_ == -1) {
+        selected_property_ = properties[0];
+        return;
+    }
+
+    auto it = std::find(properties.begin(), properties.end(), selected_property_);
+    if (it != properties.end()) {
+        ++it;
+        if (it == properties.end()) {
+            selected_property_ = properties[0];
+        }
+        else {
+            selected_property_ = *it;
+        }
+    }
+    else {
+        selected_property_ = properties[0];
+    }
+}
+
+void Board::previousProperty() {
+    auto player = getCurrentPlayer();
+    const std::vector<int>& properties = player->getProperties();
+
+    if (properties.empty()) {
+        selected_property_ = -1;
+        return;
+    }
+
+    if (selected_property_ == -1) {
+        selected_property_ = properties[0];
+        return;
+    }
+
+    auto it = std::find(properties.begin(), properties.end(), selected_property_);
+    if (it != properties.end()) {
+        if (it == properties.begin()) {
+            selected_property_ = properties.back();
+        }
+        else {
+            --it;
+            selected_property_ = *it;
+        }
+    }
+    else {
+        selected_property_ = properties[0];
+    }
 }
