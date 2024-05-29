@@ -1,8 +1,8 @@
 #include "fields/TaxField.h"
 #include <iostream>
 
-TaxField::TaxField(int id, const std::string& name, int taxAmount)
-    : ActionField(id, name), taxAmount_(taxAmount), paid_(false) {}
+TaxField::TaxField(int id, const std::string& name, sf::Color& color, int taxAmount)
+    : ActionField(id, name, color), taxAmount_(taxAmount), paid_(false) {}
 
 void TaxField::invokeAction(std::shared_ptr<Player> player) {
     if (isActionAvailable(player, Action::PAY_TAX)) {

@@ -11,6 +11,7 @@
 #include "Action.h"
 #include "fields/Property.h"
 #include "fields/FieldLoader.h"
+#include "Color.h"
 
 class Board : public Drawable {
 public:
@@ -25,6 +26,9 @@ public:
     void decrementAction();
     void setActionAvailability();
     void drawLeaderBoard();
+    std::vector<std::shared_ptr<Property>> getPlayersProperties();
+    void drawProperties();
+    std::shared_ptr<Player> getCurrentPlayer();
 
 
     bool dice_tossed_;

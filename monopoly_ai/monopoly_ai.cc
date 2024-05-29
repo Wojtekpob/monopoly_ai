@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-    auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1000, 600), "Board Example");
+    auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1400, 900), "Board Example");
     Board board(400, 400, window);
     board.setPosition(200.0f, 100.0f);
     sf::Color backgroundColor = sf::Color::Black;

@@ -2,8 +2,8 @@
 #include <iostream>
 #include <cmath>
 
-RailRoad::RailRoad(int id, const std::string& name, int cost, int rent)
-    : Property(id, name, cost), rent_(rent) {}
+RailRoad::RailRoad(int id, const std::string& name, sf::Color& color, int cost, int rent)
+    : Property(id, name, color, cost), rent_(rent) {}
 
 void RailRoad::invokeAction(std::shared_ptr<Player> player) {
     if (owner_) {

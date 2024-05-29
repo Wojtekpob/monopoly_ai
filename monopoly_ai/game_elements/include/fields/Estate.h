@@ -5,12 +5,14 @@
 
 class Estate : public Property {
 public:
-    Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province);
+    Estate(int id, const std::string& name, sf::Color& color,  int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province);
 
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     std::string getStr(Action action) override;
     void nextRound() override;
+
+    std::string province_;
 
 private:
     void buyHouse(std::shared_ptr<Player> player);
@@ -22,7 +24,6 @@ private:
     int houseCost_;
     int hotelCost_;
     std::vector<int> houses_rent_;
-    std::string province_;
     bool bought_;
 };
 

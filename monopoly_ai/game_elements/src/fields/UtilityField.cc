@@ -1,8 +1,8 @@
 #include "fields/UtilityField.h"
 #include <iostream>
 
-UtilityField::UtilityField(int id, const std::string& name, int cost, int rent)
-    : Property(id, name, cost), rent_(rent) {}
+UtilityField::UtilityField(int id, const std::string& name, sf::Color& color, int cost, int rent)
+    : Property(id, name, color, cost), rent_(rent) {}
 
 void UtilityField::invokeAction(std::shared_ptr<Player> player) {
     if (owner_) {

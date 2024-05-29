@@ -18,6 +18,7 @@ public:
     void decreaseMoney(int amount);
     void increaseMoney(int amount);
     void addProperty(int property_id);
+    std::vector<int> getProperties();
     int getRailRoads();
     void incrementRailRoads();
     int getUtilities();

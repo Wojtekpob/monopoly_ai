@@ -1,8 +1,8 @@
 #include "fields/Property.h"
 #include <iostream>
 
-Property::Property(int id, const std::string& name, int cost)
-    : ActionField(id, name), pledged_(false), owner_(nullptr), cost_(cost), rent_paid_(false) {}
+Property::Property(int id, const std::string& name, sf::Color& color, int cost)
+    : ActionField(id, name, color), pledged_(false), owner_(nullptr), cost_(cost), rent_paid_(false) {}
 
 std::string Property::getStr(Action action) {
     std::string str;

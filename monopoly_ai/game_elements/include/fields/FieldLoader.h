@@ -1,6 +1,7 @@
 #ifndef FIELDLOADER_H
 #define FIELDLOADER_H
 
+#include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
 #include <memory>
@@ -21,12 +22,12 @@ public:
     std::shared_ptr<ActionField> loadField(const json& j, int id);
 
 private:
-    std::shared_ptr<Estate> createEstate(const json& j, int id);
-    std::shared_ptr<BlankField> createBlankField(const json& j, int id);
-    std::shared_ptr<TaxField> createTaxField(const json& j, int id);
-    std::shared_ptr<UtilityField> createUtilityField(const json& j, int id);
-    std::shared_ptr<GoToJailField> createGoToJailField(const json& j, int id);
-    std::shared_ptr<RailRoad> createRailRoad(const json& j, int id);
+    std::shared_ptr<Estate> createEstate(const json& j, int id, sf::Color& color);
+    std::shared_ptr<BlankField> createBlankField(const json& j, int id, sf::Color& color);
+    std::shared_ptr<TaxField> createTaxField(const json& j, int id, sf::Color& color);
+    std::shared_ptr<UtilityField> createUtilityField(const json& j, int id, sf::Color& color);
+    std::shared_ptr<GoToJailField> createGoToJailField(const json& j, int id, sf::Color& color);
+    std::shared_ptr<RailRoad> createRailRoad(const json& j, int id, sf::Color& color);
 
     static int id_count_;
 };

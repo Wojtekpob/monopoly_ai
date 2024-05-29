@@ -76,3 +76,7 @@ void Player::incrementUtilities() {
 std::string Player::to_string() const {
     return "Player " + std::to_string(id_);
 }
+
+std::vector<int> Player::getProperties() {
+    return properties_;
+}

@@ -2,12 +2,14 @@
   "fields": [
     {
       "type": "BlankField",
-      "name": "Start"
+      "name": "Start",
+      "color": "White"
     },
     {
       "type": "Estate",
       "name": "Świnoujście",
-      "province": "brown",
+      "province": "Zachodniopomorskie",
+      "color": "Brown",
       "cost": 60,
       "house_cost": 50,
       "hotel_cost": 50,
@@ -15,12 +17,14 @@
     },
     {
       "type": "BlankField",
-      "name": "Kasa Społeczna"
+      "name": "Kasa Społeczna",
+      "color": "LightGray"
     },
     {
       "type": "Estate",
       "name": "Kołobrzeg",
-      "province": "brown",
+      "province": "Zachodniopomorskie",
+      "color": "Brown",
       "cost": 60,
       "house_cost": 50,
       "hotel_cost": 50,
@@ -29,18 +33,21 @@
     {
       "type": "TaxField",
       "name": "Podatek Dochodowy",
+      "color": "Gray",
       "tax_amount": 200
     },
     {
       "type": "RailRoad",
       "name": "Dworzec Główny",
+      "color": "Black",
       "cost": 200,
       "rent": 25
     },
     {
       "type": "Estate",
       "name": "Olsztyn",
-      "province": "light blue",
+      "province": "Warmińsko-Mazurskie",
+      "color": "LightBlue",
       "cost": 100,
       "house_cost": 50,
       "hotel_cost": 50,
@@ -48,12 +55,14 @@
     },
     {
       "type": "BlankField",
-      "name": "Szansa"
+      "name": "Szansa",
+      "color": "LightGray"
     },
     {
       "type": "Estate",
       "name": "Suwałki",
-      "province": "light blue",
+      "province": "Podlaskie",
+      "color": "LightBlue",
       "cost": 100,
       "house_cost": 50,
       "hotel_cost": 50,
@@ -62,7 +71,8 @@
     {
       "type": "Estate",
       "name": "Białystok",
-      "province": "light blue",
+      "province": "Podlaskie",
+      "color": "LightBlue",
       "cost": 120,
       "house_cost": 50,
       "hotel_cost": 50,
@@ -70,12 +80,14 @@
     },
     {
       "type": "BlankField",
-      "name": "Więzienie"
+      "name": "Więzienie",
+      "color": "LightGray"
     },
     {
       "type": "Estate",
       "name": "Gdynia",
-      "province": "pink",
+      "province": "Pomorskie",
+      "color": "Pink",
       "cost": 140,
       "house_cost": 100,
       "hotel_cost": 100,
@@ -84,13 +96,15 @@
     {
       "type": "UtilityField",
       "name": "Elektrownia",
+      "color": "Yellow",
       "cost": 150,
-      "rent": 4 
+      "rent": 4
     },
     {
       "type": "Estate",
       "name": "Gdańsk",
-      "province": "pink",
+      "province": "Pomorskie",
+      "color": "Pink",
       "cost": 140,
       "house_cost": 100,
       "hotel_cost": 100,
@@ -99,7 +113,8 @@
     {
       "type": "Estate",
       "name": "Sopot",
-      "province": "pink",
+      "province": "Pomorskie",
+      "color": "Pink",
       "cost": 160,
       "house_cost": 100,
       "hotel_cost": 100,
@@ -108,13 +123,15 @@
     {
       "type": "RailRoad",
       "name": "Dworzec Zachodni",
+      "color": "Black",
       "cost": 200,
       "rent": 25
     },
     {
       "type": "Estate",
       "name": "Toruń",
-      "province": "orange",
+      "province": "Kujawsko-Pomorskie",
+      "color": "Orange",
       "cost": 180,
       "house_cost": 100,
       "hotel_cost": 100,
@@ -122,12 +139,14 @@
     },
     {
       "type": "BlankField",
-      "name": "Kasa Społeczna"
+      "name": "Kasa Społeczna",
+      "color": "LightGray"
     },
     {
       "type": "Estate",
       "name": "Bydgoszcz",
-      "province": "orange",
+      "province": "Kujawsko-Pomorskie",
+      "color": "Orange",
       "cost": 180,
       "house_cost": 100,
       "hotel_cost": 100,
@@ -136,7 +155,8 @@
     {
       "type": "Estate",
       "name": "Poznań",
-      "province": "orange",
+      "province": "Wielkopolskie",
+      "color": "Orange",
       "cost": 200,
       "house_cost": 100,
       "hotel_cost": 100,
@@ -144,12 +164,14 @@
     },
     {
       "type": "BlankField",
-      "name": "Parking"
+      "name": "Parking",
+      "color": "White"
     },
     {
       "type": "Estate",
       "name": "Wrocław",
-      "province": "red",
+      "province": "Dolnośląskie",
+      "color": "Red",
       "cost": 220,
       "house_cost": 150,
       "hotel_cost": 150,
@@ -157,12 +179,14 @@
     },
     {
       "type": "BlankField",
-      "name": "Szansa"
+      "name": "Szansa",
+      "color": "LightGray"
     },
     {
       "type": "Estate",
       "name": "Opole",
-      "province": "red",
+      "province": "Opolskie",
+      "color": "Red",
       "cost": 220,
       "house_cost": 150,
       "hotel_cost": 150,
@@ -171,7 +195,8 @@
     {
       "type": "Estate",
       "name": "Katowice",
-      "province": "red",
+      "province": "Śląskie",
+      "color": "Red",
       "cost": 240,
       "house_cost": 150,
       "hotel_cost": 150,
@@ -180,13 +205,15 @@
     {
       "type": "RailRoad",
       "name": "Dworzec Południowy",
+      "color": "Black",
       "cost": 200,
       "rent": 25
     },
     {
       "type": "Estate",
       "name": "Rzeszów",
-      "province": "yellow",
+      "province": "Podkarpackie",
+      "color": "DarkRed",
       "cost": 260,
       "house_cost": 150,
       "hotel_cost": 150,
@@ -195,7 +222,8 @@
     {
       "type": "Estate",
       "name": "Lublin",
-      "province": "yellow",
+      "province": "Lubelskie",
+      "color": "DarkRed",
       "cost": 260,
       "house_cost": 150,
       "hotel_cost": 150,
@@ -204,13 +232,15 @@
     {
       "type": "UtilityField",
       "name": "Wodociągi",
+      "color": "Yellow",
       "cost": 150,
-      "rent": 4 
+      "rent": 4
     },
     {
       "type": "Estate",
       "name": "Łódź",
-      "province": "yellow",
+      "province": "Łódzkie",
+      "color": "DarkRed",
       "cost": 280,
       "house_cost": 150,
       "hotel_cost": 150,
@@ -218,21 +248,14 @@
     },
     {
       "type": "GoToJailField",
-      "name": "Idź do więzienia"
+      "name": "Idź do więzienia",
+      "color": "White"
     },
     {
       "type": "Estate",
       "name": "Kraków",
-      "province": "green",
-      "cost": 300,
-      "house_cost": 200,
-      "hotel_cost": 200,
-      "houses_rent": [ 26, 130, 390, 900, 1100, 1275 ]
-    },
-    {
-      "type": "Estate",
-      "name": "Częstochowa",
-      "province": "green",
+      "province": "Małopolskie",
+      "color": "Green",
       "cost": 300,
       "house_cost": 200,
       "hotel_cost": 200,
@@ -240,12 +263,24 @@
     },
     {
       "type": "BlankField",
-      "name": "Kasa Społeczna"
+      "name": "Kasa Społeczna",
+      "color": "LightGray"
+    },
+    {
+      "type": "Estate",
+      "name": "Częstochowa",
+      "province": "Śląskie",
+      "color": "Green",
+      "cost": 300,
+      "house_cost": 200,
+      "hotel_cost": 200,
+      "houses_rent": [ 26, 130, 390, 900, 1100, 1275 ]
     },
     {
       "type": "Estate",
       "name": "Warszawa",
-      "province": "green",
+      "province": "Mazowieckie",
+      "color": "Green",
       "cost": 320,
       "house_cost": 200,
       "hotel_cost": 200,
@@ -254,17 +289,20 @@
     {
       "type": "RailRoad",
       "name": "Dworzec Wschodni",
+      "color": "Black",
       "cost": 200,
       "rent": 25
     },
     {
       "type": "BlankField",
-      "name": "Szansa"
+      "name": "Szansa",
+      "color": "LightGray"
     },
     {
       "type": "Estate",
       "name": "Szczecin",
-      "province": "dark blue",
+      "province": "Zachodniopomorskie",
+      "color": "DarkBlue",
       "cost": 350,
       "house_cost": 200,
       "hotel_cost": 200,
@@ -273,12 +311,14 @@
     {
       "type": "TaxField",
       "name": "Podatek Luksusowy",
+      "color": "Gray",
       "tax_amount": 100
     },
     {
       "type": "Estate",
       "name": "Zakopane",
-      "province": "dark blue",
+      "province": "Małopolskie",
+      "color": "DarkBlue",
       "cost": 400,
       "house_cost": 200,
       "hotel_cost": 200,

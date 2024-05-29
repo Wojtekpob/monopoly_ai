@@ -5,7 +5,7 @@
 
 class BlankField : public ActionField {
 public:
-    BlankField(int id, const std::string& name);
+    BlankField(int id, const std::string& name, sf::Color& color);
 
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     void nextRound() override {};

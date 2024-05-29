@@ -1,7 +1,7 @@
 #include "fields/Estate.h"
 #include <iostream>
-Estate::Estate(int id, const std::string& name, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province) 
-    : Property(id, name, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent),
+Estate::Estate(int id, const std::string& name, sf::Color& color, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province)
+    : Property(id, name, color, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent),
     province_(province), bought_(false) {}
 
 void Estate::invokeAction(std::shared_ptr<Player> player) {
@@ -62,6 +62,7 @@ void Estate::payRent(std::shared_ptr<Player> player) {
     if (isActionAvailable(player, Action::PAY_RENT)) {
         player->decreaseMoney(houses_rent_[houses_ + hotels_]);
         rent_paid_ = true;
+        owner_->increaseMoney(houses_rent_[houses_ + hotels_]);
     }
 }
 

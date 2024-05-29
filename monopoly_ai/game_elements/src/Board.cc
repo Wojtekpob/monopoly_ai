@@ -14,31 +14,32 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
         throw std::runtime_error("Failed to load font");
     }
 
-    // Initialize the text object
     actionText_.setFont(font_);
-    actionText_.setCharacterSize(24); // example size
-    actionText_.setPosition(610.0f, 40.0f); // example position
+    actionText_.setCharacterSize(24); 
+    actionText_.setPosition(610.0f, 5.0f); 
 
     playerText_.setFont(font_);
     playerText_.setCharacterSize(24);
-    playerText_.setFillColor(sf::Color::White);
-    playerText_.setPosition(610.0f, 10.0f); // Position it in the right corner
 
     updatePlayerText();
 }
 
 void Board::runRound() {
     dice_->throwDice();
-    players_[current_player_]->move(dice_->getValue(), squares_);
+    getCurrentPlayer()->move(dice_->getValue(), squares_);
     dice_tossed_ = true;
     setActionAvailability();
     //nextPlayer();
 }
 
+std::shared_ptr<Player> Board::getCurrentPlayer() {
+    return players_[current_player_];
+}
+
 void Board::performCurrentAction() {
     if (!action_available_) return;
 
-    auto player = players_[current_player_];
+    auto player = getCurrentPlayer();
     auto currentSquare = player->getCurrentSquare();
     currentSquare->actionField_->invokeAction(player);
     setActionAvailability();
@@ -97,7 +98,8 @@ void Board::setActionAvailability() {
 }
 
 bool Board::isActionAvailable(Action& action) {
-    auto player = players_[current_player_];
+    if (action == Action::PLEDGE_PROPERTY || action == Action::REDEEM_PLEDGE) return true;
+    auto player = getCurrentPlayer();
     auto currentSquare = player->getCurrentSquare();
     auto a = currentSquare->actionField_->isActionAvailable(player, action);
     return a;
@@ -263,7 +265,7 @@ void Board::initializeSquares(float pos_x, float pos_y) {
         }
     }
     for (int i = 0; i < squares_.size(); i++) {
-        squares_[i]->setColor(propertyColors[i]);
+        squares_[i]->setColor(fields[i]->color_);
         squares_[i]->setActionField(fields[i]);
         std::cout << fields[i]->name_ << std::endl;
     }
@@ -275,7 +277,7 @@ void Board::setPosition(float x, float y) {
 }
 
 void Board::nextPlayer() {
-    players_[current_player_]->getCurrentSquare()->actionField_->nextRound();
+    getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
     current_player_ = (current_player_ + 1) % players_.size();
     current_action_ = Action::BUY_PROPERTY;
     setActionAvailability();
@@ -294,8 +296,7 @@ void Board::drawAction() {
     
     switch (current_action_) {
     case Action::BUY_PROPERTY:
-        str = "ACTION: BUY_PROPERTY \n keepo";
-        //actionText_.setString("ACTION: BUY_PROPERTY \n keepo");
+        str = "ACTION: BUY_PROPERTY";
         break;
     case Action::PAY_RENT:
         str = "ACTION: PAY_RENT";
@@ -319,10 +320,11 @@ void Board::drawAction() {
         str = "Unknown Action";
         break;
     }
-    actionText_.setString(str + "\n" + players_[current_player_]->getCurrentSquare()->actionField_->getStr(Action::REDEEM_PLEDGE));
-    
+    actionText_.setString(str + "\n" + getCurrentPlayer()->getCurrentSquare()->actionField_->getStr(Action::REDEEM_PLEDGE));
     window_->draw(actionText_);
 }
+
+
 
 void Board::incrementAction() {
     ++current_action_;
@@ -335,7 +337,7 @@ void Board::decrementAction() {
 }
 
 void Board::updatePlayerText() {
-    std::string money = std::to_string(players_[current_player_]->getMoney());
+    std::string money = std::to_string(getCurrentPlayer()->getMoney());
     playerText_.setString("Player " + std::to_string(current_player_) + "\t\t\t" + money + " $");
 }
 
@@ -349,4 +351,27 @@ void Board::drawLeaderBoard() {
         playerText_.setPosition(10.0f, (i) * 20.0f);
         window_->draw(playerText_);
     }
+}
+
+std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
+    auto player = getCurrentPlayer();
+    std::vector<std::shared_ptr<Property>> playerProperties;
+
+    for (int propertyId : player->getProperties()) {
+        if (propertyId >= 0 && propertyId < squares_.size()) {
+            std::shared_ptr<ActionField> actionField = squares_[propertyId]->actionField_;
+            std::shared_ptr<Property> property = std::dynamic_pointer_cast<Property>(actionField);
+            if (property) {
+                playerProperties.push_back(property);
+            }
+        }
+    }
+
+    return playerProperties;
+}
+
+
+void Board::drawProperties() {
+    std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();
+
 }

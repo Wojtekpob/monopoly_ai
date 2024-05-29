@@ -8,7 +8,7 @@
 
 class ActionField {
 public:
-    ActionField(int id, const std::string& name) : id_(id), name_(name) {}
+    ActionField(int id, const std::string& name, sf::Color& color) : id_(id), name_(name), color_(color) {}
     virtual ~ActionField() = default;
     virtual void invokeAction(std::shared_ptr<Player> player) = 0;
     virtual void nextRound() = 0;
@@ -21,7 +21,7 @@ public:
         return name_;
     }
     std::string name_;
-
+    sf::Color color_;
 
 protected:
 
