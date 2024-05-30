@@ -250,7 +250,7 @@ void Board::drawSquaresDescription() {
     for (auto square : squares_) {
 
         fieldsText_.setPosition(fieldsText_.getPosition() + sf::Vector2f(0.0, 20.0));
-        fieldsText_.setString(square->actionField_->name_);
+        fieldsText_.setString(square->actionField_->getDescription());
         fieldsText_.setColor(square->actionField_->color_);
         if (selected_property_ == square->actionField_->getId()) {
             sf::RectangleShape highlightRect;

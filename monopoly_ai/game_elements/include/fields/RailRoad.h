@@ -12,6 +12,7 @@ public:
     int getRent();
     std::string getStr(Action action) override;
     void nextRound() override {};
+
 private:
     int rent_;
 };

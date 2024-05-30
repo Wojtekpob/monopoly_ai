@@ -29,3 +29,7 @@ std::string TaxField::getStr(Action action) {
 void TaxField::nextRound() {
     paid_ = true;
 }
+
+std::string TaxField::getDescription() {
+    return ActionField::getDescription() + " | Podatek: " + std::to_string(taxAmount_);
+}

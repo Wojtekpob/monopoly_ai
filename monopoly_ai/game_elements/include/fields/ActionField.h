@@ -20,6 +20,9 @@ public:
     virtual std::string getStr(Action action) {
         return name_;
     }
+    virtual std::string getDescription() {
+        return name_;
+    }
     int getId() {
         return id_;
     };

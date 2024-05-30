@@ -15,6 +15,7 @@ public:
     int getPledgePrice();
     std::string getStr(Action action) override;
     void nextRound() override;
+    std::string getDescription() override;
 
 protected:
     bool pledged_;
