@@ -34,7 +34,6 @@ void Board::runRound() {
     getCurrentPlayer()->move(dice_->getValue(), squares_);
     dice_tossed_ = true;
     setActionAvailability();
-    //nextPlayer();
 }
 
 std::shared_ptr<Player> Board::getCurrentPlayer() {
@@ -231,17 +230,18 @@ void Board::setPosition(float x, float y) {
 }
 
 void Board::nextPlayer() {
-    getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
-    current_player_ = (current_player_ + 1) % players_.size();
-    current_action_ = Action::BUY_PROPERTY;
-    setActionAvailability();
-    updatePlayerText();
-    dice_tossed_ = false;
-    if (getCurrentPlayer()->getProperties().size() == 0) {
+    Action mandatoryAction = getCurrentPlayer()->getCurrentSquare()->actionField_->getMandatoryAction(getCurrentPlayer());
+    if (mandatoryAction != Action::END) {}
+    else {
+        getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
+        current_player_ = (current_player_ + 1) % players_.size();
+        current_action_ = Action::BUY_PROPERTY;
+        setActionAvailability();
+        updatePlayerText();
+        dice_tossed_ = false;
         selected_property_ = -1;
     }
-    else selected_property_ = getCurrentPlayer()->getProperties().front();
-}
+    }
 
 void Board::drawSquaresDescription() {
     std::string str;

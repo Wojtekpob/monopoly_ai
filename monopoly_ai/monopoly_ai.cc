@@ -14,7 +14,7 @@ int main()
     auto window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1400, 900), "Board Example");
     Board board(400, 400, window);
     board.setPosition(200.0f, 100.0f);
-    sf::Color backgroundColor = sf::Color(9, 111, 9);
+    sf::Color backgroundColor = sf::Color(9, 100, 9);
     while (window->isOpen()) {
         sf::Event event;
         while (window->pollEvent(event)) {
@@ -36,7 +36,6 @@ int main()
                 else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I) {
                     board.performCurrentAction();
                 }
-
             }
             else {
                 if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) {

@@ -25,6 +25,9 @@ public:
             return false;
         }
     }
+    virtual Action getMandatoryAction(std::shared_ptr<Player> player) {
+        return Action::END;
+    }
 
     virtual std::string getStr(Action action) {
         return name_;

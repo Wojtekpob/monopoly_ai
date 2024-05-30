@@ -50,6 +50,13 @@ void Property::nextRound() {
     rent_paid_ = false;
 }
 
+Action Property::getMandatoryAction(std::shared_ptr<Player> player) {
+    if (player != owner_ && !rent_paid_) {
+        return Action::PAY_RENT;
+    }
+    else return ActionField::getMandatoryAction(player);
+}
+
 std::string Property::getDescription() {
     return ActionField::getDescription() + " | Cena: " + std::to_string(cost_) + " | Zastaw/Wykup: " + std::to_string(getPledgePrice()) +
         " / " + std::to_string(getRedeemPledgePrice());

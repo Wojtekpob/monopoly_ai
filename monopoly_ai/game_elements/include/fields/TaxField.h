@@ -12,6 +12,7 @@ public:
     std::string getStr(Action action) override;
     void nextRound() override;
     std::string getDescription() override;
+    Action getMandatoryAction(std::shared_ptr<Player> player) override;
 private:
     int taxAmount_;
     bool paid_;

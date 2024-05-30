@@ -14,7 +14,7 @@ void TaxField::invokeAction(std::shared_ptr<Player> player) {
 bool TaxField::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     switch (action) {
     case Action::PAY_TAX:
-        return !paid_ && player->getMoney() >= taxAmount_;
+        return paid_ && player->getMoney() >= taxAmount_;
     default:
         return ActionField::isActionAvailable(player, action);
     }
@@ -27,9 +27,14 @@ std::string TaxField::getStr(Action action) {
 }
 
 void TaxField::nextRound() {
-    paid_ = true;
+    paid_ = false;
 }
 
 std::string TaxField::getDescription() {
     return ActionField::getDescription() + " | Podatek: " + std::to_string(taxAmount_);
+}
+
+Action TaxField::getMandatoryAction(std::shared_ptr<Player> player) {
+    if (!paid_) return Action::PAY_TAX;
+    else return ActionField::getMandatoryAction(player);
 }
