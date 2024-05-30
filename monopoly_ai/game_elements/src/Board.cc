@@ -11,13 +11,18 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     initializePlayers(4);
     setActionAvailability();
 
+
+    initializeTexts();
+
+}
+
+void Board::initializeTexts() {
     if (!font_.loadFromFile(std::string(BASE_PATH) + "assets/fonts/font.ttf")) {
         throw std::runtime_error("Failed to load font");
     }
-
     actionText_.setFont(font_);
-    actionText_.setCharacterSize(24); 
-    actionText_.setPosition(610.0f, 5.0f); 
+    actionText_.setCharacterSize(24);
+    actionText_.setPosition(610.0f, 5.0f);
 
     playerText_.setFont(font_);
     playerText_.setCharacterSize(24);
@@ -26,7 +31,49 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     fieldsText_.setCharacterSize(18);
     fieldsText_.setPosition(800.0f, 5.0f);
 
+    communicatsText_.setFont(font_);
+    communicatsText_.setCharacterSize(24);
+    communicatsText_.setPosition(5.0f, 550.0f);
+
+    keysText_.setFont(font_);
+    keysText_.setCharacterSize(24);
+    keysText_.setPosition(5.0f, 550.0f);
+
     updatePlayerText();
+}
+
+void Board::drawKeysText() {
+    std::vector<std::string> actions;
+
+    if (!property_selection_) {
+        if (!dice_tossed_) {
+            actions.push_back("ENTER -> rzuc koscia");
+        }
+        else {
+            actions.push_back("ENTER -> nastepny gracz");
+            actions.push_back("I -> wykonaj akcje");
+        }
+        actions.push_back("RIGHT -> nastepna akcja");
+        actions.push_back("LEFT -> poprzednia akcja");
+    }
+    else {
+        if (dice_tossed_) {
+            actions.push_back("UP -> poprzednia nieruchomosc");
+            actions.push_back("DOWN -> nastepna nieruchomosc");
+            actions.push_back("R -> akcja na nieruchomosci");
+            actions.push_back("B -> zamknij wybor nieruchomosci");
+        }
+    }
+
+    float yOffset = 10.0f;
+    keysText_.setPosition(yOffset, 550.0f);
+
+    for (const auto& action : actions) {
+        keysText_.setString(action);
+        window_->draw(keysText_);
+        keysText_.move(0.0f, 28.0f);
+    }
+    keysText_.setPosition(10.0f, 550.0f);
 }
 
 void Board::runRound() {
@@ -71,54 +118,6 @@ void Board::performCurrentAction() {
     auto currentSquare = player->getCurrentSquare();
     currentSquare->actionField_->invokeAction(player);
     setActionAvailability();
-    //switch (current_action_) {
-    //case Action::BUY_PROPERTY:
-    //    // Implement logic to buy property
-    //    std::cout << "Player buys property" << std::endl;
-    //    // Placeholder logic: adjust player's money and mark property as owned// Example cost
-    //    // Assume current square is a property square
-    //    player->decreaseMoney(100);
-    //    break;
-    //case Action::PAY_RENT:
-    //    // Implement logic to pay rent
-    //    std::cout << "Player pays rent" << std::endl;
-    //    // Placeholder logic: adjust player's money
-    //    player->decreaseMoney(50); // Example rent
-    //    break;
-    //case Action::BUY_HOUSE:
-    //    // Implement logic to buy house
-    //    std::cout << "Player buys house" << std::endl;
-    //    // Placeholder logic: adjust player's money and add house to property
-    //    player->decreaseMoney(200); // Example house cost
-    //    break;
-    //case Action::BUY_HOTEL:
-    //    // Implement logic to buy hotel
-    //    std::cout << "Player buys hotel" << std::endl;
-    //    // Placeholder logic: adjust player's money and add hotel to property
-    //    player->decreaseMoney(400); // Example hotel cost
-    //    break;
-    //case Action::PLEDGE_PROPERTY:
-    //    // Implement logic to pledge property
-    //    std::cout << "Player pledges property" << std::endl;
-    //    // Placeholder logic: mark property as pledged and adjust player's money
-    //    player->increaseMoney(150); // Example pledge value
-    //    break;
-    //case Action::PAY_TAX:
-    //    // Implement logic to pay tax
-    //    std::cout << "Player pays tax" << std::endl;
-    //    // Placeholder logic: adjust player's money
-    //    player->decreaseMoney(75); // Example tax
-    //    break;
-    //case Action::REDEEM_PLEDGE:
-    //    // Implement logic to redeem pledged property
-    //    std::cout << "Player redeems pledged property" << std::endl;
-    //    // Placeholder logic: mark property as unpledged and adjust player's money
-    //    player->decreaseMoney(150); // Example redeem cost
-    //    break;
-    //default:
-    //    std::cout << "Invalid action" << std::endl;
-    //    break;
-    //}
 }
 
 void Board::setActionAvailability() {
@@ -146,6 +145,8 @@ void Board::draw() {
         drawLeaderBoard();
         window_->draw(playerText_);
         drawSquaresDescription();
+        //window_->draw(communicatsText_);
+        drawKeysText();
     }
 }
 

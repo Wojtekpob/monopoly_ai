@@ -36,6 +36,7 @@ public:
     void startPropertySelection();
     void closePropertySelection();
     void actionOnProperty();
+    void drawKeysText();
 
 
     bool dice_tossed_;
@@ -47,6 +48,7 @@ private:
     void initializePlayers(int players);
     bool isActionAvailable(Action& action);
     void updatePlayerText();
+    void initializeTexts();
 
 
     int current_player_;
@@ -60,6 +62,8 @@ private:
     sf::Text actionText_;
     sf::Text playerText_;
     sf::Text fieldsText_;
+    sf::Text communicatsText_;
+    sf::Text keysText_;
     bool action_available_;
     FieldLoader fieldLoader_;
 

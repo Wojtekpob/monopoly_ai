@@ -51,7 +51,7 @@ void Property::nextRound() {
 }
 
 Action Property::getMandatoryAction(std::shared_ptr<Player> player) {
-    if (player != owner_ && !rent_paid_) {
+    if (owner_ && player != owner_ && !rent_paid_) {
         return Action::PAY_RENT;
     }
     else return ActionField::getMandatoryAction(player);
