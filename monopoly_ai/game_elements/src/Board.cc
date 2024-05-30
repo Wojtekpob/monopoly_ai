@@ -2,7 +2,8 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_(), dice_tossed_(false), selected_property_(-1) {
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_(), dice_tossed_(false),
+    selected_property_(-1), property_selection_(false) {
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -40,8 +41,32 @@ std::shared_ptr<Player> Board::getCurrentPlayer() {
     return players_[current_player_];
 }
 
+void Board::startPropertySelection() {
+    property_selection_ = true;
+    selected_property_ = getCurrentPlayer()->getProperties().front();
+}
+
+void Board::closePropertySelection() {
+    property_selection_ = false;
+    selected_property_ = -1;
+}
+
+void Board::actionOnProperty() {
+    if (current_action_ == Action::PLEDGE_PROPERTY) {
+        getCurrentlySelectedProperty()->pledge(getCurrentPlayer());
+    }
+    else if (current_action_ == Action::REDEEM_PLEDGE) {
+        getCurrentlySelectedProperty()->redeemPledge(getCurrentPlayer());
+    }
+}
+
 void Board::performCurrentAction() {
     if (!action_available_) return;
+
+    if (current_action_ == Action::PLEDGE_PROPERTY || current_action_ == Action::REDEEM_PLEDGE) {
+        startPropertySelection();
+        return;
+    }
 
     auto player = getCurrentPlayer();
     auto currentSquare = player->getCurrentSquare();
@@ -102,37 +127,10 @@ void Board::setActionAvailability() {
 }
 
 bool Board::isActionAvailable(Action& action) {
-    if (action == Action::PLEDGE_PROPERTY || action == Action::REDEEM_PLEDGE) return true;
     auto player = getCurrentPlayer();
     auto currentSquare = player->getCurrentSquare();
     auto a = currentSquare->actionField_->isActionAvailable(player, action);
     return a;
-    //switch (action) { // @TODO to implement
-    //case Action::BUY_PROPERTY:
-    //    // Check if the current square is a property and it can be bought
-    //    // Placeholder check; replace with actual game logic
-    //    return true; // Example: always return true for simplicity
-    //case Action::PAY_RENT:
-    //    // Check if the player is on a property owned by another player
-    //    return false; // Placeholder
-    //case Action::BUY_HOUSE:
-    //    // Check if the player owns all properties of a color set and has enough money
-    //    return false; // Placeholder
-    //case Action::BUY_HOTEL:
-    //    // Check if the player has enough houses to buy a hotel
-    //    return true; // Placeholder
-    //case Action::PLEDGE_PROPERTY:
-    //    // Check if the player owns the property and it is not already pledged
-    //    return false; // Placeholder
-    //case Action::PAY_TAX:
-    //    // Check if the current square is a tax square
-    //    return false; // Placeholder
-    //case Action::REDEEM_PLEDGE:
-    //    // Check if the player has pledged properties that can be redeemed
-    //    return false; // Placeholder
-    //default:
-    //    return false;
-    //}
 }
 
 void Board::draw() {
@@ -248,7 +246,6 @@ void Board::nextPlayer() {
 void Board::drawSquaresDescription() {
     std::string str;
     for (auto square : squares_) {
-
         fieldsText_.setPosition(fieldsText_.getPosition() + sf::Vector2f(0.0, 20.0));
         fieldsText_.setString(square->actionField_->getDescription());
         fieldsText_.setColor(square->actionField_->color_);
@@ -349,6 +346,10 @@ std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
     return playerProperties;
 }
 
+std::shared_ptr<Property> Board::getCurrentlySelectedProperty() {
+    if (selected_property_ == -1) throw std::runtime_error("No selected property");
+    return std::dynamic_pointer_cast<Property>(squares_[selected_property_]->actionField_);
+}
 
 void Board::drawProperties() {
     std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();

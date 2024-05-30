@@ -32,10 +32,15 @@ public:
     void drawSquaresDescription();
     void nextProperty();
     void previousProperty();
+    std::shared_ptr<Property> getCurrentlySelectedProperty();
+    void startPropertySelection();
+    void closePropertySelection();
+    void actionOnProperty();
 
 
     bool dice_tossed_;
     int selected_property_;
+    bool property_selection_;
 
 private:
     void initializeSquares(float pos_x, float pos_y);

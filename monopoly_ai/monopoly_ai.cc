@@ -20,26 +20,37 @@ int main()
         while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window->close();
-            else if (!board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-                board.runRound();
+            if (!board.property_selection_) {
+                if (!board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                    board.runRound();
+                }
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) {
+                    board.incrementAction();
+                }
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) {
+                    board.decrementAction();
+                }
+                else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                    board.nextPlayer();
+                }
+                else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I) {
+                    board.performCurrentAction();
+                }
+
             }
-            else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right) {
-                board.incrementAction();
-            }
-            else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left) {
-                board.decrementAction();
-            }
-            else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-                board.nextPlayer();
-            }
-            else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I) {
-                board.performCurrentAction();
-            }
-            else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) {
-                board.previousProperty();
-            }
-            else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) {
-                board.nextProperty();
+            else {
+                if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) {
+                    board.previousProperty();
+                }
+                else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down) {
+                    board.nextProperty();
+                }
+                else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R) {
+                    board.actionOnProperty();
+                }
+                else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B) {
+                    board.closePropertySelection();
+                }
             }
         }
         

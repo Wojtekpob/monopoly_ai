@@ -23,7 +23,7 @@ void Property::buy(std::shared_ptr<Player> player) {
 }
 
 void Property::pledge(std::shared_ptr<Player> player) {
-    if (player == owner_) {
+    if (player == owner_ && !pledged_) {
         player->increaseMoney(getPledgePrice());
         pledged_ = true;
     }
@@ -31,8 +31,9 @@ void Property::pledge(std::shared_ptr<Player> player) {
 }
 
 void Property::redeemPledge(std::shared_ptr<Player> player) {
-    if (player == owner_ && player->getMoney() > getRedeemPledgePrice()) {
+    if (player == owner_ && player->getMoney() > getRedeemPledgePrice() && pledged_) {
         player->decreaseMoney(getRedeemPledgePrice());
+        pledged_ = false;
     }
     else std::cout << "Player has to be an owner to redeem property" << std::endl;
 }
