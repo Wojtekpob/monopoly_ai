@@ -15,7 +15,16 @@ public:
     bool operator==(const ActionField& other) const {
         return id_ == other.id_ && name_ == other.name_;
     }
-    virtual bool isActionAvailable(std::shared_ptr<Player> player, Action action) = 0;
+    virtual bool isActionAvailable(std::shared_ptr<Player> player, Action action) {
+        switch (action) {
+        case Action::PLEDGE_PROPERTY:
+            return player->getProperties().size() > 0;
+        case Action::REDEEM_PLEDGE:
+            return player->getProperties().size() > 0;
+        default:
+            return false;
+        }
+    }
 
     virtual std::string getStr(Action action) {
         return name_;

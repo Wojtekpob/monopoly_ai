@@ -22,17 +22,6 @@ void Property::buy(std::shared_ptr<Player> player) {
     else std::cout << "Brak pieniêdzy" << std::endl;
 }
 
-bool Property::isActionAvailable(std::shared_ptr<Player> player, Action action) {
-    switch (action) {
-    case Action::PLEDGE_PROPERTY:
-        return owner_ != nullptr && player == owner_ && !pledged_;
-    case Action::REDEEM_PLEDGE:
-        return owner_ != nullptr && player == owner_ && pledged_ && player->getMoney() > getRedeemPledgePrice();
-    default:
-        return false;
-    }
-}
-
 void Property::pledge(std::shared_ptr<Player> player) {
     if (player == owner_) {
         player->increaseMoney(getPledgePrice());

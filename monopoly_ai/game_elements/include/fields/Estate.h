@@ -11,7 +11,6 @@ public:
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     std::string getStr(Action action) override;
     void nextRound() override;
-    //std::string getDescription() override;
 
     std::string province_;
 

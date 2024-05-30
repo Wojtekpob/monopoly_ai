@@ -40,7 +40,7 @@ bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     case Action::BUY_HOTEL:
         return owner_ != nullptr && player == owner_ && !bought_ && houses_ == 4 && hotels_ == 0 && player->getMoney() >= houses_rent_.back();
     default:
-        return Property::isActionAvailable(player, action);
+        return ActionField::isActionAvailable(player, action);
     }
 }
 

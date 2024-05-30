@@ -10,7 +10,6 @@ public:
     void buy(std::shared_ptr<Player> player);
     void pledge(std::shared_ptr<Player> player);
     void redeemPledge(std::shared_ptr<Player> player);
-    bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;
     int getRedeemPledgePrice();
     int getPledgePrice();
     std::string getStr(Action action) override;

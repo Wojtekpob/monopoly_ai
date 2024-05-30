@@ -16,7 +16,7 @@ bool TaxField::isActionAvailable(std::shared_ptr<Player> player, Action action) 
     case Action::PAY_TAX:
         return !paid_ && player->getMoney() >= taxAmount_;
     default:
-        return false;
+        return ActionField::isActionAvailable(player, action);
     }
 }
 

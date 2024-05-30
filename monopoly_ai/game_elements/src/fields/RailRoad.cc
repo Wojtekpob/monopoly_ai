@@ -26,7 +26,7 @@ bool RailRoad::isActionAvailable(std::shared_ptr<Player> player, Action action) 
     case Action::PAY_RENT:
         return owner_ != nullptr && player != owner_ && !rent_paid_ && player->getMoney() >= getRent();
     default:
-        return Property::isActionAvailable(player, action);
+        return ActionField::isActionAvailable(player, action);
     }
 }
 
