@@ -23,7 +23,7 @@ public:
     void incrementRailRoads();
     int getUtilities();
     void incrementUtilities();
-    std::string Player::to_string() const;
+    std::string to_string() const;
     
 
 private:
