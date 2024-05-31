@@ -9,7 +9,8 @@ Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquar
     setColor(sf::Color(255 / 4 * id, 255 / 4 * id, 255 / 4 * id));
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
     setPosition(currentSquare_->getPosition());
-
+    circle_.setOutlineColor(sf::Color::White);
+    circle_.setOutlineThickness(1.0f);
 }
 
 void Player::setColor(sf::Color& color) {
@@ -32,7 +33,9 @@ void Player::draw() {
 }
 
 void Player::move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares) {
+    if (position_ + steps > boardSquares.size()) increaseMoney(200);
     position_ = (position_ + steps) % boardSquares.size();
+
     currentSquare_ = boardSquares[position_];
     setPosition(currentSquare_->getPosition());
 }

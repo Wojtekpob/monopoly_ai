@@ -39,7 +39,7 @@ void Board::initializeTexts() {
     keysText_.setCharacterSize(24);
     keysText_.setPosition(5.0f, 550.0f);
 
-    updatePlayerText();
+
 }
 
 void Board::drawKeysText() {
@@ -143,7 +143,6 @@ void Board::draw() {
         dice_->draw();
         drawAction();
         drawLeaderBoard();
-        window_->draw(playerText_);
         drawSquaresDescription();
         //window_->draw(communicatsText_);
         drawKeysText();
@@ -238,7 +237,7 @@ void Board::nextPlayer() {
         current_player_ = (current_player_ + 1) % players_.size();
         current_action_ = Action::BUY_PROPERTY;
         setActionAvailability();
-        updatePlayerText();
+        //updatePlayerText();
         dice_tossed_ = false;
         selected_property_ = -1;
     }
@@ -322,15 +321,27 @@ void Board::updatePlayerText() {
 }
 
 void Board::drawLeaderBoard() {
+    playerText_.setOutlineColor(sf::Color::White);
+    playerText_.setOutlineThickness(0.5f);
+
     for (int i = 0; i < players_.size(); ++i) {
         
         std::string money = std::to_string(players_[i]->getMoney());
         playerText_.setString("Player " + std::to_string(i) + "\t\t\t" + money + " $");
-        if (i == current_player_) playerText_.setFillColor(sf::Color::Green);
-        else playerText_.setFillColor(sf::Color::White);
-        playerText_.setPosition(10.0f, (i) * 20.0f);
+        playerText_.setColor(players_[i]->getColor());
+
+        if (i == current_player_) {
+            playerText_.setOutlineColor(sf::Color::Green);
+            playerText_.setOutlineThickness(2.0f);
+        }
+        else {
+            playerText_.setOutlineColor(sf::Color::White);
+            playerText_.setOutlineThickness(0.5f);
+        }
         window_->draw(playerText_);
+        playerText_.move(0.0f, 24.0f);
     }
+    playerText_.setPosition(0.0f, 0.0f);
 }
 
 std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
