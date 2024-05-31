@@ -18,6 +18,8 @@ void Property::buy(std::shared_ptr<Player> player) {
         owner_ = player;
         player->addProperty(id_);
         std::cout << "Kupiono " << name_ << std::endl;
+        owned_ = true;
+        owner_color_ = player->getColor();
     }
     else std::cout << "Brak pieniêdzy" << std::endl;
 }

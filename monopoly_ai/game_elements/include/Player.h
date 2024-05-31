@@ -24,9 +24,12 @@ public:
     int getUtilities();
     void incrementUtilities();
     std::string to_string() const;
+    sf::Color getColor();
+    void setColor(sf::Color& color);
     
 
 private:
+    sf::Color color_;
     sf::CircleShape circle_;
     std::shared_ptr<BoardSquare> currentSquare_;
     int position_;

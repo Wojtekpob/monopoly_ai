@@ -242,7 +242,7 @@ void Board::nextPlayer() {
         dice_tossed_ = false;
         selected_property_ = -1;
     }
-    }
+}
 
 void Board::drawSquaresDescription() {
     std::string str;
@@ -297,11 +297,14 @@ void Board::drawAction() {
         str = "Unknown Action";
         break;
     }
-    actionText_.setString(str + "\n" + getCurrentPlayer()->getCurrentSquare()->actionField_->getStr(Action::REDEEM_PLEDGE));
+    actionText_.setString(str);
     window_->draw(actionText_);
+    actionText_.move(0.0f, 25.0f);
+    actionText_.setString(getCurrentPlayer()->getCurrentSquare()->actionField_->getStr(Action::REDEEM_PLEDGE));
+    actionText_.setColor(sf::Color::Black);
+    window_->draw(actionText_);
+    actionText_.move(0.0f, -25.0f);
 }
-
-
 
 void Board::incrementAction() {
     ++current_action_;
