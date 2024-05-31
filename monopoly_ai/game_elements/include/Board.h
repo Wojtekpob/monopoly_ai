@@ -26,7 +26,7 @@ public:
     void decrementAction();
     void setActionAvailability();
     void drawLeaderBoard();
-    std::vector<std::shared_ptr<Property>> getPlayersProperties();
+    std::vector<std::shared_ptr<Property>> getPlayersProperties(int state);
     void drawProperties();
     std::shared_ptr<Player> getCurrentPlayer();
     void drawSquaresDescription();
