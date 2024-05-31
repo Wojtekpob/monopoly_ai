@@ -89,21 +89,26 @@ std::shared_ptr<Player> Board::getCurrentPlayer() {
 
 void Board::startPropertySelection() {
     property_selection_ = true;
-    selected_property_ = getCurrentPlayer()->getProperties().front();
+    selected_property_ = -1;
+    nextProperty();
 }
 
 void Board::closePropertySelection() {
     property_selection_ = false;
     selected_property_ = -1;
+    setActionAvailability();
 }
 
 void Board::actionOnProperty() {
     if (current_action_ == Action::PLEDGE_PROPERTY) {
         getCurrentlySelectedProperty()->pledge(getCurrentPlayer());
+        nextProperty();
     }
     else if (current_action_ == Action::REDEEM_PLEDGE) {
         getCurrentlySelectedProperty()->redeemPledge(getCurrentPlayer());
+        nextProperty();
     }
+    if (!isActionAvailable(current_action_)) closePropertySelection();
 }
 
 void Board::performCurrentAction() {
@@ -385,7 +390,11 @@ void Board::drawProperties() {
 
 void Board::nextProperty() {
     auto player = getCurrentPlayer();
-    const std::vector<int>& properties = player->getProperties();
+    std::vector<std::shared_ptr<Property>> properties;
+    if (current_action_ == Action::PLEDGE_PROPERTY) {
+        properties = getPlayersProperties(1);
+    }
+    else properties = getPlayersProperties(2);
 
     if (properties.empty()) {
         selected_property_ = -1;
@@ -393,50 +402,59 @@ void Board::nextProperty() {
     }
 
     if (selected_property_ == -1) {
-        selected_property_ = properties[0];
+        selected_property_ = properties[0]->getId();
         return;
     }
 
-    auto it = std::find(properties.begin(), properties.end(), selected_property_);
+    auto it = std::find_if(properties.begin(), properties.end(), [this](const std::shared_ptr<Property>& property) {
+        return property->getId() == selected_property_;
+        });
+
     if (it != properties.end()) {
         ++it;
         if (it == properties.end()) {
-            selected_property_ = properties[0];
+            selected_property_ = properties[0]->getId();
         }
         else {
-            selected_property_ = *it;
+            selected_property_ = (*it)->getId();
         }
     }
     else {
-        selected_property_ = properties[0];
+        selected_property_ = properties[0]->getId();
     }
 }
 
 void Board::previousProperty() {
     auto player = getCurrentPlayer();
-    const std::vector<int>& properties = player->getProperties();
-
+    std::vector<std::shared_ptr<Property>> properties;
+    if (current_action_ == Action::PLEDGE_PROPERTY) {
+        properties = getPlayersProperties(1);
+    } else properties = getPlayersProperties(2);
+    
     if (properties.empty()) {
         selected_property_ = -1;
         return;
     }
 
     if (selected_property_ == -1) {
-        selected_property_ = properties[0];
+        selected_property_ = properties[0]->getId();
         return;
     }
 
-    auto it = std::find(properties.begin(), properties.end(), selected_property_);
+    auto it = std::find_if(properties.begin(), properties.end(), [this](const std::shared_ptr<Property>& property) {
+        return property->getId() == selected_property_;
+        });
+
     if (it != properties.end()) {
         if (it == properties.begin()) {
-            selected_property_ = properties.back();
+            selected_property_ = properties.back()->getId();
         }
         else {
             --it;
-            selected_property_ = *it;
+            selected_property_ = (*it)->getId();
         }
     }
     else {
-        selected_property_ = properties[0];
+        selected_property_ = properties[0]->getId();
     }
 }
