@@ -127,6 +127,14 @@ void Board::setActionAvailability() {
 bool Board::isActionAvailable(Action& action) {
     auto player = getCurrentPlayer();
     auto currentSquare = player->getCurrentSquare();
+    switch (current_action_) {
+    case Action::PLEDGE_PROPERTY:
+        if (getPlayersProperties(1).empty()) return false;
+        break;
+    case Action::REDEEM_PLEDGE:
+        if (getPlayersProperties(2).empty()) return false;
+        break;
+    }
     auto a = currentSquare->actionField_->isActionAvailable(player, action);
     return a;
 }
@@ -180,12 +188,10 @@ void Board::initializeSquares(float pos_x, float pos_y) {
     for (int i = 0; i < number_of_squares; ++i) {
         for (int j = 0; j < number_of_squares; ++j) {
             if (i > 0 && i < number_of_squares - 1 && j > 0 && j < number_of_squares - 1) {
-                // Skip the center 9x9 area
                 continue;
             }
 
             std::string textContent = "Property";
-            //sf::Color fillColor = propertyColors[propertyColorIndex];
             std::string textureFile = "";
 
 
@@ -237,7 +243,6 @@ void Board::nextPlayer() {
         current_player_ = (current_player_ + 1) % players_.size();
         current_action_ = Action::BUY_PROPERTY;
         setActionAvailability();
-        //updatePlayerText();
         dice_tossed_ = false;
         selected_property_ = -1;
     }
@@ -344,7 +349,7 @@ void Board::drawLeaderBoard() {
     playerText_.setPosition(0.0f, 0.0f);
 }
 
-std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
+std::vector<std::shared_ptr<Property>> Board::getPlayersProperties(int state) { // 0 - all // 1 - can be pledged 2 - already pledged
     auto player = getCurrentPlayer();
     std::vector<std::shared_ptr<Property>> playerProperties;
 
@@ -353,7 +358,15 @@ std::vector<std::shared_ptr<Property>> Board::getPlayersProperties() {
             std::shared_ptr<ActionField> actionField = squares_[propertyId]->actionField_;
             std::shared_ptr<Property> property = std::dynamic_pointer_cast<Property>(actionField);
             if (property) {
-                playerProperties.push_back(property);
+                if (state == 0) {
+                    playerProperties.push_back(property);
+                }
+                else if (state == 1 && !property->pledged_) {
+                    playerProperties.push_back(property);
+                }
+                else if (state == 2 && property->pledged_) {
+                    playerProperties.push_back(property);
+                }
             }
         }
     }
@@ -367,7 +380,7 @@ std::shared_ptr<Property> Board::getCurrentlySelectedProperty() {
 }
 
 void Board::drawProperties() {
-    std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();
+    //std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();
 }
 
 void Board::nextProperty() {

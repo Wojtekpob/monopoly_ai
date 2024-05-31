@@ -17,8 +17,9 @@ public:
     std::string getDescription() override;
     Action getMandatoryAction(std::shared_ptr<Player> player) override;
 
-protected:
     bool pledged_;
+protected:
+
     std::shared_ptr<Player> owner_;
     int cost_;
     bool rent_paid_;
