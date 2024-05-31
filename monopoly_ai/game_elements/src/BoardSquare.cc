@@ -14,7 +14,7 @@ BoardSquare::BoardSquare(float width, float height, std::shared_ptr<sf::RenderWi
         }
         shape_.setTexture(&texture_);
     }
-    shape_.setOutlineThickness(2.0f);
+    shape_.setOutlineThickness(3.0f);
     shape_.setOutlineColor(sf::Color::Black);
 
     //sf::Font font;
@@ -38,6 +38,9 @@ void BoardSquare::setColor(sf::Color& color) {
 
 void BoardSquare::draw() {
     if (window_) {
+        if (actionField_->owned_) {
+            shape_.setOutlineColor(actionField_->owner_color_);
+        } else shape_.setOutlineColor(sf::Color::Black);
         window_->draw(shape_);
     }
 }
