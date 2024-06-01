@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <chrono>
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Drawable.h"
@@ -41,6 +42,7 @@ private:
     int railroads_;
     int utilities_;
     std::shared_ptr<int> current_player_;
+    std::chrono::steady_clock::time_point start_time_;
 };
 
 #endif // PLAYER_H

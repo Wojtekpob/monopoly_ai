@@ -20,24 +20,9 @@ void Board::initializeTexts() {
     if (!font_.loadFromFile(std::string(BASE_PATH) + "assets/fonts/font.ttf")) {
         throw std::runtime_error("Failed to load font");
     }
-    actionText_.setFont(font_);
-    actionText_.setCharacterSize(24);
-    actionText_.setPosition(610.0f, 5.0f);
-
-    playerText_.setFont(font_);
-    playerText_.setCharacterSize(24);
-
-    fieldsText_.setFont(font_);
-    fieldsText_.setCharacterSize(18);
-    fieldsText_.setPosition(800.0f, 5.0f);
-
     communicatsText_.setFont(font_);
     communicatsText_.setCharacterSize(24);
     communicatsText_.setPosition(5.0f, 700.0f);
-
-    keysText_.setFont(font_);
-    keysText_.setCharacterSize(30);
-    keysText_.setPosition(5.0f, 550.0f);
 
 }
 
