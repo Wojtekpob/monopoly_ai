@@ -63,3 +63,10 @@ std::string Property::getDescription() {
     return ActionField::getDescription() + " | Cena: " + std::to_string(cost_) + " | Zastaw/Wykup: " + std::to_string(getPledgePrice()) +
         " / " + std::to_string(getRedeemPledgePrice());
 }
+
+void Property::clearProperty() {
+    owner_ = nullptr;
+    owned_ = false;
+    owner_color_ = sf::Color::Black;
+    pledged_ = false;
+}

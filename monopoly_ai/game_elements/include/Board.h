@@ -37,6 +37,8 @@ public:
     void closePropertySelection();
     void actionOnProperty();
     void drawKeysText();
+    void playerSurrender();
+    void finishGame();
 
 
     bool dice_tossed_;
@@ -48,6 +50,7 @@ private:
     void initializePlayers(int players);
     bool isActionAvailable(Action& action);
     void initializeTexts();
+    void incrementPlayer();
 
 
     std::unique_ptr<TextRenderer> textRenderer;

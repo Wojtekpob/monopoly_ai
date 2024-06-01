@@ -32,16 +32,13 @@ void Player::draw() {
         if (*current_player_ == id_) {
             sf::Vector2f playerPosition = getPosition();
 
-            // Obliczanie up³ywu czasu
             auto currentTime = std::chrono::steady_clock::now();
             std::chrono::duration<float> elapsedTime = currentTime - start_time_;
             float offsetY = 10.0f * std::sin(elapsedTime.count());
 
-            // Tworzenie zielonej strza³ki z czarnym obrysem
             sf::ConvexShape arrow;
             arrow.setPointCount(7);
 
-            // Ustawienie punktów strza³ki skierowanej w dó³
             arrow.setPoint(0, sf::Vector2f(0.0f, 0.0f));
             arrow.setPoint(1, sf::Vector2f(30.0f, 0.0f));
             arrow.setPoint(2, sf::Vector2f(30.0f, 20.0f));
@@ -50,12 +47,10 @@ void Player::draw() {
             arrow.setPoint(5, sf::Vector2f(0.0f, 20.0f));
             arrow.setPoint(6, sf::Vector2f(20.0f, 20.0f));
 
-            // Ustawienie koloru wype³nienia na bardziej przezroczysty zielony
-            arrow.setFillColor(sf::Color(0, 255, 0, 128)); // Bardziej przezroczysty zielony
+            arrow.setFillColor(sf::Color(0, 255, 0, 128));
             arrow.setOutlineColor(sf::Color::Black);
             arrow.setOutlineThickness(2.0f);
 
-            // Ustawienie pozycji strza³ki wy¿ej nad graczem z animacj¹ w górê i w dó³
             arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 70.0f + offsetY);
 
             window_->draw(arrow);
