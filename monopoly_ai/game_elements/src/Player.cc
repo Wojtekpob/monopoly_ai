@@ -1,12 +1,18 @@
 #include "Player.h"
 #include <stdexcept>
 
+std::vector<sf::Color> Player::colors_ = {
+    sf::Color::Red,
+    sf::Color::Green,
+    sf::Color::Blue,
+    sf::Color::Yellow
+};
 
 Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id, std::shared_ptr<int> current_player)
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
     railroads_(0), utilities_(0), current_player_(current_player), start_time_(std::chrono::steady_clock::now()) {
     circle_.setRadius(5.0f); 
-    setColor(sf::Color(255 / 4 * id, 255 / 4 * id, 255 / 4 * id));
+    setColor(colors_[id]);
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
     setPosition(currentSquare_->getPosition());
     circle_.setOutlineColor(sf::Color::White);

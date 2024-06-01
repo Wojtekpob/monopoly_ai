@@ -34,11 +34,11 @@ bool Estate::isActionAvailable(std::shared_ptr<Player> player, Action action) {
     case Action::BUY_PROPERTY:
         return owner_ == nullptr && player->getMoney() >= houses_rent_.front();
     case Action::PAY_RENT:
-        return owner_ != nullptr && player != owner_ && !rent_paid_ && player->getMoney() >= houses_rent_[houses_ + hotels_];
+        return owner_ != nullptr && player != owner_ && !pledged_ && !rent_paid_ && player->getMoney() >= houses_rent_[houses_ + hotels_];
     case Action::BUY_HOUSE:
-        return owner_ != nullptr && player == owner_ && !bought_ && houses_ < 4 && player->getMoney() >= houseCost_;
+        return owner_ != nullptr && player == owner_ && !bought_ && !pledged_ && houses_ < 4 && player->getMoney() >= houseCost_;
     case Action::BUY_HOTEL:
-        return owner_ != nullptr && player == owner_ && !bought_ && houses_ == 4 && hotels_ == 0 && player->getMoney() >= houses_rent_.back();
+        return owner_ != nullptr && player == owner_ && !bought_ && !pledged_ && houses_ == 4 && hotels_ == 0 && player->getMoney() >= houses_rent_.back();
     default:
         return ActionField::isActionAvailable(player, action);
     }

@@ -13,7 +13,6 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     initializePlayers(4);
     setActionAvailability();
     initializeTexts();
-
 }
 
 int getIndexById(std::vector<std::shared_ptr<Player>>& players, int id) {

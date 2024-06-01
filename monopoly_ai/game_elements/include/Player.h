@@ -31,6 +31,7 @@ public:
     int id_;
 
 private:
+    static std::vector<sf::Color> colors_;
     sf::Color color_;
     sf::CircleShape circle_;
     std::shared_ptr<BoardSquare> currentSquare_;
