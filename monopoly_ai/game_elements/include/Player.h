@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <chrono>
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Drawable.h"
@@ -27,7 +28,7 @@ public:
     std::string to_string() const;
     sf::Color getColor();
     void setColor(sf::Color& color);
-    
+    int id_;
 
 private:
     sf::Color color_;
@@ -35,12 +36,12 @@ private:
     std::shared_ptr<BoardSquare> currentSquare_;
     int position_;
     sf::Vector2f position_bias_;
-    int id_;
     int money_;
     std::vector<int> properties_;
     int railroads_;
     int utilities_;
     std::shared_ptr<int> current_player_;
+    std::chrono::steady_clock::time_point start_time_;
 };
 
 #endif // PLAYER_H

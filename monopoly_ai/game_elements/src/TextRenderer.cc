@@ -47,7 +47,7 @@ void TextRenderer::renderPlayers(std::vector<std::shared_ptr<Player>>& players, 
     for (int i = 0; i < players.size(); ++i) {
 
         std::string money = std::to_string(players[i]->getMoney());
-        player_text_.setString("Player " + std::to_string(i) + "\t\t\t" + money + " $");
+        player_text_.setString(players[i]->to_string() + "\t\t\t" + money + " $");
         player_text_.setColor(players[i]->getColor());
 
         if (i == current_player) {

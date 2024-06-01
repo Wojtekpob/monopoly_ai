@@ -4,7 +4,7 @@
 
 Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id, std::shared_ptr<int> current_player)
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
-    railroads_(0), utilities_(0), current_player_(current_player) {
+    railroads_(0), utilities_(0), current_player_(current_player), start_time_(std::chrono::steady_clock::now()) {
     circle_.setRadius(5.0f); 
     setColor(sf::Color(255 / 4 * id, 255 / 4 * id, 255 / 4 * id));
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
@@ -32,9 +32,12 @@ void Player::draw() {
         if (*current_player_ == id_) {
             sf::Vector2f playerPosition = getPosition();
 
-            
+            auto currentTime = std::chrono::steady_clock::now();
+            std::chrono::duration<float> elapsedTime = currentTime - start_time_;
+            float offsetY = 10.0f * std::sin(elapsedTime.count());
+
             sf::ConvexShape arrow;
-            arrow.setPointCount(7); 
+            arrow.setPointCount(7);
 
             arrow.setPoint(0, sf::Vector2f(0.0f, 0.0f));
             arrow.setPoint(1, sf::Vector2f(30.0f, 0.0f));
@@ -44,15 +47,14 @@ void Player::draw() {
             arrow.setPoint(5, sf::Vector2f(0.0f, 20.0f));
             arrow.setPoint(6, sf::Vector2f(20.0f, 20.0f));
 
-            arrow.setFillColor(sf::Color::Green);
-            arrow.setOutlineColor(sf::Color::Black); 
-            arrow.setOutlineThickness(2.0f); 
+            arrow.setFillColor(sf::Color(0, 255, 0, 128));
+            arrow.setOutlineColor(sf::Color::Black);
+            arrow.setOutlineThickness(2.0f);
 
-            arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 60.0f); 
+            arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 70.0f + offsetY);
 
-            window_->draw(arrow); 
+            window_->draw(arrow);
         }
-        
     }
 }
 

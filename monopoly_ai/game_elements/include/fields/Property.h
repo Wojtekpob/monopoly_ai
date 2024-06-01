@@ -16,6 +16,7 @@ public:
     void nextRound() override;
     std::string getDescription() override;
     Action getMandatoryAction(std::shared_ptr<Player> player) override;
+    void virtual clearProperty();
 
     bool pledged_;
 protected:

@@ -36,6 +36,9 @@ int main()
                 else if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I) {
                     board.performCurrentAction();
                 }
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F) {
+                    board.playerSurrender();
+                }
             }
             else {
                 if (board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up) {

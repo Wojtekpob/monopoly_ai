@@ -16,28 +16,21 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
 
 }
 
+int getIndexById(std::vector<std::shared_ptr<Player>>& players, int id) {
+    int i = 0;
+    for (auto player : players) {
+        if (id == player->id_) return i;
+        i++;
+    }
+}
+
 void Board::initializeTexts() {
     if (!font_.loadFromFile(std::string(BASE_PATH) + "assets/fonts/font.ttf")) {
         throw std::runtime_error("Failed to load font");
     }
-    actionText_.setFont(font_);
-    actionText_.setCharacterSize(24);
-    actionText_.setPosition(610.0f, 5.0f);
-
-    playerText_.setFont(font_);
-    playerText_.setCharacterSize(24);
-
-    fieldsText_.setFont(font_);
-    fieldsText_.setCharacterSize(18);
-    fieldsText_.setPosition(800.0f, 5.0f);
-
     communicatsText_.setFont(font_);
     communicatsText_.setCharacterSize(24);
     communicatsText_.setPosition(5.0f, 700.0f);
-
-    keysText_.setFont(font_);
-    keysText_.setCharacterSize(30);
-    keysText_.setPosition(5.0f, 550.0f);
 
 }
 
@@ -53,7 +46,10 @@ void Board::runRound() {
 }
 
 std::shared_ptr<Player> Board::getCurrentPlayer() {
-    return players_[*current_player_];
+    for (auto player : players_) {
+        if (player->id_ == *current_player_) return player;
+    }
+    return nullptr;
 }
 
 void Board::startPropertySelection() {
@@ -210,12 +206,30 @@ void Board::setPosition(float x, float y) {
     shape_.setPosition(sf::Vector2f(x, y));
 }
 
+void Board::incrementPlayer() {
+    ++(*current_player_);
+
+    if (*current_player_ > players_.back()->id_) {
+        *current_player_ = players_.front()->id_;
+    }
+
+    while (!getCurrentPlayer() || *current_player_ != getCurrentPlayer()->id_) {
+        ++(*current_player_);
+
+        if (*current_player_ > players_.back()->id_) {
+            *current_player_ = players_.front()->id_;
+        }
+    }
+}
+
 void Board::nextPlayer() {
     Action mandatoryAction = getCurrentPlayer()->getCurrentSquare()->actionField_->getMandatoryAction(getCurrentPlayer());
     if (mandatoryAction != Action::END) {}
     else {
+
         getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
-        *current_player_ = (*current_player_ + 1) % players_.size();
+        /**current_player_ = (*current_player_ + 1) % players_.size();*/
+        incrementPlayer();
         current_action_ = Action::BUY_PROPERTY;
         setActionAvailability();
         dice_tossed_ = false;
@@ -242,7 +256,7 @@ void Board::decrementAction() {
 }
 
 void Board::drawLeaderBoard() {
-    textRenderer->renderPlayers(players_, *current_player_);
+    textRenderer->renderPlayers(players_, getIndexById(players_, *current_player_));
 }
 
 std::vector<std::shared_ptr<Property>> Board::getPlayersProperties(int state) { // 0 - all // 1 - can be pledged 2 - already pledged
@@ -345,3 +359,26 @@ void Board::previousProperty() {
         selected_property_ = properties[0]->getId();
     }
 }
+
+
+void Board::playerSurrender() {
+    auto playersProperties = getPlayersProperties(0);
+    getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
+    for (std::shared_ptr<Property> property : playersProperties) {
+        property->clearProperty();
+    }
+
+    players_.erase(players_.begin() + getIndexById(players_, *current_player_));
+    
+    if (players_.size() == 1) finishGame();
+    else {
+        incrementPlayer();
+        current_action_ = Action::BUY_PROPERTY;
+        setActionAvailability();
+        dice_tossed_ = false;
+        selected_property_ = -1;
+    }
+}
+
+
+void Board::finishGame() {}

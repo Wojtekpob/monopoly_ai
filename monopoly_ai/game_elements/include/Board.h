@@ -37,6 +37,8 @@ public:
     void closePropertySelection();
     void actionOnProperty();
     void drawKeysText();
+    void playerSurrender();
+    void finishGame();
 
 
     bool dice_tossed_;
@@ -48,6 +50,7 @@ private:
     void initializePlayers(int players);
     bool isActionAvailable(Action& action);
     void initializeTexts();
+    void incrementPlayer();
 
 
     std::unique_ptr<TextRenderer> textRenderer;
@@ -58,11 +61,7 @@ private:
     std::unique_ptr<Dice> dice_;
     Action current_action_;
     sf::Font font_;
-    sf::Text actionText_;
-    sf::Text playerText_;
-    sf::Text fieldsText_;
     sf::Text communicatsText_;
-    sf::Text keysText_;
     bool action_available_;
     FieldLoader fieldLoader_;
     std::shared_ptr<int> current_player_;

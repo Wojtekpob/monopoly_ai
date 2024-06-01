@@ -48,6 +48,7 @@ void Estate::buyHouse(std::shared_ptr<Player> player) {
     if (isActionAvailable(player, Action::BUY_HOUSE)) {
         player->decreaseMoney(houseCost_);
         ++houses_;
+        bought_ = true;
     }
 }
 
@@ -55,6 +56,7 @@ void Estate::buyHotel(std::shared_ptr<Player> player) {
     if (isActionAvailable(player, Action::BUY_HOTEL)) {
         player->decreaseMoney(hotelCost_);
         ++hotels_;
+        bought_ = true;
     }
 }
 
@@ -88,4 +90,11 @@ int Estate::getHotels() {
 }
 int Estate::getHouses() {
     return houses_;
+}
+
+void Estate::clearProperty() {
+    houses_ = 0;
+    hotels_ = 0;
+    bought_ = false;
+    Property::clearProperty();
 }
