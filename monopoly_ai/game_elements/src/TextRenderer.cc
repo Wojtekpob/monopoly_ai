@@ -24,8 +24,10 @@ void TextRenderer::initializeTexts() {
     fields_text_.setPosition(800.0f, 5.0f);
 
     communicats_text_.setFont(font_);
-    communicats_text_.setCharacterSize(24);
-    communicats_text_.setPosition(5.0f, 700.0f);
+    communicats_text_.setCharacterSize(40);
+    communicats_text_.setPosition(100.0f, 550.0f);
+    communicats_text_.setOutlineColor(sf::Color::Black);
+    communicats_text_.setOutlineThickness(3.0f);
 
     keys_text_.setFont(font_);
     keys_text_.setCharacterSize(30);
@@ -37,7 +39,6 @@ void TextRenderer::renderText(const std::string& text, const sf::Vector2f& posit
     text_.setPosition(position);
     text_.setFillColor(color);
     text_.setCharacterSize(size);
-    //window_.draw(text_);
 }
 
 void TextRenderer::renderPlayers(std::vector<std::shared_ptr<Player>>& players, int current_player) {
@@ -186,4 +187,27 @@ void TextRenderer::renderHotKeys(bool property_selection, bool dice_tossed) {
         keys_text_.move(0.0f, 32.0f);
     }
     keys_text_.setPosition(yOffset, 550.0f);
+}
+
+void TextRenderer::addCommunicat(const std::string& text) {
+    Communicat new_communicat = { text, std::chrono::steady_clock::now() };
+    communicats_.push_back(new_communicat);
+}
+
+void TextRenderer::renderCommunicats() {
+    auto now = std::chrono::steady_clock::now();
+    communicats_.erase(std::remove_if(communicats_.begin(), communicats_.end(),
+        [now, this](const Communicat& comm) {
+            return (now - comm.timestamp) > display_time_;
+        }),
+        communicats_.end());
+
+    float yOffset = 0.0f;
+
+    for (auto it = communicats_.rbegin(); it != communicats_.rend(); ++it) {
+        communicats_text_.setString(it->text);
+        communicats_text_.setPosition(400.0f, 550.0f - yOffset);
+        window_->draw(communicats_text_);
+        yOffset -= 40.0f; 
+    }
 }

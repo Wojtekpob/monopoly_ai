@@ -3,6 +3,7 @@
 #include <string>
 #include "Player.h"
 #include "Action.h"
+#include <chrono>
 
 class TextRenderer {
 public:
@@ -13,9 +14,16 @@ public:
     void renderSquaresDescription(std::vector<std::shared_ptr<BoardSquare>>& squares, int selected_property);
     void renderAction(Action action, bool action_available, std::shared_ptr<ActionField> action_field);
     void renderHotKeys(bool property_selection, bool dice_tossed);
+    void addCommunicat(const std::string& text);
+    void renderCommunicats();
 
 private:
     void initializeTexts();
+
+    struct Communicat {
+        std::string text;
+        std::chrono::steady_clock::time_point timestamp;
+    };
 
     sf::Font font_;
     sf::Text text_;
@@ -25,4 +33,6 @@ private:
     sf::Text communicats_text_;
     sf::Text keys_text_;
     std::shared_ptr<sf::RenderWindow> window_;
+    std::vector<Communicat> communicats_;
+    std::chrono::seconds display_time_ = std::chrono::seconds(4);
 };

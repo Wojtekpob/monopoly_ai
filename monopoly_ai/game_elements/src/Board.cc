@@ -77,7 +77,7 @@ void Board::actionOnProperty() {
 
 void Board::performCurrentAction() {
     if (!action_available_) {
-        communicatsText_.setString("Akcja niedozwolona");
+        textRenderer->addCommunicat("Akcja niedozwolona");
         return;
     }
 
@@ -125,6 +125,7 @@ void Board::draw() {
         drawSquaresDescription();
         window_->draw(communicatsText_);
         drawKeysText();
+        textRenderer->renderCommunicats();
     }
 }
 
