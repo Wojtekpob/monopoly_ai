@@ -2,8 +2,9 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY), current_player_(0), fieldLoader_(), dice_tossed_(false),
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), fieldLoader_(), dice_tossed_(false),
     selected_property_(-1), property_selection_(false) {
+    current_player_ = std::make_shared<int>(0);
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -83,7 +84,7 @@ void Board::runRound() {
 }
 
 std::shared_ptr<Player> Board::getCurrentPlayer() {
-    return players_[current_player_];
+    return players_[*current_player_];
 }
 
 void Board::startPropertySelection() {
@@ -159,31 +160,6 @@ void Board::draw() {
         drawSquaresDescription();
         //window_->draw(communicatsText_);
         drawKeysText();
-        // Rysowanie wskaŸnika nad pozycj¹ obecnego gracza
-        auto currentPlayer = getCurrentPlayer();
-        sf::Vector2f playerPosition = currentPlayer->getPosition();
-
-        // Tworzenie zielonej strza³ki z czarnym obrysem
-        sf::ConvexShape arrow;
-        arrow.setPointCount(7); // Strza³ka bêdzie mia³a 7 punktów
-
-        // Ustawienie punktów strza³ki skierowanej w dó³
-        arrow.setPoint(0, sf::Vector2f(0.0f, 0.0f));
-        arrow.setPoint(1, sf::Vector2f(30.0f, 0.0f));
-        arrow.setPoint(2, sf::Vector2f(30.0f, 20.0f));
-        arrow.setPoint(3, sf::Vector2f(50.0f, 20.0f));
-        arrow.setPoint(4, sf::Vector2f(25.0f, 50.0f));
-        arrow.setPoint(5, sf::Vector2f(0.0f, 20.0f));
-        arrow.setPoint(6, sf::Vector2f(20.0f, 20.0f));
-
-        arrow.setFillColor(sf::Color::Green); // Ustawienie koloru wype³nienia na zielony
-        arrow.setOutlineColor(sf::Color::Black); // Ustawienie koloru obrysu na czarny
-        arrow.setOutlineThickness(2.0f); // Ustawienie gruboœci obrysu
-
-        // Ustawienie pozycji strza³ki nad graczem
-        arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 60.0f); // Pozycjonowanie nad graczem
-
-        window_->draw(arrow); // Rysowanie strza³ki
     }
 }
 
@@ -195,7 +171,7 @@ void Board::initializePlayers(int players=1) {
         sf::Vector2f(27.0f, 27.0f)
     };
     for (int i = 0; i < players; i++) {
-        players_.push_back(std::make_shared<Player>(window_, squares_[0], position_biases[i], i));
+        players_.push_back(std::make_shared<Player>(window_, squares_[0], position_biases[i], i, current_player_));
     }
 }
 
@@ -270,7 +246,7 @@ void Board::nextPlayer() {
     if (mandatoryAction != Action::END) {}
     else {
         getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
-        current_player_ = (current_player_ + 1) % players_.size();
+        *current_player_ = (*current_player_ + 1) % players_.size();
         current_action_ = Action::BUY_PROPERTY;
         setActionAvailability();
         dice_tossed_ = false;
@@ -380,7 +356,7 @@ void Board::decrementAction() {
 
 void Board::updatePlayerText() {
     std::string money = std::to_string(getCurrentPlayer()->getMoney());
-    playerText_.setString("Player " + std::to_string(current_player_) + "\t\t\t" + money + " $");
+    playerText_.setString("Player " + std::to_string(*current_player_) + "\t\t\t" + money + " $");
 }
 
 void Board::drawLeaderBoard() {
@@ -393,7 +369,7 @@ void Board::drawLeaderBoard() {
         playerText_.setString("Player " + std::to_string(i) + "\t\t\t" + money + " $");
         playerText_.setColor(players_[i]->getColor());
 
-        if (i == current_player_) {
+        if (i == *current_player_) {
             playerText_.setOutlineColor(sf::Color::Green);
             playerText_.setOutlineThickness(2.0f);
         }

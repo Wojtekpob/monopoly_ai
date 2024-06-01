@@ -51,7 +51,7 @@ private:
     void initializeTexts();
 
 
-    int current_player_;
+    //int current_player_;
     sf::RectangleShape shape_;
     std::vector<std::shared_ptr<BoardSquare>> squares_;
     sf::Texture texture_;
@@ -66,7 +66,7 @@ private:
     sf::Text keysText_;
     bool action_available_;
     FieldLoader fieldLoader_;
-
+    std::shared_ptr<int> current_player_;
 };
 
 #endif // BOARD_H

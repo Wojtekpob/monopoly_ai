@@ -8,7 +8,7 @@
 
 class Player : public Drawable {
 public:
-    Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id);
+    Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id, std::shared_ptr<int> current_player);
     void draw() override;
     void move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares);
     std::shared_ptr<BoardSquare> getCurrentSquare() const;
@@ -40,7 +40,7 @@ private:
     std::vector<int> properties_;
     int railroads_;
     int utilities_;
-
+    std::shared_ptr<int> current_player_;
 };
 
 #endif // PLAYER_H

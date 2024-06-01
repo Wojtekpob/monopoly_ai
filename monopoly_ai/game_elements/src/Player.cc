@@ -2,9 +2,9 @@
 #include <stdexcept>
 
 
-Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id)
+Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id, std::shared_ptr<int> current_player)
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
-    railroads_(0), utilities_(0) {
+    railroads_(0), utilities_(0), current_player_(current_player) {
     circle_.setRadius(5.0f); 
     setColor(sf::Color(255 / 4 * id, 255 / 4 * id, 255 / 4 * id));
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
