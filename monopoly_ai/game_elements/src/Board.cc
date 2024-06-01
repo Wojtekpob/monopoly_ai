@@ -39,7 +39,6 @@ void Board::initializeTexts() {
     keysText_.setCharacterSize(24);
     keysText_.setPosition(5.0f, 550.0f);
 
-
 }
 
 void Board::drawKeysText() {
@@ -282,25 +281,25 @@ void Board::drawAction() {
     
     switch (current_action_) {
     case Action::BUY_PROPERTY:
-        str = "ACTION: BUY_PROPERTY";
+        str = "AKCJA: KUP";
         break;
     case Action::PAY_RENT:
-        str = "ACTION: PAY_RENT";
+        str = "AKCJA: ZAPLAC CZYNSZ";
         break;
     case Action::BUY_HOUSE:
-        str = "ACTION: BUY_HOUSE";
+        str = "AKCJA: KUP DOM";
         break;
     case Action::BUY_HOTEL:
-        str = "ACTION: BUY_HOTEL";
+        str = "AKCJA: KUP HOTEL";
         break;
     case Action::PLEDGE_PROPERTY:
-        str = "ACTION: PLEDGE_PROPERTY";
+        str = "AKCJA: ZASTAW";
         break;
     case Action::PAY_TAX:
-        str = "ACTION: PAY_TAX";
+        str = "AKCJA ZAPLAC PODATEK";
         break;
     case Action::REDEEM_PLEDGE:
-        str = "ACTION: REDEEM_PLEDGE";
+        str = "AKCJA: WYKUP ZASTAW";
         break;
     default:
         str = "Unknown Action";
