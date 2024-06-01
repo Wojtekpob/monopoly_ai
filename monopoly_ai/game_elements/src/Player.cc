@@ -29,6 +29,31 @@ void Player::setPosition(sf::Vector2f pos) {
 void Player::draw() {
     if (window_) {
         window_->draw(circle_);
+        // Rysowanie wskaŸnika nad pozycj¹ obecnego gracza
+        if (*current_player_ == id_) {
+            sf::Vector2f playerPosition = getPosition();
+
+            
+            sf::ConvexShape arrow;
+            arrow.setPointCount(7); 
+
+            arrow.setPoint(0, sf::Vector2f(0.0f, 0.0f));
+            arrow.setPoint(1, sf::Vector2f(30.0f, 0.0f));
+            arrow.setPoint(2, sf::Vector2f(30.0f, 20.0f));
+            arrow.setPoint(3, sf::Vector2f(50.0f, 20.0f));
+            arrow.setPoint(4, sf::Vector2f(25.0f, 50.0f));
+            arrow.setPoint(5, sf::Vector2f(0.0f, 20.0f));
+            arrow.setPoint(6, sf::Vector2f(20.0f, 20.0f));
+
+            arrow.setFillColor(sf::Color::Green);
+            arrow.setOutlineColor(sf::Color::Black); 
+            arrow.setOutlineThickness(2.0f); 
+
+            arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 60.0f); 
+
+            window_->draw(arrow); 
+        }
+        
     }
 }
 
