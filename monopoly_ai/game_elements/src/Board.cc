@@ -257,49 +257,8 @@ void Board::drawSquaresDescription() {
     textRenderer->renderSquaresDescription(squares_, selected_property_);
 }
 
-
 void Board::drawAction() {
-    if (action_available_) {
-        actionText_.setFillColor(sf::Color::Green);
-    }
-    else {
-        actionText_.setFillColor(sf::Color(105, 105, 105));
-    }
-    std::string str;
-    
-    switch (current_action_) {
-    case Action::BUY_PROPERTY:
-        str = "AKCJA: KUP";
-        break;
-    case Action::PAY_RENT:
-        str = "AKCJA: ZAPLAC CZYNSZ";
-        break;
-    case Action::BUY_HOUSE:
-        str = "AKCJA: KUP DOM";
-        break;
-    case Action::BUY_HOTEL:
-        str = "AKCJA: KUP HOTEL";
-        break;
-    case Action::PLEDGE_PROPERTY:
-        str = "AKCJA: ZASTAW";
-        break;
-    case Action::PAY_TAX:
-        str = "AKCJA ZAPLAC PODATEK";
-        break;
-    case Action::REDEEM_PLEDGE:
-        str = "AKCJA: WYKUP ZASTAW";
-        break;
-    default:
-        str = "Unknown Action";
-        break;
-    }
-    actionText_.setString(str);
-    window_->draw(actionText_);
-    actionText_.move(0.0f, 25.0f);
-    actionText_.setString(getCurrentPlayer()->getCurrentSquare()->actionField_->getStr(Action::REDEEM_PLEDGE));
-    actionText_.setColor(sf::Color::Black);
-    window_->draw(actionText_);
-    actionText_.move(0.0f, -25.0f);
+    textRenderer->renderAction(current_action_, action_available_, getCurrentPlayer()->getCurrentSquare()->actionField_);
 }
 
 void Board::incrementAction() {

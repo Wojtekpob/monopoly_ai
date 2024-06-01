@@ -109,3 +109,47 @@ void TextRenderer::renderSquaresDescription(std::vector<std::shared_ptr<BoardSqu
     }
     fields_text_.setPosition(950.0f, 5.0f);
 }
+
+void TextRenderer::renderAction(Action action, bool action_available, std::shared_ptr<ActionField> action_field) {
+    if (action_available) {
+        action_text_.setFillColor(sf::Color::Green);
+    }
+    else {
+        action_text_.setFillColor(sf::Color(105, 105, 105));
+    }
+    std::string str;
+
+    switch (action) {
+    case Action::BUY_PROPERTY:
+        str = "AKCJA: KUP";
+        break;
+    case Action::PAY_RENT:
+        str = "AKCJA: ZAPLAC CZYNSZ";
+        break;
+    case Action::BUY_HOUSE:
+        str = "AKCJA: KUP DOM";
+        break;
+    case Action::BUY_HOTEL:
+        str = "AKCJA: KUP HOTEL";
+        break;
+    case Action::PLEDGE_PROPERTY:
+        str = "AKCJA: ZASTAW";
+        break;
+    case Action::PAY_TAX:
+        str = "AKCJA ZAPLAC PODATEK";
+        break;
+    case Action::REDEEM_PLEDGE:
+        str = "AKCJA: WYKUP ZASTAW";
+        break;
+    default:
+        str = "Unknown Action";
+        break;
+    }
+    action_text_.setString(str);
+    window_->draw(action_text_);
+    action_text_.move(0.0f, 25.0f);
+    action_text_.setString(action_field->getStr(action));
+    action_text_.setColor(sf::Color::Black);
+    window_->draw(action_text_);
+    action_text_.move(0.0f, -25.0f);
+}
