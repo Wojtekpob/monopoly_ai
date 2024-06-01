@@ -55,6 +55,7 @@ void Property::nextRound() {
 }
 
 Action Property::getMandatoryAction(std::shared_ptr<Player> player) {
+
     if (owner_ && player != owner_ && !pledged_ && !rent_paid_) {
         textRenderer_->addCommunicat("Musisz zaplacic czynsz!");
         return Action::PAY_RENT;
