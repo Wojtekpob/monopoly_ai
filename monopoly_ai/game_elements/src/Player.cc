@@ -9,7 +9,8 @@ std::vector<sf::Color> Player::colors_ = {
     sf::Color::Yellow
 };
 
-Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id, std::shared_ptr<int> current_player)
+Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id,
+    std::shared_ptr<int> current_player)
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
     railroads_(0), utilities_(0), current_player_(current_player), start_time_(std::chrono::steady_clock::now()) {
     circle_.setRadius(5.0f); 
@@ -66,7 +67,9 @@ void Player::draw() {
 }
 
 void Player::move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares) {
-    if (position_ + steps > boardSquares.size()) increaseMoney(400);
+    if (position_ + steps > boardSquares.size()) {
+        increaseMoney(400);
+    }
     position_ = (position_ + steps) % boardSquares.size();
 
     currentSquare_ = boardSquares[position_];
@@ -114,12 +117,12 @@ int Player::getUtilities() {
 }
 
 void Player::incrementUtilities() {
-    if (utilities_ < 4) ++utilities_;
-    else throw std::runtime_error("Can't have more than 4 utilities");
+    if (utilities_ < 2) ++utilities_;
+    else throw std::runtime_error("Can't have more than 2 utilities");
 }
 
 std::string Player::to_string() const {
-    return "Player " + std::to_string(id_);
+    return "Gracz " + std::to_string(id_);
 }
 
 std::vector<int> Player::getProperties() {

@@ -5,7 +5,7 @@
 
 class Estate : public Property {
 public:
-    Estate(int id, const std::string& name, sf::Color& color,  int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province);
+    Estate(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer,  int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province);
 
     void invokeAction(std::shared_ptr<Player> player) override;
     bool isActionAvailable(std::shared_ptr<Player> player, Action action) override;

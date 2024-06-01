@@ -5,7 +5,7 @@
 
 class Property : public ActionField {
 public:
-    Property(int id, const std::string& name, sf::Color& color, int cost);
+    Property(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost);
 
     void buy(std::shared_ptr<Player> player);
     void pledge(std::shared_ptr<Player> player);

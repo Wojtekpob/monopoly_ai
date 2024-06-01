@@ -2,10 +2,11 @@
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
-    : Drawable(win), current_action_(Action::BUY_PROPERTY), fieldLoader_(), dice_tossed_(false),
+    : Drawable(win), current_action_(Action::BUY_PROPERTY), dice_tossed_(false),
     selected_property_(-1), property_selection_(false) {
     current_player_ = std::make_shared<int>(0);
-    textRenderer = std::make_unique<TextRenderer>(window_);
+    textRenderer = std::make_shared<TextRenderer>(window_);
+    fieldLoader_ = std::make_unique<FieldLoader>(textRenderer);
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -39,6 +40,7 @@ void Board::drawKeysText() {
 
 void Board::runRound() {
     dice_->throwDice();
+    textRenderer->addCommunicat(getCurrentPlayer()->to_string() + " wyrzucil " + std::to_string(dice_->getValue()));
     getCurrentPlayer()->move(dice_->getValue(), squares_);
     dice_tossed_ = true;
     setActionAvailability();
@@ -142,7 +144,7 @@ void Board::initializePlayers(int players=2) {
 }
 
 void Board::initializeSquares(float pos_x, float pos_y) {
-    std::vector<std::shared_ptr<ActionField>> fields = fieldLoader_.loadFields(std::string(BASE_PATH) + "assets/fields/fields.json");
+    std::vector<std::shared_ptr<ActionField>> fields = fieldLoader_->loadFields(std::string(BASE_PATH) + "assets/fields/fields.json");
     float x, y;
     int number_of_squares = 11;
     float squareWidth = shape_.getSize().x / number_of_squares;

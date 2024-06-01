@@ -1,8 +1,8 @@
 #include "fields/Property.h"
 #include <iostream>
 
-Property::Property(int id, const std::string& name, sf::Color& color, int cost)
-    : ActionField(id, name, color), pledged_(false), owner_(nullptr), cost_(cost), rent_paid_(false) {}
+Property::Property(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost)
+    : ActionField(id, name, color, textRenderer), pledged_(false), owner_(nullptr), cost_(cost), rent_paid_(false) {}
 
 std::string Property::getStr(Action action) {
     std::string str;
@@ -17,7 +17,7 @@ void Property::buy(std::shared_ptr<Player> player) {
         player->decreaseMoney(cost_);
         owner_ = player;
         player->addProperty(id_);
-        std::cout << "Kupiono " << name_ << std::endl;
+        textRenderer_->addCommunicat(player->to_string() + " kupil " + name_);
         owned_ = true;
         owner_color_ = player->getColor();
     }
@@ -28,6 +28,7 @@ void Property::pledge(std::shared_ptr<Player> player) {
     if (player == owner_ && !pledged_) {
         player->increaseMoney(getPledgePrice());
         pledged_ = true;
+        textRenderer_->addCommunicat(player->to_string() + " zastawil " + name_);
     }
     else std::cout << "Player has to be an owner to pledge property" << std::endl;
 }
@@ -36,6 +37,7 @@ void Property::redeemPledge(std::shared_ptr<Player> player) {
     if (player == owner_ && player->getMoney() > getRedeemPledgePrice() && pledged_) {
         player->decreaseMoney(getRedeemPledgePrice());
         pledged_ = false;
+        textRenderer_->addCommunicat(player->to_string() + " wykupil zastaw " + name_);
     }
     else std::cout << "Player has to be an owner to redeem property" << std::endl;
 }
@@ -54,6 +56,7 @@ void Property::nextRound() {
 
 Action Property::getMandatoryAction(std::shared_ptr<Player> player) {
     if (owner_ && player != owner_ && !pledged_ && !rent_paid_) {
+        textRenderer_->addCommunicat("Musisz zaplacic czynsz!");
         return Action::PAY_RENT;
     }
     else return ActionField::getMandatoryAction(player);

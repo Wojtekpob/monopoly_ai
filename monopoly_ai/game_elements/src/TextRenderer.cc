@@ -190,6 +190,9 @@ void TextRenderer::renderHotKeys(bool property_selection, bool dice_tossed) {
 }
 
 void TextRenderer::addCommunicat(const std::string& text) {
+
+
+
     Communicat new_communicat = { text, std::chrono::steady_clock::now() };
     communicats_.push_back(new_communicat);
 }

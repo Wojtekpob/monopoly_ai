@@ -53,7 +53,7 @@ private:
     void incrementPlayer();
 
 
-    std::unique_ptr<TextRenderer> textRenderer;
+    std::shared_ptr<TextRenderer> textRenderer;
     sf::RectangleShape shape_;
     std::vector<std::shared_ptr<BoardSquare>> squares_;
     sf::Texture texture_;
@@ -63,7 +63,7 @@ private:
     sf::Font font_;
     sf::Text communicatsText_;
     bool action_available_;
-    FieldLoader fieldLoader_;
+    std::unique_ptr<FieldLoader> fieldLoader_;
     std::shared_ptr<int> current_player_;
 };
 

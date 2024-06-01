@@ -1,7 +1,7 @@
 #include "fields/Estate.h"
 #include <iostream>
-Estate::Estate(int id, const std::string& name, sf::Color& color, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province)
-    : Property(id, name, color, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent),
+Estate::Estate(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province)
+    : Property(id, name, color, textRenderer, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent),
     province_(province), bought_(false) {}
 
 void Estate::invokeAction(std::shared_ptr<Player> player) {
@@ -9,7 +9,6 @@ void Estate::invokeAction(std::shared_ptr<Player> player) {
         if (player == owner_) {
             if (houses_ < 4) {
                 buyHouse(player);
-                std::cout << "Kupiono Dom" << std::endl;
                 bought_ = true;
             }
             else {
@@ -49,6 +48,7 @@ void Estate::buyHouse(std::shared_ptr<Player> player) {
         player->decreaseMoney(houseCost_);
         ++houses_;
         bought_ = true;
+        textRenderer_->addCommunicat(player->to_string() + " kupil dom w " + name_);
     }
 }
 
@@ -57,6 +57,7 @@ void Estate::buyHotel(std::shared_ptr<Player> player) {
         player->decreaseMoney(hotelCost_);
         ++hotels_;
         bought_ = true;
+        textRenderer_->addCommunicat(player->to_string() + " kupil hotel w " + name_);
     }
 }
 
@@ -65,6 +66,7 @@ void Estate::payRent(std::shared_ptr<Player> player) {
         player->decreaseMoney(houses_rent_[houses_ + hotels_]);
         rent_paid_ = true;
         owner_->increaseMoney(houses_rent_[houses_ + hotels_]);
+        textRenderer_->addCommunicat(player->to_string() + " zaplacil czynsz " + owner_->to_string());
     }
 }
 
