@@ -82,3 +82,10 @@ void Estate::nextRound() {
     Property::nextRound();
     bought_ = false;
 }
+
+int Estate::getHotels() {
+    return hotels_;
+}
+int Estate::getHouses() {
+    return houses_;
+}

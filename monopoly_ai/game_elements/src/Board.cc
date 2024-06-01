@@ -257,7 +257,8 @@ void Board::drawSquaresDescription() {
     for (auto square : squares_) {
         fieldsText_.setPosition(fieldsText_.getPosition() + sf::Vector2f(0.0, 20.0));
         fieldsText_.setString(square->actionField_->getDescription());
-        fieldsText_.setColor(square->actionField_->color_);
+        fieldsText_.setFillColor(square->actionField_->color_);
+
         if (selected_property_ == square->actionField_->getId()) {
             sf::RectangleShape highlightRect;
             highlightRect.setSize(sf::Vector2f(fieldsText_.getLocalBounds().width, fieldsText_.getLocalBounds().height + 5.0));
@@ -265,10 +266,37 @@ void Board::drawSquaresDescription() {
             highlightRect.setPosition(fieldsText_.getPosition());
             window_->draw(highlightRect);
         }
+
+        if (square->actionField_->owned_) {
+            sf::RectangleShape ownerRect;
+            ownerRect.setSize(sf::Vector2f(20.0f, 20.0f)); 
+            ownerRect.setFillColor(square->actionField_->owner_color_);
+            ownerRect.setPosition(fieldsText_.getPosition().x - 25.0f, fieldsText_.getPosition().y);
+            window_->draw(ownerRect);
+            auto estate = std::dynamic_pointer_cast<Estate>(square->actionField_);
+            if (estate) {
+                if (estate->getHotels() == 1) {
+                    sf::CircleShape hotelCircle(10.0f); 
+                    hotelCircle.setFillColor(sf::Color::Red);
+                    hotelCircle.setPosition(fieldsText_.getPosition().x + fieldsText_.getLocalBounds().width + 10.0f, fieldsText_.getPosition().y);
+                    window_->draw(hotelCircle);
+                }
+                else {
+                    for (int i = 0; i < estate->getHouses(); ++i) {
+                        sf::CircleShape houseCircle(5.0f); 
+                        houseCircle.setFillColor(sf::Color::Green);
+                        houseCircle.setPosition(fieldsText_.getPosition().x + fieldsText_.getLocalBounds().width + 12.0f + i * 15.0f, fieldsText_.getPosition().y);
+                        window_->draw(houseCircle);
+                    }
+                }
+            }
+        }
+
         window_->draw(fieldsText_);
     }
-    fieldsText_.setPosition(950.0f, 5.0f);
+    fieldsText_.setPosition(950.0f, 5.0f); // Resetowanie pozycji tekstu na koñcu
 }
+
 
 void Board::drawAction() {
     if (action_available_) {
