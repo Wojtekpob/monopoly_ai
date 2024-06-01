@@ -12,6 +12,7 @@
 #include "fields/Property.h"
 #include "fields/FieldLoader.h"
 #include "Color.h"
+#include "TextRenderer.h"
 
 class Board : public Drawable {
 public:
@@ -49,7 +50,7 @@ private:
     void initializeTexts();
 
 
-    //int current_player_;
+    std::unique_ptr<TextRenderer> textRenderer;
     sf::RectangleShape shape_;
     std::vector<std::shared_ptr<BoardSquare>> squares_;
     sf::Texture texture_;

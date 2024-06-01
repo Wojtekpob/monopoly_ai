@@ -5,6 +5,7 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     : Drawable(win), current_action_(Action::BUY_PROPERTY), fieldLoader_(), dice_tossed_(false),
     selected_property_(-1), property_selection_(false) {
     current_player_ = std::make_shared<int>(0);
+    textRenderer = std::make_unique<TextRenderer>(window_);
     dice_ = std::make_unique<Dice>(win);
     shape_.setSize(sf::Vector2f(width, height));
     shape_.setFillColor(sf::Color::White);
@@ -353,27 +354,7 @@ void Board::decrementAction() {
 }
 
 void Board::drawLeaderBoard() {
-    playerText_.setOutlineColor(sf::Color::White);
-    playerText_.setOutlineThickness(0.5f);
-
-    for (int i = 0; i < players_.size(); ++i) {
-        
-        std::string money = std::to_string(players_[i]->getMoney());
-        playerText_.setString("Player " + std::to_string(i) + "\t\t\t" + money + " $");
-        playerText_.setColor(players_[i]->getColor());
-
-        if (i == *current_player_) {
-            playerText_.setOutlineColor(sf::Color::Green);
-            playerText_.setOutlineThickness(2.0f);
-        }
-        else {
-            playerText_.setOutlineColor(sf::Color::White);
-            playerText_.setOutlineThickness(0.5f);
-        }
-        window_->draw(playerText_);
-        playerText_.move(0.0f, 24.0f);
-    }
-    playerText_.setPosition(0.0f, 0.0f);
+    textRenderer->renderPlayers(players_, *current_player_);
 }
 
 std::vector<std::shared_ptr<Property>> Board::getPlayersProperties(int state) { // 0 - all // 1 - can be pledged 2 - already pledged
