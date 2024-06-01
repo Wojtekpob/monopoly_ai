@@ -92,3 +92,7 @@ std::string Player::to_string() const {
 std::vector<int> Player::getProperties() {
     return properties_;
 }
+
+sf::Vector2f Player::getPosition() {
+    return circle_.getPosition();
+}

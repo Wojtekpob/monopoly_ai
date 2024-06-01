@@ -150,6 +150,7 @@ void Board::draw() {
             square->draw();
         }
         for (auto& player : players_) {
+            
             player->draw();
         }
         dice_->draw();
@@ -158,6 +159,31 @@ void Board::draw() {
         drawSquaresDescription();
         //window_->draw(communicatsText_);
         drawKeysText();
+        // Rysowanie wskaŸnika nad pozycj¹ obecnego gracza
+        auto currentPlayer = getCurrentPlayer();
+        sf::Vector2f playerPosition = currentPlayer->getPosition();
+
+        // Tworzenie zielonej strza³ki z czarnym obrysem
+        sf::ConvexShape arrow;
+        arrow.setPointCount(7); // Strza³ka bêdzie mia³a 7 punktów
+
+        // Ustawienie punktów strza³ki skierowanej w dó³
+        arrow.setPoint(0, sf::Vector2f(0.0f, 0.0f));
+        arrow.setPoint(1, sf::Vector2f(30.0f, 0.0f));
+        arrow.setPoint(2, sf::Vector2f(30.0f, 20.0f));
+        arrow.setPoint(3, sf::Vector2f(50.0f, 20.0f));
+        arrow.setPoint(4, sf::Vector2f(25.0f, 50.0f));
+        arrow.setPoint(5, sf::Vector2f(0.0f, 20.0f));
+        arrow.setPoint(6, sf::Vector2f(20.0f, 20.0f));
+
+        arrow.setFillColor(sf::Color::Green); // Ustawienie koloru wype³nienia na zielony
+        arrow.setOutlineColor(sf::Color::Black); // Ustawienie koloru obrysu na czarny
+        arrow.setOutlineThickness(2.0f); // Ustawienie gruboœci obrysu
+
+        // Ustawienie pozycji strza³ki nad graczem
+        arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 60.0f); // Pozycjonowanie nad graczem
+
+        window_->draw(arrow); // Rysowanie strza³ki
     }
 }
 

@@ -13,6 +13,7 @@ public:
     void move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares);
     std::shared_ptr<BoardSquare> getCurrentSquare() const;
     void setPosition(sf::Vector2f pos);
+    sf::Vector2f getPosition();
     bool operator==(const Player& other) const;
     int getMoney() const;
     void decreaseMoney(int amount);
