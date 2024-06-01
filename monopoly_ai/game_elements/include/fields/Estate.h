@@ -13,6 +13,8 @@ public:
     void nextRound() override;
 
     std::string province_;
+    int getHotels();
+    int getHouses();
 
 private:
     void buyHouse(std::shared_ptr<Player> player);

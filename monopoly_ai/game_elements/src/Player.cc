@@ -2,9 +2,9 @@
 #include <stdexcept>
 
 
-Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id)
+Player::Player(std::shared_ptr<sf::RenderWindow> win, std::shared_ptr<BoardSquare> startSquare, sf::Vector2f& position_bias, int id, std::shared_ptr<int> current_player)
     : Drawable(win), currentSquare_(startSquare), position_(0), position_bias_(position_bias), id_(id), money_(1500),
-    railroads_(0), utilities_(0) {
+    railroads_(0), utilities_(0), current_player_(current_player) {
     circle_.setRadius(5.0f); 
     setColor(sf::Color(255 / 4 * id, 255 / 4 * id, 255 / 4 * id));
     circle_.setOrigin(circle_.getRadius(), circle_.getRadius()); 
@@ -29,11 +29,35 @@ void Player::setPosition(sf::Vector2f pos) {
 void Player::draw() {
     if (window_) {
         window_->draw(circle_);
+        if (*current_player_ == id_) {
+            sf::Vector2f playerPosition = getPosition();
+
+            
+            sf::ConvexShape arrow;
+            arrow.setPointCount(7); 
+
+            arrow.setPoint(0, sf::Vector2f(0.0f, 0.0f));
+            arrow.setPoint(1, sf::Vector2f(30.0f, 0.0f));
+            arrow.setPoint(2, sf::Vector2f(30.0f, 20.0f));
+            arrow.setPoint(3, sf::Vector2f(50.0f, 20.0f));
+            arrow.setPoint(4, sf::Vector2f(25.0f, 50.0f));
+            arrow.setPoint(5, sf::Vector2f(0.0f, 20.0f));
+            arrow.setPoint(6, sf::Vector2f(20.0f, 20.0f));
+
+            arrow.setFillColor(sf::Color::Green);
+            arrow.setOutlineColor(sf::Color::Black); 
+            arrow.setOutlineThickness(2.0f); 
+
+            arrow.setPosition(playerPosition.x - 25.0f, playerPosition.y - 60.0f); 
+
+            window_->draw(arrow); 
+        }
+        
     }
 }
 
 void Player::move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares) {
-    if (position_ + steps > boardSquares.size()) increaseMoney(200);
+    if (position_ + steps > boardSquares.size()) increaseMoney(400);
     position_ = (position_ + steps) % boardSquares.size();
 
     currentSquare_ = boardSquares[position_];
@@ -91,4 +115,8 @@ std::string Player::to_string() const {
 
 std::vector<int> Player::getProperties() {
     return properties_;
+}
+
+sf::Vector2f Player::getPosition() {
+    return circle_.getPosition();
 }
