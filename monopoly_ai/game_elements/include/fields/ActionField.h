@@ -5,10 +5,12 @@
 #include <memory>
 #include "Player.h"
 #include "Action.h"
+#include "TextRenderer.h"
 
 class ActionField {
 public:
-    ActionField(int id, const std::string& name, sf::Color& color) : id_(id), name_(name), color_(color), owned_(false) {}
+    ActionField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer) : id_(id), name_(name), color_(color), owned_(false),
+        textRenderer_(textRenderer) {}
     virtual ~ActionField() = default;
     virtual void invokeAction(std::shared_ptr<Player> player) = 0;
     virtual void nextRound() = 0;
@@ -42,10 +44,11 @@ public:
     sf::Color color_;
     bool owned_;
     sf::Color owner_color_;
+    
 
 
 protected:
-
+    std::shared_ptr<TextRenderer> textRenderer_;
     int id_;
 };
 

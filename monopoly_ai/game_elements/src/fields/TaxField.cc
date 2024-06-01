@@ -1,13 +1,14 @@
 #include "fields/TaxField.h"
 #include <iostream>
 
-TaxField::TaxField(int id, const std::string& name, sf::Color& color, int taxAmount)
-    : ActionField(id, name, color), taxAmount_(taxAmount), paid_(false) {}
+TaxField::TaxField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int taxAmount)
+    : ActionField(id, name, color, textRenderer), taxAmount_(taxAmount), paid_(false) {}
 
 void TaxField::invokeAction(std::shared_ptr<Player> player) {
     if (isActionAvailable(player, Action::PAY_TAX)) {
         player->decreaseMoney(taxAmount_);
         paid_ = true;
+        textRenderer_->addCommunicat(player->to_string() + " zaplacil podatek = " + std::to_string(taxAmount_));
     }
 }
 
@@ -35,6 +36,10 @@ std::string TaxField::getDescription() {
 }
 
 Action TaxField::getMandatoryAction(std::shared_ptr<Player> player) {
-    if (!paid_) return Action::PAY_TAX;
+    if (!paid_)
+    {
+        textRenderer_->addCommunicat("Musisz zaplacic podatek = " + std::to_string(taxAmount_) + "!");
+        return Action::PAY_TAX;
+    }
     else return ActionField::getMandatoryAction(player);
 }

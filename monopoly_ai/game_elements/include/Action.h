@@ -4,10 +4,10 @@
 enum class Action {
     BUY_PROPERTY,
     PAY_RENT,
+    PAY_TAX,
     BUY_HOUSE,
     BUY_HOTEL,
     PLEDGE_PROPERTY,
-    PAY_TAX,
     REDEEM_PLEDGE,
     END 
 };

@@ -5,7 +5,7 @@
 
 class BlankField : public ActionField {
 public:
-    BlankField(int id, const std::string& name, sf::Color& color);
+    BlankField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer);
 
     void nextRound() override {};
 

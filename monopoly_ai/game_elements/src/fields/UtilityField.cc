@@ -1,8 +1,8 @@
 #include "fields/UtilityField.h"
 #include <iostream>
 
-UtilityField::UtilityField(int id, const std::string& name, sf::Color& color, int cost, int rent)
-    : Property(id, name, color, cost), rent_(rent) {}
+UtilityField::UtilityField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost, int rent)
+    : Property(id, name, color, textRenderer, cost), rent_(rent) {}
 
 void UtilityField::invokeAction(std::shared_ptr<Player> player) {
     if (owner_) {
@@ -23,7 +23,7 @@ bool UtilityField::isActionAvailable(std::shared_ptr<Player> player, Action acti
     case Action::BUY_PROPERTY:
         return owner_ == nullptr && player->getMoney() >= cost_;
     case Action::PAY_RENT:
-        return owner_ != nullptr && player != owner_ && !rent_paid_ && player->getMoney() >= getRent();
+        return owner_ != nullptr && player != owner_ && !pledged_ && !rent_paid_ && player->getMoney() >= getRent();
     default:
         return ActionField::isActionAvailable(player, action);
     }

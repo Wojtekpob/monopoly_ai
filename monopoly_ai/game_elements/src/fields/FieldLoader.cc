@@ -6,6 +6,8 @@
 #include <string>
 #include "Color.h"
 
+FieldLoader::FieldLoader(std::shared_ptr<TextRenderer> textRenderer) : textRenderer_(textRenderer) {}
+
 std::vector<std::shared_ptr<ActionField>> FieldLoader::loadFields(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -57,35 +59,35 @@ std::shared_ptr<Estate> FieldLoader::createEstate(const json& j, int id, sf::Col
     int houseCost = j.value("house_cost", 0);
     int hotelCost = j.value("hotel_cost", 0);
     std::vector<int> houses_rent = j.value("houses_rent", std::vector<int>{0, 0, 0, 0, 0, 0});
-    return std::make_shared<Estate>(id, name, color, cost, houseCost, hotelCost, houses_rent, province);
+    return std::make_shared<Estate>(id, name, color, textRenderer_, cost, houseCost, hotelCost, houses_rent, province);
 }
 
 std::shared_ptr<BlankField> FieldLoader::createBlankField(const json& j, int id, sf::Color& color) {
     std::string name = j.value("name", "");
-    return std::make_shared<BlankField>(id, name, color);
+    return std::make_shared<BlankField>(id, name, color, textRenderer_);
 }
 
 std::shared_ptr<TaxField> FieldLoader::createTaxField(const json& j, int id, sf::Color& color) {
     std::string name = j.value("name", "");
     int taxAmount = j.value("tax_amount", 0);
-    return std::make_shared<TaxField>(id, name, color, taxAmount);
+    return std::make_shared<TaxField>(id, name, color, textRenderer_, taxAmount);
 }
 
 std::shared_ptr<UtilityField> FieldLoader::createUtilityField(const json& j, int id, sf::Color& color) {
     std::string name = j.value("name", "");
     int cost = j.value("cost", 0);
     int rent = j.value("rent", 0);
-    return std::make_shared<UtilityField>(id, name, color, cost, rent);
+    return std::make_shared<UtilityField>(id, name, color, textRenderer_, cost, rent);
 }
 
 std::shared_ptr<GoToJailField> FieldLoader::createGoToJailField(const json& j, int id, sf::Color& color) {
     std::string name = j.value("name", "");
-    return std::make_shared<GoToJailField>(id, name, color);
+    return std::make_shared<GoToJailField>(id, name, color, textRenderer_);
 }
 
 std::shared_ptr<RailRoad> FieldLoader::createRailRoad(const json& j, int id, sf::Color& color) {
     std::string name = j.value("name", "");
     int cost = j.value("cost", 0);
     int rent = j.value("rent", 0);
-    return std::make_shared<RailRoad>(id, name, color, cost, rent);
+    return std::make_shared<RailRoad>(id, name, color, textRenderer_, cost, rent);
 }
