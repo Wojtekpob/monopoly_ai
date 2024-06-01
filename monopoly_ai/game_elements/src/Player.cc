@@ -29,7 +29,6 @@ void Player::setPosition(sf::Vector2f pos) {
 void Player::draw() {
     if (window_) {
         window_->draw(circle_);
-        // Rysowanie wskaünika nad pozycjπ obecnego gracza
         if (*current_player_ == id_) {
             sf::Vector2f playerPosition = getPosition();
 
@@ -58,7 +57,7 @@ void Player::draw() {
 }
 
 void Player::move(int steps, const std::vector<std::shared_ptr<BoardSquare>>& boardSquares) {
-    if (position_ + steps > boardSquares.size()) increaseMoney(200);
+    if (position_ + steps > boardSquares.size()) increaseMoney(400);
     position_ = (position_ + steps) % boardSquares.size();
 
     currentSquare_ = boardSquares[position_];

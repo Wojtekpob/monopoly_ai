@@ -17,7 +17,7 @@ class Board : public Drawable {
 public:
     Board(float width, float height, std::shared_ptr<sf::RenderWindow> win);
     void draw() override;
-    void setPosition(float x, float y); // Deklaracja funkcji
+    void setPosition(float x, float y);
     void runRound();
     void performCurrentAction();
     void nextPlayer();
@@ -27,7 +27,6 @@ public:
     void setActionAvailability();
     void drawLeaderBoard();
     std::vector<std::shared_ptr<Property>> getPlayersProperties(int state);
-    void drawProperties();
     std::shared_ptr<Player> getCurrentPlayer();
     void drawSquaresDescription();
     void nextProperty();
@@ -47,7 +46,6 @@ private:
     void initializeSquares(float pos_x, float pos_y);
     void initializePlayers(int players);
     bool isActionAvailable(Action& action);
-    void updatePlayerText();
     void initializeTexts();
 
 

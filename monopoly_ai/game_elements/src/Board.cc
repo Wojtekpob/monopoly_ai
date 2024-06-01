@@ -11,8 +11,6 @@ Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     initializeSquares(200.0f, 100.0f);
     initializePlayers(4);
     setActionAvailability();
-
-
     initializeTexts();
 
 }
@@ -34,10 +32,10 @@ void Board::initializeTexts() {
 
     communicatsText_.setFont(font_);
     communicatsText_.setCharacterSize(24);
-    communicatsText_.setPosition(5.0f, 550.0f);
+    communicatsText_.setPosition(5.0f, 700.0f);
 
     keysText_.setFont(font_);
-    keysText_.setCharacterSize(24);
+    keysText_.setCharacterSize(30);
     keysText_.setPosition(5.0f, 550.0f);
 
 }
@@ -71,9 +69,9 @@ void Board::drawKeysText() {
     for (const auto& action : actions) {
         keysText_.setString(action);
         window_->draw(keysText_);
-        keysText_.move(0.0f, 28.0f);
+        keysText_.move(0.0f, 32.0f);
     }
-    keysText_.setPosition(10.0f, 550.0f);
+    keysText_.setPosition(yOffset, 550.0f);
 }
 
 void Board::runRound() {
@@ -112,7 +110,10 @@ void Board::actionOnProperty() {
 }
 
 void Board::performCurrentAction() {
-    if (!action_available_) return;
+    if (!action_available_) {
+        communicatsText_.setString("Akcja niedozwolona");
+        return;
+    }
 
     if (current_action_ == Action::PLEDGE_PROPERTY || current_action_ == Action::REDEEM_PLEDGE) {
         startPropertySelection();
@@ -140,8 +141,7 @@ bool Board::isActionAvailable(Action& action) {
         if (getPlayersProperties(2).empty()) return false;
         break;
     }
-    auto a = currentSquare->actionField_->isActionAvailable(player, action);
-    return a;
+    return currentSquare->actionField_->isActionAvailable(player, action);
 }
 
 void Board::draw() {
@@ -151,19 +151,18 @@ void Board::draw() {
             square->draw();
         }
         for (auto& player : players_) {
-            
             player->draw();
         }
         dice_->draw();
         drawAction();
         drawLeaderBoard();
         drawSquaresDescription();
-        //window_->draw(communicatsText_);
+        window_->draw(communicatsText_);
         drawKeysText();
     }
 }
 
-void Board::initializePlayers(int players=1) {
+void Board::initializePlayers(int players=2) {
     std::vector<sf::Vector2f> position_biases = {
         sf::Vector2f(7.0f, 7.0f),
         sf::Vector2f(27.0f, 7.0f),
@@ -232,7 +231,6 @@ void Board::initializeSquares(float pos_x, float pos_y) {
     for (int i = 0; i < squares_.size(); i++) {
         squares_[i]->setColor(fields[i]->color_);
         squares_[i]->setActionField(fields[i]);
-        std::cout << fields[i]->name_ << std::endl;
     }
    
 }
@@ -296,7 +294,7 @@ void Board::drawSquaresDescription() {
 
         window_->draw(fieldsText_);
     }
-    fieldsText_.setPosition(950.0f, 5.0f); // Resetowanie pozycji tekstu na koñcu
+    fieldsText_.setPosition(950.0f, 5.0f); 
 }
 
 
@@ -354,11 +352,6 @@ void Board::decrementAction() {
     setActionAvailability();
 }
 
-void Board::updatePlayerText() {
-    std::string money = std::to_string(getCurrentPlayer()->getMoney());
-    playerText_.setString("Player " + std::to_string(*current_player_) + "\t\t\t" + money + " $");
-}
-
 void Board::drawLeaderBoard() {
     playerText_.setOutlineColor(sf::Color::White);
     playerText_.setOutlineThickness(0.5f);
@@ -411,10 +404,6 @@ std::vector<std::shared_ptr<Property>> Board::getPlayersProperties(int state) { 
 std::shared_ptr<Property> Board::getCurrentlySelectedProperty() {
     if (selected_property_ == -1) throw std::runtime_error("No selected property");
     return std::dynamic_pointer_cast<Property>(squares_[selected_property_]->actionField_);
-}
-
-void Board::drawProperties() {
-    //std::vector<std::shared_ptr<Property>> properties = getPlayersProperties();
 }
 
 void Board::nextProperty() {
