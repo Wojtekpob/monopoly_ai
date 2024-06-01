@@ -42,37 +42,7 @@ void Board::initializeTexts() {
 }
 
 void Board::drawKeysText() {
-    std::vector<std::string> actions;
-
-    if (!property_selection_) {
-        if (!dice_tossed_) {
-            actions.push_back("ENTER -> rzuc koscia");
-        }
-        else {
-            actions.push_back("ENTER -> nastepny gracz");
-            actions.push_back("I -> wykonaj akcje");
-        }
-        actions.push_back("RIGHT -> nastepna akcja");
-        actions.push_back("LEFT -> poprzednia akcja");
-    }
-    else {
-        if (dice_tossed_) {
-            actions.push_back("UP -> poprzednia nieruchomosc");
-            actions.push_back("DOWN -> nastepna nieruchomosc");
-            actions.push_back("R -> akcja na nieruchomosci");
-            actions.push_back("B -> zamknij wybor nieruchomosci");
-        }
-    }
-
-    float yOffset = 10.0f;
-    keysText_.setPosition(yOffset, 550.0f);
-
-    for (const auto& action : actions) {
-        keysText_.setString(action);
-        window_->draw(keysText_);
-        keysText_.move(0.0f, 32.0f);
-    }
-    keysText_.setPosition(yOffset, 550.0f);
+    textRenderer->renderHotKeys(property_selection_, dice_tossed_);
 }
 
 void Board::runRound() {

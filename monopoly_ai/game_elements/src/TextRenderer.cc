@@ -153,3 +153,37 @@ void TextRenderer::renderAction(Action action, bool action_available, std::share
     window_->draw(action_text_);
     action_text_.move(0.0f, -25.0f);
 }
+
+void TextRenderer::renderHotKeys(bool property_selection, bool dice_tossed) {
+    std::vector<std::string> actions;
+
+    if (!property_selection) {
+        if (!dice_tossed) {
+            actions.push_back("ENTER -> rzuc koscia");
+        }
+        else {
+            actions.push_back("ENTER -> nastepny gracz");
+            actions.push_back("I -> wykonaj akcje");
+        }
+        actions.push_back("RIGHT -> nastepna akcja");
+        actions.push_back("LEFT -> poprzednia akcja");
+    }
+    else {
+        if (dice_tossed) {
+            actions.push_back("UP -> poprzednia nieruchomosc");
+            actions.push_back("DOWN -> nastepna nieruchomosc");
+            actions.push_back("R -> akcja na nieruchomosci");
+            actions.push_back("B -> zamknij wybor nieruchomosci");
+        }
+    }
+
+    float yOffset = 10.0f;
+    keys_text_.setPosition(yOffset, 550.0f);
+
+    for (const auto& action : actions) {
+        keys_text_.setString(action);
+        window_->draw(keys_text_);
+        keys_text_.move(0.0f, 32.0f);
+    }
+    keys_text_.setPosition(yOffset, 550.0f);
+}

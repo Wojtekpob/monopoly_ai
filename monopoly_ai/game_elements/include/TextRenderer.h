@@ -12,6 +12,7 @@ public:
     void renderPlayers(std::vector<std::shared_ptr<Player>>& players, int current_player);
     void renderSquaresDescription(std::vector<std::shared_ptr<BoardSquare>>& squares, int selected_property);
     void renderAction(Action action, bool action_available, std::shared_ptr<ActionField> action_field);
+    void renderHotKeys(bool property_selection, bool dice_tossed);
 
 private:
     void initializeTexts();
