@@ -14,3 +14,8 @@ sudo apt install -y \
     libxrandr-dev \
     libxcursor-dev \
     libfreetype6-dev
+
+
+
+sudo pip3 insatll python-neat
+sudo pip install pybind11
