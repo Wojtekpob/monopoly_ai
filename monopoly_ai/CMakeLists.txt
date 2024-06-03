@@ -15,7 +15,9 @@ add_executable(monopoly_ai
     game_elements/src/fields/GoToJailField.cc 
     game_elements/src/fields/FieldLoader.cc 
     game_elements/src/Color.cc 
-    game_elements/src/TextRenderer.cc)
+    game_elements/src/TextRenderer.cc
+    game_elements/src/NEAT_algorithm/NEAT.cpp
+)
 
 # Include directories for header files
 target_include_directories(monopoly_ai PRIVATE ${CMAKE_SOURCE_DIR}/monopoly_ai/game_elements/include)

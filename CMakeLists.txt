@@ -20,6 +20,7 @@ foreach(DLL ${SFML_DLLS})
 endforeach()
 
 # Add subdirectories
+add_subdirectory(extern/pybind11)
 add_subdirectory(SFML)
 include_directories(${CMAKE_SOURCE_DIR}/SFML/include)
 add_subdirectory(monopoly_ai)
