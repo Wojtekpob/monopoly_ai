@@ -16,7 +16,6 @@ add_executable(monopoly_ai
     game_elements/src/fields/FieldLoader.cc 
     game_elements/src/Color.cc 
     game_elements/src/TextRenderer.cc
-    game_elements/src/NEAT_algorithm/NEAT.cpp
 )
 
 # Include directories for header files
