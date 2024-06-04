@@ -22,6 +22,7 @@ endforeach()
 
 add_subdirectory(extern/pybind11)
 include_directories(${CMAKE_SOURCE_DIR}/extern/pybind11/include)
+include_directories(${CMAKE_SOURCE_DIR}/extern/nlohmann)
 add_subdirectory(SFML)
 include_directories(${CMAKE_SOURCE_DIR}/SFML/include)
 add_subdirectory(monopoly_ai)
