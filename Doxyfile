@@ -1,0 +1,7 @@
+PROJECT_NAME = "Monopoly Game"
+INPUT = ./src ./include
+RECURSIVE = YES
+FILE_PATTERNS = *.cpp *.h *.cc
+EXTRACT_ALL = YES
+ENERATE_LATEX = YES
+GENERATE_HTML = YES

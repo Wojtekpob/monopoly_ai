@@ -21,3 +21,7 @@
 - `make`
 - `./tests/GameTests` - uruchomienie testów
 - `./monopoly_ai/monopoly_ai` - uruchomienie aplikacji
+
+
+# Dokumentacja doxygen:
+- uruchomienie pliku `monopoly_ai/docs/html/index.html` w przegladarce
