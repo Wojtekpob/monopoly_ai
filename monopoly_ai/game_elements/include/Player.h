@@ -1,3 +1,10 @@
+/*
+ * This file defines the Player class, representing a player in the game.
+ * The Player class manages the player's position on the board, money, properties, railroads, and utilities.
+ * It includes methods for moving the player, drawing the player on the game window, handling financial transactions,
+ * and managing properties. The class also provides functionalities to increment the count of railroads and utilities owned by the player.
+ */
+
 #ifndef PLAYER_H
 #define PLAYER_H
 

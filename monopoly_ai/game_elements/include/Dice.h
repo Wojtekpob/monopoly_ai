@@ -1,3 +1,9 @@
+/*
+ * This file defines the Dice class, which represents a game die that can be rolled to generate a random value between 1 and 6.
+ * The Dice class includes methods for throwing the die, drawing the die on the screen, and retrieving the current value of the die.
+ * It uses SFML for rendering and managing textures for each face of the die. The textures are loaded from files, and the sprite is updated based on the current value.
+ */
+
 #ifndef DICE_H
 #define DICE_H
 

@@ -1,3 +1,11 @@
+/*
+ * This file defines the Estate class, a subclass of Property.
+ * The Estate class represents a type of property in a game that can have houses and hotels built on it.
+ * It includes methods to handle actions such as buying houses, buying hotels, and paying rent.
+ * The class also manages information about the property's province, number of houses, number of hotels,
+ * and the associated costs and rents.
+ */
+
 #ifndef ESTATE_H
 #define ESTATE_H
 

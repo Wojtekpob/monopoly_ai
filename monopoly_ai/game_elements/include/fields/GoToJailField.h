@@ -1,3 +1,10 @@
+/*
+ * This file defines the GoToJailField class, a subclass of ActionField.
+ * The GoToJailField class represents a game field that sends a player to jail when they land on it.
+ * It overrides the `invokeAction` method to specify the action of sending the player to jail.
+ * The `isActionAvailable` method always returns false, indicating no specific actions are available on this field.
+ */
+
 #ifndef GOTOJAILFIELD_H
 #define GOTOJAILFIELD_H
 

@@ -1,3 +1,11 @@
+/*
+ * This file defines the Board class, which manages the game board, players, and their interactions.
+ * The Board class is responsible for initializing the game elements, handling player actions, running game rounds,
+ * and rendering the board and its components. It includes methods for player movement, dice rolling, action execution,
+ * property management, and various rendering tasks. The class maintains the state of the game and ensures the correct
+ * sequence of gameplay events.
+ */
+
 #ifndef BOARD_H
 #define BOARD_H
 

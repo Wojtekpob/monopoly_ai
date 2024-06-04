@@ -1,3 +1,10 @@
+/*
+ * This file defines the TextRenderer class, which is responsible for rendering various text elements on the game screen.
+ * The TextRenderer class includes methods for displaying player information, square descriptions, current actions,
+ * and hotkeys. It also handles adding and rendering communication messages during the game.
+ * The class uses SFML for rendering text and shapes, and it manages the positioning and formatting of these elements.
+ */
+
 #pragma once
 
 #include <string>

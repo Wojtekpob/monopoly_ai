@@ -1,3 +1,11 @@
+/*
+ * This file defines the Color class, which maps color names to their corresponding sf::Color values.
+ * The class includes a static method `getColor` for retrieving a color by name, and predefined static constants
+ * for various common colors, including additional colors like Brown, LightBlue, Pink, Orange, DarkRed, DarkYellow,
+ * DarkGreen, and DarkBlue.
+ * A private static unordered_map stores the color name and sf::Color value pairs for quick lookup.
+ */
+
 #ifndef COLOR_H
 #define COLOR_H
 

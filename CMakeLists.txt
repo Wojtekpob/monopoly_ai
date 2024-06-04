@@ -19,9 +19,7 @@ foreach(DLL ${SFML_DLLS})
     file(COPY ${DLL} DESTINATION "${CMAKE_BINARY_DIR}/monopoly_ai")
 endforeach()
 
-# Add subdirectories
-# find_package(PythonLibs 3 REQUIRED)
-# include_directories(${PYTHON_INCLUDE_DIRS})
+
 add_subdirectory(extern/pybind11)
 include_directories(${CMAKE_SOURCE_DIR}/extern/pybind11/include)
 add_subdirectory(SFML)

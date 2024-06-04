@@ -1,4 +1,11 @@
-﻿#include <SFML/Graphics.hpp>
+﻿/*
+ * This file contains the main function, which initializes the game window and runs the main game loop.
+ * The main function sets up the game board, handles user input for various actions such as rolling dice,
+ * performing actions, navigating properties, and surrendering. It uses SFML for rendering and managing events.
+ * The game loop continues to process events and render the game until the window is closed.
+ */
+
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
 #include "Board.h"

@@ -1,3 +1,11 @@
+/*
+ * This file defines the Property class, a subclass of ActionField.
+ * The Property class represents a type of field in a game that can be owned by players.
+ * It includes methods for buying, pledging, and redeeming pledges on the property, as well as handling rent payments.
+ * The class manages the property's cost, ownership status, and whether it is pledged.
+ * It overrides several methods from ActionField to provide specific behaviors for properties.
+ */
+
 #ifndef PROPERTY_H
 #define PROPERTY_H
 
