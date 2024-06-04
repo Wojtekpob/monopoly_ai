@@ -24,9 +24,10 @@ int main()
     sf::Color backgroundColor = sf::Color(9, 100, 9);
     while (window->isOpen()) {
         sf::Event event;
-        while (window->pollEvent(event) && !board.game_end_) {
+        while (window->pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window->close();
+            if (board.game_end_) continue;
             if (!board.property_selection_) {
                 if (!board.dice_tossed_ && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
                     board.runRound();
