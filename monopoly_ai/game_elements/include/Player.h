@@ -2,8 +2,8 @@
 #define PLAYER_H
 
 #include <chrono>
-#include <SFML/Graphics.hpp>
 #include <memory>
+#include <SFML/Graphics.hpp>
 #include "Drawable.h"
 #include "BoardSquare.h"
 

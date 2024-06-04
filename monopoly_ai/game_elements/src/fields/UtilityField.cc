@@ -1,5 +1,5 @@
-#include "fields/UtilityField.h"
 #include <iostream>
+#include "fields/UtilityField.h"
 
 UtilityField::UtilityField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost, int rent)
     : Property(id, name, color, textRenderer, cost), rent_(rent) {}

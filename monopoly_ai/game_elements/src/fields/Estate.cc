@@ -1,5 +1,6 @@
-#include "fields/Estate.h"
 #include <iostream>
+#include "fields/Estate.h"
+
 Estate::Estate(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost, int houseCost, int hotelCost, std::vector<int> houses_rent, std::string province)
     : Property(id, name, color, textRenderer, cost), hotels_(0), houses_(0), houseCost_(houseCost), hotelCost_(hotelCost), houses_rent_(houses_rent),
     province_(province), bought_(false) {}

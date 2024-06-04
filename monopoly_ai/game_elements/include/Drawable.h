@@ -1,8 +1,8 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
-#include <SFML/Graphics.hpp>
 #include <memory>
+#include <SFML/Graphics.hpp>
 
 class Drawable {
 public:

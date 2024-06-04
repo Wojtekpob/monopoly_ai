@@ -1,5 +1,5 @@
-#include "fields/TaxField.h"
 #include <iostream>
+#include "fields/TaxField.h"
 
 TaxField::TaxField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int taxAmount)
     : ActionField(id, name, color, textRenderer), taxAmount_(taxAmount), paid_(false) {}

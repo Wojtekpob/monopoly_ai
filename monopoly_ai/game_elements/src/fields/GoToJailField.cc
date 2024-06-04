@@ -1,5 +1,5 @@
-#include "fields/GoToJailField.h"
 #include <iostream>
+#include "fields/GoToJailField.h"
 
 GoToJailField::GoToJailField(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer) : ActionField(id, name, color, textRenderer) {}
 

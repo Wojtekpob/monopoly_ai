@@ -1,11 +1,9 @@
 #ifndef BOARDSQUARE_H
 #define BOARDSQUARE_H
 
-#include <SFML/Graphics.hpp>
 #include <memory>
+#include <SFML/Graphics.hpp>
 #include "Drawable.h"
-//#include "fields/ActionField.h"
-
 
 class ActionField;
 

@@ -1,9 +1,9 @@
 #ifndef DICE_H
 #define DICE_H
 
-#include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 class Dice {
 public:

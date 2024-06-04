@@ -168,6 +168,7 @@ void TextRenderer::renderHotKeys(bool property_selection, bool dice_tossed) {
         }
         actions.push_back("RIGHT -> nastepna akcja");
         actions.push_back("LEFT -> poprzednia akcja");
+        actions.push_back("F -> poddaj sie");
     }
     else {
         if (dice_tossed) {

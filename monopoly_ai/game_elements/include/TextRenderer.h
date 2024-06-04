@@ -1,11 +1,10 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
 #include <string>
+#include <chrono>
 #include "Player.h"
 #include "Action.h"
-#include <chrono>
-
-
+#include <SFML/Graphics.hpp>
 
 class TextRenderer {
 public:

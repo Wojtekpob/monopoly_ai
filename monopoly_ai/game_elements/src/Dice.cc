@@ -1,18 +1,16 @@
-#include "Dice.h"
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include "Dice.h"
 
-// Constructor definition
 Dice::Dice(std::shared_ptr<sf::RenderWindow> window)
     : window_(window), value_(1) {
     loadTextures();
-    sprite_.setTexture(textures_[0]); // Initial texture for value 1
-    sprite_.setPosition(50.0f, 350.0f); // Set position on screen
-    std::srand(static_cast<unsigned int>(std::time(nullptr))); // Initialize random generator
+    sprite_.setTexture(textures_[0]);
+    sprite_.setPosition(50.0f, 350.0f);
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 }
 
-// Private method to load textures
 void Dice::loadTextures() {
     textures_.resize(6);
     for (int i = 0; i < 6; ++i) {
@@ -23,20 +21,17 @@ void Dice::loadTextures() {
     }
 }
 
-// Public method to throw the dice
 void Dice::throwDice() {
     value_ = (std::rand() % 6) + 1;
     sprite_.setTexture(textures_[value_ - 1]);
 }
 
-// Public method to draw the dice
 void Dice::draw() {
     if (window_) {
         window_->draw(sprite_);
     }
 }
 
-// Getter for the value
 int Dice::getValue() const {
     return value_;
 }

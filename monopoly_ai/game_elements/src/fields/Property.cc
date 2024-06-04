@@ -1,5 +1,5 @@
-#include "fields/Property.h"
 #include <iostream>
+#include "fields/Property.h"
 
 Property::Property(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost)
     : ActionField(id, name, color, textRenderer), pledged_(false), owner_(nullptr), cost_(cost), rent_paid_(false) {}

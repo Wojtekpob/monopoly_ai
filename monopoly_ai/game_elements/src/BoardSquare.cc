@@ -1,5 +1,5 @@
-#include "BoardSquare.h"
 #include <iostream>
+#include "BoardSquare.h"
 #include "fields/ActionField.h"
 
 BoardSquare::BoardSquare(float width, float height, std::shared_ptr<sf::RenderWindow> win,
@@ -16,20 +16,6 @@ BoardSquare::BoardSquare(float width, float height, std::shared_ptr<sf::RenderWi
     }
     shape_.setOutlineThickness(3.0f);
     shape_.setOutlineColor(sf::Color::Black);
-
-    //sf::Font font;
-    //if (!font.loadFromFile(std::string(BASE_PATH) + "assets/fonts/font.ttf")) {
-    //    throw std::runtime_error("Failed to load font");
-    //}
-
-    //text_.setFont(font);
-    //text_.setString(textContent);
-    //text_.setCharacterSize(24);
-    //text_.setFillColor(sf::Color::White);
-    //text_.setPosition(10, 10);
-
-    //shape_.setRotation(orientation);
-    //text_.setRotation(orientation);
 }
 
 void BoardSquare::setColor(sf::Color& color) {

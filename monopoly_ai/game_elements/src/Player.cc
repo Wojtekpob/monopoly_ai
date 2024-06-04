@@ -1,6 +1,6 @@
-#include "Player.h"
 #include <stdexcept>
 #include <cmath>
+#include "Player.h"
 
 std::vector<sf::Color> Player::colors_ = {
     sf::Color::Red,

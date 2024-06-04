@@ -1,9 +1,9 @@
-#include "fields/FieldLoader.h"
 #include <iostream>
 #include <fstream>
 #include <memory>
 #include <vector>
 #include <string>
+#include "fields/FieldLoader.h"
 #include "Color.h"
 
 FieldLoader::FieldLoader(std::shared_ptr<TextRenderer> textRenderer) : textRenderer_(textRenderer) {}

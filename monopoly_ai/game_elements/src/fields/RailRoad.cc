@@ -1,6 +1,6 @@
-#include "fields/RailRoad.h"
 #include <iostream>
 #include <cmath>
+#include "fields/RailRoad.h"
 
 RailRoad::RailRoad(int id, const std::string& name, sf::Color& color, std::shared_ptr<TextRenderer> textRenderer, int cost, int rent)
     : Property(id, name, color, textRenderer, cost), rent_(rent) {}

@@ -1,10 +1,10 @@
 #ifndef FIELDLOADER_H
 #define FIELDLOADER_H
 
-#include <SFML/Graphics.hpp>
 #include <string>
 #include <vector>
 #include <memory>
+#include <SFML/Graphics.hpp>
 #include "fields/ActionField.h"
 #include "fields/Estate.h"
 #include "nlohmann/json.hpp"

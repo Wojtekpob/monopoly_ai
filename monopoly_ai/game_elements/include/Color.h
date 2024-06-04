@@ -1,9 +1,9 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-#include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <string>
+#include <SFML/Graphics.hpp>
 
 class Color {
 public:

@@ -1,9 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
+#include <SFML/Graphics.hpp>
 #include "BoardSquare.h"
 #include "Drawable.h"
 #include "Player.h"
