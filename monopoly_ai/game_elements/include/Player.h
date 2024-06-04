@@ -3,6 +3,7 @@
  * The Player class manages the player's position on the board, money, properties, railroads, and utilities.
  * It includes methods for moving the player, drawing the player on the game window, handling financial transactions,
  * and managing properties. The class also provides functionalities to increment the count of railroads and utilities owned by the player.
+ * Author: Wojciech Pobocha
  */
 
 #ifndef PLAYER_H

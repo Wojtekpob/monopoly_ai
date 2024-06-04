@@ -3,6 +3,7 @@
  * The RailRoad class represents a type of property in a game that functions as a railroad.
  * It includes methods for handling actions such as buying the railroad, paying rent, and calculating rent based on the number of railroads owned by a player.
  * The class manages the cost and rent of the railroad and overrides several methods from Property to provide specific behaviors for railroads.
+ * Author: Mikołaj Sendybył
  */
 
 #ifndef RAILROAD_H

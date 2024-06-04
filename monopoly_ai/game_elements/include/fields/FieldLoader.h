@@ -4,6 +4,7 @@
  * field types such as Estate, BlankField, TaxField, UtilityField, GoToJailField, and RailRoad.
  * It includes methods to load all fields from a JSON file, load an individual field, and create specific types
  * of fields based on the parsed JSON data.
+ * Author: Wojciech Pobocha
  */
 
 #ifndef FIELDLOADER_H

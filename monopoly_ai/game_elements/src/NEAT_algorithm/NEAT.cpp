@@ -1,4 +1,12 @@
-// #include <pybind11
+/*
+ * This file defines the NEATAI class, which integrates a Python-based AI using the NEAT algorithm into a C++ application.
+ * The class uses pybind11 to interface with Python, allowing it to train the AI and get actions based on the game state.
+ * The NEATAI class includes methods for training the AI with game states and retrieving an action based on the current game state.
+ * It also manages the Python interpreter's lifecycle by initializing and finalizing it within the constructor and destructor.
+ *
+ * Author: Mikołaj Sendybył
+ */
+
 #include <pybind11/stl.h>
 #include <pybind11/embed.h>
 #include <vector>

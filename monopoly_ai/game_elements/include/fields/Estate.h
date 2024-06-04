@@ -4,6 +4,7 @@
  * It includes methods to handle actions such as buying houses, buying hotels, and paying rent.
  * The class also manages information about the property's province, number of houses, number of hotels,
  * and the associated costs and rents.
+ * Author: Mikołaj Sendybył
  */
 
 #ifndef ESTATE_H

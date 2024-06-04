@@ -4,6 +4,7 @@
  * and rendering the board and its components. It includes methods for player movement, dice rolling, action execution,
  * property management, and various rendering tasks. The class maintains the state of the game and ensures the correct
  * sequence of gameplay events.
+ * Author: Wojciech Pobocha, Mikołaj Sendybył
  */
 
 #ifndef BOARD_H

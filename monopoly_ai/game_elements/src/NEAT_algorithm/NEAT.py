@@ -1,5 +1,10 @@
 """
-Bazowa implementacja, która miała być przystosowana do współdzaiałania z c++
+This file defines the NEATAI class, which integrates a Python-based AI using the NEAT algorithm into a C++ application.
+The class uses pybind11 to interface with Python, allowing it to train the AI and get actions based on the game state.
+The NEATAI class includes methods for training the AI with game states and retrieving an action based on the current game state.
+It also manages the Python interpreter's lifecycle by initializing and finalizing it within the constructor and destructor.
+The PYBIND11_MODULE macro creates a Python module named monopoly_ai_cpp, exposing the NEATAI class and its methods to Python.
+Author: Mikołaj Sendybył
 """
 import neat
 import pickle

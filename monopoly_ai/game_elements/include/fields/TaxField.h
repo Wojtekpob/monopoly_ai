@@ -3,6 +3,7 @@
  * The TaxField class represents a game field where players must pay a tax.
  * It includes methods for handling the action of paying tax, checking if the tax payment is available,
  * and managing the tax amount. The class also overrides several methods from ActionField to provide specific behaviors for tax fields.
+ * Author: Mikołaj Sendybył
  */
 
 #ifndef TAXFIELD_H

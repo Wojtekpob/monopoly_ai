@@ -3,6 +3,7 @@
  * It includes data on the field's ID, name, color, and ownership status.
  * The class is an abstract base class with pure virtual methods `invokeAction` and `nextRound` that must be implemented in derived classes.
  * It also contains methods for checking action availability, comparing objects, and retrieving field information.
+ * Author: Mikołaj Sendybył
  */
 
 

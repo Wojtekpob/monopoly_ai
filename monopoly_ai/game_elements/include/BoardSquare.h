@@ -3,6 +3,7 @@
  * The BoardSquare class includes methods for setting its position, color, and associated ActionField.
  * It handles the rendering of the square, including its fill color, outline color, and texture if provided.
  * The class inherits from Drawable to allow it to be drawn within the game window.
+ * Author: Wojciech Pobocha
  */
 
 #ifndef BOARDSQUARE_H

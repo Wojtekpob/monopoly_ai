@@ -4,6 +4,7 @@
  * for various common colors, including additional colors like Brown, LightBlue, Pink, Orange, DarkRed, DarkYellow,
  * DarkGreen, and DarkBlue.
  * A private static unordered_map stores the color name and sf::Color value pairs for quick lookup.
+ * Author: Wojciech Pobocha
  */
 
 #ifndef COLOR_H

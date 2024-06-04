@@ -4,6 +4,7 @@
  * It includes methods for buying, pledging, and redeeming pledges on the property, as well as handling rent payments.
  * The class manages the property's cost, ownership status, and whether it is pledged.
  * It overrides several methods from ActionField to provide specific behaviors for properties.
+ * Author: Mikołaj Sendybył
  */
 
 #ifndef PROPERTY_H
