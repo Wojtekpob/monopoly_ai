@@ -24,7 +24,7 @@ int main()
     sf::Color backgroundColor = sf::Color(9, 100, 9);
     while (window->isOpen()) {
         sf::Event event;
-        while (window->pollEvent(event)) {
+        while (window->pollEvent(event) && !board.game_end_) {
             if (event.type == sf::Event::Closed)
                 window->close();
             if (!board.property_selection_) {
@@ -62,10 +62,10 @@ int main()
                 }
             }
         }
-        
-        window->clear(backgroundColor);
-        board.draw();
-
+        if (!board.game_end_) {
+            window->clear(backgroundColor);
+            board.draw();
+        }
         window->display();
     }
     return 0;

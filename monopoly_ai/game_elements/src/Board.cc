@@ -1,9 +1,11 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "Board.h"
 
 Board::Board(float width, float height, std::shared_ptr<sf::RenderWindow> win)
     : Drawable(win), current_action_(Action::BUY_PROPERTY), dice_tossed_(false),
-    selected_property_(-1), property_selection_(false) {
+    selected_property_(-1), property_selection_(false), game_end_(false) {
     current_player_ = std::make_shared<int>(0);
     textRenderer = std::make_shared<TextRenderer>(window_);
     fieldLoader_ = std::make_unique<FieldLoader>(textRenderer);
@@ -29,8 +31,9 @@ void Board::initializeTexts() {
         throw std::runtime_error("Failed to load font");
     }
     communicatsText_.setFont(font_);
-    communicatsText_.setCharacterSize(24);
-    communicatsText_.setPosition(5.0f, 700.0f);
+    communicatsText_.setCharacterSize(150.0f);
+    communicatsText_.setPosition(0.0f, 0.0f);
+    communicatsText_.setOutlineThickness(10.0f);
 
 }
 
@@ -230,7 +233,6 @@ void Board::nextPlayer() {
     else {
 
         getCurrentPlayer()->getCurrentSquare()->actionField_->nextRound();
-        /**current_player_ = (*current_player_ + 1) % players_.size();*/
         incrementPlayer();
         current_action_ = Action::BUY_PROPERTY;
         setActionAvailability();
@@ -369,7 +371,7 @@ void Board::playerSurrender() {
     for (std::shared_ptr<Property> property : playersProperties) {
         property->clearProperty();
     }
-
+    textRenderer->addCommunicat(getCurrentPlayer()->to_string() + " sie poddal");
     players_.erase(players_.begin() + getIndexById(players_, *current_player_));
     
     if (players_.size() == 1) finishGame();
@@ -382,5 +384,9 @@ void Board::playerSurrender() {
     }
 }
 
-
-void Board::finishGame() {}
+void Board::finishGame() {
+    window_->clear(Color::Black);
+    communicatsText_.setString(players_[0]->to_string() + " Wygrywa!");
+    window_->draw(communicatsText_);
+    window_->display();
+}

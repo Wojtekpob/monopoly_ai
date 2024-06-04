@@ -52,6 +52,7 @@ public:
     bool dice_tossed_;
     int selected_property_;
     bool property_selection_;
+    bool game_end_;
 
 private:
     void initializeSquares(float pos_x, float pos_y);
