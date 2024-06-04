@@ -13,16 +13,8 @@ endif()
 # Project name
 project("monopoly_ai")
 
-# Copy SFML DLLs
-file(GLOB SFML_DLLS "${CMAKE_SOURCE_DIR}/dlls/*.dll")
-foreach(DLL ${SFML_DLLS})
-    file(COPY ${DLL} DESTINATION "${CMAKE_BINARY_DIR}/monopoly_ai")
-endforeach()
-
-
 add_subdirectory(extern/pybind11)
 include_directories(${CMAKE_SOURCE_DIR}/extern/pybind11/include)
-include_directories(${CMAKE_SOURCE_DIR}/extern/nlohmann)
 add_subdirectory(SFML)
 include_directories(${CMAKE_SOURCE_DIR}/SFML/include)
 add_subdirectory(monopoly_ai)
